@@ -42,6 +42,13 @@ INSTALLED_APPS = [
 
 LOGIN_REDIRECT_URL = '/'
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'project.concon'
+EMAIL_HOST_PASSWORD = 'jIQ9W0DKoq0w-dk'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Concon <project.concon@gmail.com>'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

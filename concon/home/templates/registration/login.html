@@ -16,6 +16,13 @@
                         <input type="password" name="password" id="password" />
                     </div> -->
                     {{ form.as_p }}
+                    <ul>
+                        <li>
+                            <a href="{% url 'password_reset' %}">Forgot my password</a>
+                        </li>
+                    </ul>
+
+
 
                     <ul class="actions">
                         <li><input type="submit" value="Login" name="login" id='login_button' class="special" /></li>

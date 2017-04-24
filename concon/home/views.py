@@ -1,14 +1,20 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-# from django.http import HttpResponse, HttpResponseRedirect
+import os
+
+from django.http import HttpResponse    # HttpResponseRedirect
 # get_object_or_404,
 # from django.urls import reverse
 # from django.views import generic
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from forms import SignUpForm
+from forms import UploadFileForm
+from scripts import insert_contract
+from django.contrib.auth.models import User
 
 
 def index(request):
@@ -18,8 +24,20 @@ def index(request):
 
 def conflict(request):
 
-    return render(request, 'home/conflict.html', {})
+    if request.method == 'POST' and request.FILES['upfile']:
+        up_file = request.FILES['upfile']
+        fs = FileSystemStorage()
+        filename = fs.save(up_file.name, up_file)
+        uploaded_file_url = fs.url(filename)
+        username = request.user.username
+        user_id = User.objects.get(username=username).pk
+        path = settings.BASE_DIR + uploaded_file_url
+        insert_contract(path, user_id)
 
+        return render(request, 'home/conflict.html', {
+            'uploaded_file_url': uploaded_file_url
+        })
+    return render(request, 'home/conflict.html')
 
 def intro(request):
 

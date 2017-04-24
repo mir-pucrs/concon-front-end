@@ -5,7 +5,44 @@
 {% block content %}
 
                 <article id="conflict" class="active" style="display: block;width:auto">
-                    <div class="table-wrapper">                        
+                    <div class="table-wrapper">
+
+                        {% if clauses %}
+
+                            <div id="conflicts">
+                                
+                                <div class="scroll">
+                                    <table>
+                                        <tbody>
+                                            {% for clause in clauses %}
+                                                <tr class='line'>
+                                                    <td>
+                                                        {{ clause }}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="scroll">
+                                    <table>
+                                        <tbody>
+                                            {% for clause in clauses %}
+                                                <tr class='line'>
+                                                    <td>
+                                                        {{ clause }}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                        {% endif %}
+
                         <table class="alt">    
                             <tbody>
                                 <p>Please, upload a contract to start our processing.</p>
@@ -21,7 +58,7 @@
                                 <tr>
                                     <form method="post" enctype="multipart/form-data">
                                         {% csrf_token %}
-                                        <input type="file" name="upfile" id="fileToUpload">
+                                        <input type="file" name="up_file" id="fileToUpload">
                                         <input type="submit" value="Upload" id='upload_button' name="upfile">
                                     </form>
                                 </tr>

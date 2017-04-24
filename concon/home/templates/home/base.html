@@ -11,6 +11,7 @@
         {% load static %}
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link rel="stylesheet" href="{% static 'home/assets/css/main.css' %}"/>
+        <link rel="stylesheet" href="{% static 'home/assets/css/conflict.css' %}"/>
             <!-- for IE and Android native browser support -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 
@@ -39,6 +40,9 @@
                     <h3>
                         Hi {{ user.username }}! <br/>
                         <a href="{% url 'home:index' %}">Home</a>
+                        |
+                        <a href="{% url 'home:profile' %}">Profile</a>
+                        |
                         <a href="{% url 'logout' %}">logout</a>
                     </h3>
                 {% endif %}

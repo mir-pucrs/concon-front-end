@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
+    'django.contrib.sites',
 ]
+
+SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
 

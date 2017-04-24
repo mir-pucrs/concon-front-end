@@ -81,8 +81,8 @@ class Contracts(models.Model):
     con_id = models.AutoField(primary_key=True)
     con_name = models.CharField(max_length=40)
     path_to_file = models.CharField(max_length=100)
-    added_by = models.ForeignKey(AuthUser, on_delete=models.CASCADE)
-    test_only = models.IntegerField(blank=True, null=True)
+    added_by = models.ForeignKey(AuthUser, on_delete=models.CASCADE, db_column='added_by')
+    test_only = models.IntegerField(blank=True, default=0)
     reg_date = models.DateTimeField()
 
     class Meta:
@@ -101,9 +101,9 @@ class Modality(models.Model):
 
 class Clauses(models.Model):
     clause_id = models.AutoField(primary_key=True)
-    con = models.ForeignKey(Contracts, on_delete=models.CASCADE)
+    con = models.ForeignKey(Contracts, on_delete=models.CASCADE, db_column='con_id')
     clause_range = models.CharField(max_length=10)
-    modal = models.ForeignKey(Modality, on_delete=models.CASCADE, blank=True, null=True)
+    modal = models.ForeignKey(Modality, on_delete=models.CASCADE, blank=True, null=True, db_column='modal_id')
     reg_date = models.DateTimeField()
 
     class Meta:
@@ -113,7 +113,7 @@ class Clauses(models.Model):
 
 class Conflicts(models.Model):
     conf_id = models.AutoField(primary_key=True)
-    con = models.ForeignKey(Contracts, on_delete=models.CASCADE)
+    con = models.ForeignKey(Contracts, on_delete=models.CASCADE, db_column='con_id')
     clause_id_1 = models.ForeignKey(Clauses, on_delete=models.CASCADE, db_column='clause_id_1', related_name='first_clause')
     clause_id_2 = models.ForeignKey(Clauses, on_delete=models.CASCADE, db_column='clause_id_2', related_name='second_clause')
     generated = models.IntegerField(blank=True, null=True)

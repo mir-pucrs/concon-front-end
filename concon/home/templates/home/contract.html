@@ -1,0 +1,62 @@
+{% extends 'home/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% load home_extras %}
+
+    <article id="contract" class="active" style="display: block;width:auto">
+    
+        <div class="table-wrapper">
+
+            {% if clauses %}
+
+                <div id="conflicts">
+                    
+                    <div class="scroll">
+                        <table>
+                            <tbody>
+                                {% for cls in cls_obj %}
+                                    <tr class='line'>
+
+                                        <td>
+                                            {{ cls.clause_id }}
+                                        </td>
+                                        
+                                        <td>
+                                            {{ clauses|get_text:cls.clause_id }}
+                                        </td>                                        
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="scroll">
+                        <table>
+                            <tbody>
+                                {% for cls in cls_obj %}
+                                    <tr class='line'>
+
+                                        <td>
+                                            {{ cls.clause_id }}
+                                        </td>
+                                        
+                                        <td>
+                                            {{ clauses|get_text:cls.clause_id }}
+                                        </td>                                        
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </article>
+{% endblock %}

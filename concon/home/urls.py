@@ -12,8 +12,6 @@ urlpatterns = [
     url(r'^about/$', TemplateView.as_view(template_name='home/about.html'), name='about'),
     url(r'^register/$', views.register, name='register'),
     url(r'^profile/$', ProfileView.as_view(), name='profile'),
-    url(r'^profile/(?P<con_id>)/$', views.delete_contract, name='delete-contract')
-    # url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
-    # url(r'^(?P<pk>[0-9]+)/results/$', views.ResultsView.as_view(), name='results'),
-    # url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
+    url(r'^profile/(?P<con_id>\d+)/$', views.delete_contract, name='delete-contract'),
+    url(r'^contract/(?P<con_id>\d+)/$', views.contract, name='contract')
 ]

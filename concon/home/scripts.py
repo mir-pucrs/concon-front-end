@@ -1,3 +1,4 @@
+import os
 from nltk.tokenize import sent_tokenize
 from models import Contracts, Clauses
 
@@ -5,7 +6,8 @@ from models import Contracts, Clauses
 def insert_contract(path, user_obj):
 
     # Get the file name to save into the base.
-    name = path.split('/')[-1][:-4]
+    file_path = path.split('/')[-1]
+    filename, _ = os.path.splitext(file_path)
 
     # Read file.
     file_text = open(path, 'r').read()
@@ -14,19 +16,16 @@ def insert_contract(path, user_obj):
     sentences = sent_tokenize(file_text)
 
     sent_ranges = []
-    last_char_read = 0
 
     for ind, sentence in enumerate(sentences):
         # Run over the sentences and get their range in the text.
-        if not ind:
-            sent_ranges.append((0, len(sentence)))
-            last_char_read = len(sentence)
-        else:
-            sent_ranges.append((last_char_read + 1, last_char_read + len(sentence)))
-            last_char_read += len(sentence)
+        min_limit = file_text.find(sentence)
+        max_limit = min_limit + len(sentence)
+
+        sent_ranges.append((min_limit, max_limit))
 
     # Insert contract.
-    ins = Contracts(con_name=name, path_to_file=path, added_by_id=user_obj)
+    ins = Contracts(con_name=filename, path_to_file=path, added_by_id=user_obj)
     ins.save()
 
     # Get the contract id.
@@ -51,17 +50,17 @@ def get_conflicts(contract_id):
     # Get ranges from clauses.
     sel = Clauses.objects.filter(con_id=contract_id).order_by('clause_id')
 
-    clauses = []
+    clauses = dict()
 
     # Create a list to store each sentence.
     for row in sel:
 
         rng = row.clause_range
-        rng_values = rng[1:-1].split(',')
+        rng_values = rng.strip('()').split(',')
         min_limit = int(rng_values[0])
         max_limit = int(rng_values[1])
 
-        clauses.append(file_text[min_limit:max_limit])
+        clauses[row.clause_id] = file_text[min_limit:max_limit]
 
     # Return the sentences.
-    return clauses
+    return sel, clauses

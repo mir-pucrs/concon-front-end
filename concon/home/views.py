@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.http import HttpResponse    # HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth import login, authenticate
@@ -13,7 +13,7 @@ from django.views.generic import TemplateView, ListView
 from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage
 from django.core.paginator import PageNotAnInteger
-
+from django.core.urlresolvers import reverse
 
 class IndexView(TemplateView):
 
@@ -38,7 +38,7 @@ def conflict(request):
         con_id = insert_contract(path, user_obj)
 
         # Create new view.
-        clauses = get_conflicts(con_id)
+        _, clauses = get_conflicts(con_id)
 
         context = {
             'uploaded_file_url': uploaded_file_url,
@@ -92,32 +92,28 @@ class ProfileView(ListView):
         return context
 
 
-def delete_contract(request, contract_name):
+def delete_contract(request, con_id):
 
     # Delete clauses from contract.
-    get_id = Contracts.objects.get(con_name=contract_name)
-    # del_clauses.delete()
-
-    contract_id = get_id.con_id
-
-    del_clauses = Clauses.objects.filter(con=contract_id)
+    del_clauses = Clauses.objects.filter(con=con_id)
     del_clauses.delete()
 
     # Delete contract.
-    del_contract = Contracts.objects.get(con_id=contract_id)
+    del_contract = Contracts.objects.get(con_id=con_id)
     del_contract.delete()
 
-    render(request, 'home/profile.html', {})
+    return HttpResponseRedirect(reverse('home:profile'))
 
-# def profile(request):
-#
-#     # Get user id.
-#     user_id = request.user.id
-#
-#     # Get user contracts.
-#     contracts = Contracts.objects.filter(added_by=user_id)
-#
-#     # Define context.
-#     context = {'contracts': contracts}
-#
-#     return render(request, 'home/profile.html', context)
+
+def contract(request, con_id):
+
+    # Get conflicts.
+    cls_obj, clauses = get_conflicts(con_id)
+
+    context = {
+                'cls_obj': cls_obj,
+                'clauses': clauses
+              }
+
+    # Return context.
+    return render(request, 'home/contract.html', context)

@@ -16,12 +16,13 @@
                         <input type="password" name="password" id="password" />
                     </div> -->
                     {{ form.as_p }}
-                    <ul>
-                        <li>
-                            <a href="{% url 'password_reset' %}">Forgot my password</a>
-                        </li>
-                    </ul>
-
+                    
+                    <p>
+                        <a href="{% url 'password_reset' %}">
+                            Forgot my password
+                        </a>
+                    </p>
+                    
 
 
                     <ul class="actions">

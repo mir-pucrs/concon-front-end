@@ -45,6 +45,11 @@
                         |
                         <a href="{% url 'logout' %}">logout</a>
                     </h3>
+                {% else %}
+                    Hi {{ user.username }}! <br/>
+                        <a href="{% url 'home:index' %}">Home</a>
+                        |
+                        <a href="{% url 'login' %}">Login</a>
                 {% endif %}
             </header>
 

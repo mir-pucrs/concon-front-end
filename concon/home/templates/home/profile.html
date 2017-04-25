@@ -41,11 +41,11 @@
                                     </td>
 
                                     <td>
-                                        <a class="con_name" href="#" title="Click to find conflicts">{{ contract.con_name }}</a>
+                                        <a class="con_name" href="{% url 'home:contract' contract.con_id %}" title="Click to find conflicts">{{ contract.con_name }}</a>
                                     </td>
 
                                     <td>
-                                        <a href="#">Delete</a>
+                                        <a href="#">Download</a> | <a href="{% url 'home:delete-contract' contract.con_id %}">Delete</a>
                                     </td>
 
                                 </tr>
@@ -80,9 +80,14 @@
                 {% else %}
 
                     <h2>
-                        You have no contracts to show.
+                        You didn't uploaded any contract yet.
                     </h2>
-
+                    <center>
+                        <p>
+                            Please, <a href="{% url 'home:conflict' %}">upload</a> a contract to start.
+                        </p>    
+                    </center>
+                    
                 {% endif %}
 
             </div>

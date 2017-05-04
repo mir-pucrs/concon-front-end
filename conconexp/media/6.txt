@@ -1,0 +1,269 @@
+
+eCOMMERCE TRADING PARTNER AGREEMENT
+[NOT FOR THE B2B PORTAL]
+DATED: 	[date]
+
+
+BETWEEN:	Telstra Corporation Limited, ABN 33 051 775 556 of 242 Exhibition Street, Melbourne VIC 3000 ("Telstra")
+
+AND	:	[Vendor Name] ("Supplier")
+
+
+RECITALS
+
+A.	Telstra and the Supplier are trading partners.
+
+B.	The parties have agreed to trade via electronic means, in relation to agreements between Telstra and the Supplier, on the terms and conditions of this Agreement.
+
+
+
+1.  	Scope of Agreement
+
+	This Agreement relates to the interchange of data, not the various underlying commercial or contractual obligations of the parties, and is not a substitute for any individual contracts between the parties. An electronic message of the type described in Schedule B clause 4 is sent, for the purposes of any related contract between the parties, if, and only if, it is validly sent under this Agreement.
+
+	Schedules A and B are part of this Agreement.
+
+
+2.	Definitions
+
+	In this agreement the following words have the following meanings:
+
+	"Acknowledgement" means a response by the receiver complying with Schedule A clause 4.
+
+"Business Day" means a day on which banks are open for general banking business in the State in which the party receiving a Message or Acknowledgment has its place of business, not being a Saturday or Sunday.
+
+	"Message" means a structured set of data of a type identified in Schedule B clause 4 (not being an Acknowledgment), transmitted electronically from one party to another via an electronic system that has been tested and is "live" under Schedule A clause 1. 
+
+3.	Content of Messages
+
+	A sender must include in each Message or Acknowledgement:
+
+	(a)	identification of the sender (authenticated as provided for in clause 4);
+	(b)	the identification of the addressee;
+	(c)	the type of transaction;
+	(d)	criteria agreed between the parties verifying commencement of the Message or Acknowledgement and the conclusion of the Message or Acknowledgement for the purpose of verifying the integrity of the data transmitted; and
+	(e)	the data elements mutually agreed between the parties for that type of transaction.
+
+4.	Authentication 
+
+4.1	Each party must inform the other of a digital certificate, or other electronic symbol, code or password that the other party may rely on to authenticate a Message or Acknowledgment.  Each party must ensure that the certificate, symbol, code or password is kept secure and confidential subject to limited access by authorised personnel.
+
+4.2	A party receiving a Message  or Acknowledgment may rely on the authentication included in the Message or Acknowledgment under clause 4.1 as proof that it is duly sent on behalf of the other party.
+
+5.  	Receipt of Transmission
+5.1	A party must send an Acknowledgement of each Message before acting on it.
+5.2.	A Message sent by one party to the other will be deemed to have been sent by the first and received by the second party when the first party receives an Acknowledgement confirming receipt of the Message.
+
+5.3	If a party does not receive an Acknowledgement of a Message within 2 Business Days of sending the Message, the party must notify the other and, unless the issue is resolved promptly,  transmit the content of the Message by alternative means. If the first party does not comply with this clause, the first party will be deemed, for the purposes of clause  5.2, to have received an Acknowledgement within 2 Business Days.
+
+6.  	Storage of Data
+
+	Each party to a Message must maintain for a period of 7 years a record of the Message in the transmitted format and in a form from which it can readily be retrieved and visually inspected, and upon reasonable request must make the Message available to the other party for inspection. 
+7.  	Confidentiality
+
+7.1	Subject to clause 7.2, each party agrees to keep confidential the contents of a Message.  
+
+7.2	The obligations under 7.1 cease when (but only to the extent that) the Message or the information must, by law, be disclosed or has become public knowledge.
+
+8.  	Termination/Amendment
+
+8.1	This Agreement may be terminated by mutual consent, and a party may also terminate this Agreement by giving at least 30 days' notice in writing to the other party specifying the effective date of termination.  
+
+8.2	Termination of this Agreement does not, of itself, effect a termination of any other agreement between the parties. 
+
+8.3	The parties may amend this Agreement by each executing a document setting out the amendment and specifying the date from which the amendment is to take effect.
+	
+	
+9. Evidence and Contractual Effect
+9.1	The parties shall not dispute that a Message passing between them is "in writing" or a "document" merely on the grounds that the Message was transmitted electronically.
+	
+9.2	If a Message is authenticated in accordance with this agreement, neither party shall dispute that such Message has been "signed" by the party on whose behalf the Message appears to have been sent.
+
+9.3	The parties  waive any rights to bring an action declaring the invalidity of a transaction concluded between themselves on the sole ground that the transaction took place by use of electronic means.
+
+
+10. Hardware and Software
+
+10.1	Each party shall provide and maintain, at its own expense, the hardware, software and services necessary to transmit and receive Messages in accordance with this Agreement, and shall conduct such tests as may be mutually agreed from time to time to establish and monitor the adequacy of such hardware, software and services for the purposes of this Agreement.
+10.2	A party must not insert or activate, or permit a third party to insert or activate, in any Message or system, any virus, bomb, Trojan horse or computer programming code that would impair access to any part of the systems used to perform this agreement.
+
+11. Disputes
+
+11.1	The parties must attempt in good faith to resolve through negotiation any dispute regarding this Agreement.  If not resolved within 14 days, the parties agree to attempt to resolve the matter by mediation using a mediator agreed upon in writing by the parties or, in the absence of such agreement, a mediator nominated in accordance with the Mediation Guidelines of the Australian Commercial Dispute Centre (ACDC).  If following mediation the dispute is not resolved, either party may commence legal proceedings relating to the dispute. 
+
+11.2	If there is any dispute between the parties as to the contents of a Message, and if:
+	(a)	the recipient has kept a copy of the Message;
+	(b)		the recipient has sent an Acknowledgement in respect of that Message to the  sender; and
+	(c)	the recipient has not altered the Message since it was received (the onus of proving any such alteration being on the sender), 
+	then the recipient's copy of the Message must be taken to be the correct version of the Message.  If the conditions set out in the preceding sentence are not satisfied, the sender's copy of the Message must be taken to be the correct version.
+
+12.	Notices
+
+12.1	Except where otherwise prescribed by this Agreement, a notice, approval, consent or other communication ("Notice") in connection with this Agreement, must be:
+
+(a)	in writing;
+
+(b)	signed by a representative of the party giving the Notice; and
+
+
+(c)	served on the other party by being left at, or sent by prepaid ordinary post (airmail if posted to or from a place outside Australia) or sent by facsimile to the address of the Party which is specified in Schedule B or if the addressee notifies another address then to that address.
+
+12.2	A Notice takes effect from the time it is received unless a later time is specified in it.
+
+12.3	A Notice is taken to be received:
+
+(a)	in the case of a posted letter, on the third (seventh, if posted to or from a place outside Australia) day after posting; and
+
+(b)	in the case of facsimile, on production of a transmission report by the machine from which the facsimile was sent which indicates that the facsimile was sent in its entirety to the facsimile number of the recipient.
+
+13	Law and Jurisdiction
+
+13.1	This Agreement and the transactions contemplated by it will be governed by and construed in accordance with the laws in force in Victoria.
+
+13.2 	Each party irrevocably and unconditionally submits to the non-exclusive jurisdiction of the courts of the State of Victoria and courts of appeal from them for determining any dispute concerning this Agreement or the transactions contemplated by it.  Each party waives any right it has to object to an action being brought in those courts including, but not limited to, claiming that the action has been brought in an inconvenient forum or that those courts do not have jurisdiction.
+
+
+
+
+EXECUTED  as an agreement
+
+
+SIGNED by		SIGNED by
+
+
+
+
+.........................................................	....................................................
+([Vendor Manager])	([Vendor Contact Name])
+
+as authorised representative	as authorised representative 
+for Telstra Corporation Limited	for [Vendor]
+in the presence of	in the presence of
+
+
+............................................	.............................................
+([Witness Name])		([Vendor Witness Name])
+
+
+SCHEDULE A
+Procedural Guide
+
+1.	Testing, 'Going Live'
+
+	Once each party has installed the necessary eCommerce software they will exchange relevant details to enable an electronic interchange to take place.
+
+	Test documents are to be produced and sent to the parties, indicating that the document is a test document only.  Both parties are to ensure that the data is being translated, interchanged and re-translated correctly in the agreed format before completing testing.
+
+	Once the parties agree that the electronic system has been successfully tested then the system shall be deemed as a production or "live" system. Until then Messages will be of no legal effect. Paper copies or other agreed medium, where they exist, will continue to be sent until their deletion is agreed by both parties.
+
+2.	Problem Resolution
+
+	If a party encounters any problem that could affect the other party or result in failure of a Message to be transmitted, and is un-recoverable, then the party with the problem will notify the other party within 24 hours.
+
+	The receiver will notify the sender via email, fax or telephone of any duplicate documents
+	received.
+
+3.	Contingency
+
+	If the electronic system is unavailable to any party then that party must notify the other with consideration to various options such as: revert to the previous paper-based system, suspend trading temporarily or use an alternative network.
+
+4.	Acknowledgements
+Each party receiving a Message must provide an Acknowledgment to the sender.
+
+An Acknowledgement must be in the format agreed and tested under Clause 1 above. 	
+	
+	An Acknowledgement does not imply acceptance of the value of the data in the Message.
+
+
+5.	Lost Message Retrieval
+
+	If a Message is 'lost' after being received, the recipient will ask its eCommerce provider (if any) to re-send the Message.  Only if this is not possible will they ask the sender to re-send the Message.
+
+6.	Security Procedures
+
+	Each party shall develop and use security procedures as a prudent company would develop and use to ensure that all transmissions of Messages, equipment, and the network are secure from access not authorised by each party and to protect the business records and data contained therein from loss, alteration or destruction.
+
+	Each party shall, upon becoming aware of any breach of security or unauthorised use of transmission, immediately inform the other party, investigate the breach and report to the other party as to the outcome of the investigation.  The use of eCommerce shall be suspended until security has been re-established to the satisfaction of the parties.  The party responsible for the breach of security shall pay the costs of any legal proceedings against a person who has committed an act of unauthorised disclosure.
+
+7.	eCommerce Provider
+
+	A party may, by notice in writing to the other party, nominate another entity as an eCommerce provider to perform some or all of its obligations under this Agreement.  The party remains responsible for performance of these obligations and for ensuring that the eCommerce Provider complies with applicable provisions of this Agreement.
+
+	Each party will bear its own costs of depositing outgoing documents and retrieving incoming documents.
+
+	In the event of any dispute which may arise as to whether a Message has been sent or received, it will be the responsibility of the sender to supply details of the transmission date and time that the Message was sent, the envelope and the date the transaction was acknowledged if applicable.  Both parties agree to assist in any joint investigation with their eCommerce provider if required to resolve these disputes.
+
+8.	Access 
+
+	Both parties agree to access their production system on each Business Day.
+
+	
+
+SCHEDULE B
+Application Details
+
+1. 	Scope
+
+This schedule covers all operational information required with regard to the technical aspects of setting up and managing the electronic interchange between parties.
+
+It is acknowledged that from time to time changes will need to be made to this schedule in order to reflect the current electronic trading relationship.  Any amendments should be in writing and signed by an authorised person from each party setting out the changes and specifying the date from which the amendment is to take effect.
+
+2. 	Contacts
+
+TELSTRA
+
+	Address for Notices:	[Vendor Manager Name]
+			[Vendor Manager Title]
+			Telstra Corporation Limited
+			[Street 1]
+			[Street 2]
+			[Suburb]  [State]  [Postcode]
+
+			Phone: (xx) xxxx xxxx
+			Fax: (xx) xxxx xxxx
+			Email: [email.address]@team.telstra.com
+
+
+	Technical Adviser	Please refer all matters regarding electronic interchanges to:
+
+			B2B Vendor Helpdesk
+			Phone:  1300 360 695
+			Email: B2BVendorHelpDesk@team.telstra.com
+	
+SUPPLIER
+
+	Address for Notices:	[Vendor Contact Name]
+			[Vendor Manager Title]
+			[Vendor Name]
+			[Street 1]
+			[Street 2]
+			[Suburb]  [State]  [Postcode]
+
+			Phone: (xx) xxxx xxxx
+			Fax: (xx) xxxx xxxx
+			Email: [email.address]
+
+	Technical Adviser
+
+	Please refer all matters regarding electronic interchanges to:
+	
+			[Technical Contact Name]
+			[Technical Contact Title]
+			Phone: (xx) xxxx xxxx
+			Email: [email.address]
+
+
+
+3. 	Agreed Documents and Format
+
+	Each party agrees to use the following documents: Purchase Orders, Remittance Advice s, Invoices  and Acknowledgments. The format for these documents will be as follows  
+
+TypeFormat 
+(ANSI X12/EDIFACT/ebXML/RosettaNet)APurchase OrderBRemittance AdviceCInvoiceDAcknowledgment 
+1
+
+
+[Vendor] - eCommerce Trading Partner Agreement
+
+eCommerce Trading Partner Agreement v1.6 - [vendor].doc		page 8 of 9
+

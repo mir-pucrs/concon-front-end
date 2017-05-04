@@ -1,0 +1,105 @@
+{% extends 'home/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div id="wrapper2"> 
+    <!-- <header id="header">  -->
+        <div class="content">
+            <div class="inner">
+    <article id="profile" class="active" style="display: block;width:auto">
+    
+        <div class="table-wrapper">
+
+            <div>
+
+                {% if contracts %}
+                    <table class="table table-bordered">
+                        
+                        <thead>
+                            <tr>
+                                <th>
+                                    Contract ID
+                                </th>
+                                <th>
+                                    Contract Name
+                                </th>
+                                <th>
+                                    Options
+                                </th>
+                            </tr>
+                        </thead>  
+
+                        <tbody>
+                            
+                            <h3>
+                                Your contracts
+                            </h3>
+
+                            {% for contract in contracts %}
+                                <tr>
+
+                                    <td>
+                                        {{ contract.con_id }}
+                                    </td>
+
+                                    <td>
+                                        <a class="con_name" href="{% url 'home:contract' contract.con_id %}" title="Click to find conflicts">{{ contract.con_name }}</a>
+                                    </td>
+
+                                    <td>
+                                        <a href="{% url 'home:delete-contract' contract.con_id %}">Delete</a> <!-- <a href="#">Download</a> | -->
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                    {% if is_paginated %}
+                      <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                          <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                        {% else %}
+                          <li class="disabled"><span>&laquo;</span></li>
+                        {% endif %}
+                        {% for i in paginator.page_range %}
+                          {% if page_obj.number == i %}
+                            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                          {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                          {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                          <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                        {% else %}
+                          <li class="disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                      </ul>
+                    {% endif %}
+
+                {% else %}
+
+                    <h2>
+                        You didn't upload any contract yet.
+                    </h2>
+                    <center>
+                        <p>
+                            Please, <a href="{% url 'home:conflict' %}">upload</a> a contract to start.
+                        </p>    
+                    </center>
+                    
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </article>
+    </div>  
+        </div>                       
+    <!-- </header> -->
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+#!/bin/bash
+# This hook is run after this virtualenv is activated.
+if [[ -n $LD_LIBRARY_PATH ]]
+then
+    export LD_LIBRARY_PATH_BACKUP=$SOME_VAR
+fi
+export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib64
+#export THEANO_FLAGS='config.base_compiledir=/home/lsa/conconexp/.theano device=gpu2'
+export THEANO_FLAGS='floatX=float32,device=gpu2'
+
+$ cat $VIRTUAL_ENV/bin/predeactivate
+#!/bin/bash
+# This hook is run before this virtualenv is deactivated.
+if [[ -n $LD_LIBRARY_PATH_BACKUP ]]
+then
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH_BACKUP
+    unset LD_LIBRARY_PATH_BACKUP
+else
+    unset LD_LIBRARY_PATH
+fi
+
+

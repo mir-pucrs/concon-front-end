@@ -1,0 +1,122 @@
+{% extends 'home/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% load home_extras %}
+            <div id="wrapper2"> 
+                <article id="conflict" class="active" style="display: block;width:auto">
+                    <div class="table-wrapper">
+
+            {% if clauses %}
+
+                {% if conflicts %}
+
+                    <h4 id='test_text'>Conflicts</h4>
+
+                    <select id="selector">
+                        <option value="none">-</option>
+
+                        {% for conflict in conflicts %}
+
+                            <option class="conflict" value="{{ conflict|get_index:0 }}_{{ conflict|get_index:1 }}">{{ conflict|get_index:0 }} - {{ conflict|get_index:1 }} Confidence: {{ conflict|get_index:2 }}%</option>
+
+                        {% endfor %}
+                        
+                    </select>
+
+                {% else %}
+                    <h4>No conflicts found!</h4>
+                {% endif %}
+
+                <div id="conflicts">
+                    
+                    <div class="scroll">
+                        <table>
+
+                            <tbody>
+                                {% for cls in cls_obj %}
+                                    <tr id='first_{{ cls.clause_id }}' class='line'>
+
+                                        <td>
+                                            {{ cls.clause_id }}
+                                        </td>
+                                        
+                                        <td>
+                                            {{ clauses|get_text:cls.clause_id }}
+                                        </td>                                        
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="scroll">
+                        <table>
+                            <tbody>
+                                {% for cls in cls_obj %}
+                                    <tr id="second_{{ cls.clause_id }}" class='line'>
+
+                                        <td>
+                                            {{ cls.clause_id }}
+                                        </td>
+                                        
+                                        <td>
+                                            {{ clauses|get_text:cls.clause_id }}
+                                        </td>                                        
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+                        <table class="alt">    
+                            <tbody>
+                                <p>Please, upload a contract to start our processing.</p>
+                                    
+                                <tr>
+                                    <td class="before_upload">
+                                        <a class="button small">Inspect</a>
+                                        <a href="#" class="button ">Select</a>
+                                        <a href="#" class="button ">Generate</a>
+                                        <a href="#" class="button special icon fa-download">Download</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <form id="file_form" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <span>
+                                            Select a Model to use.
+                                        </span>
+                                        <select name="select_model">
+                                            <option value="cnn">
+                                                CNN model
+                                            </option>
+                                            <option value="msc">
+                                                Rule-based model
+                                            </option>
+                                        </select>
+                                        <br/>
+                                        <input type="file" name="up_file" id="fileToUpload">
+                                        <input type="submit" value="Upload" id='upload_button' name="upfile">
+                                    </form>
+                                </tr>
+
+                                <!-- <br/>
+                                <p>
+                                    <a href="{% url 'home:profile' %}}">Check the contracts you've already uploaded.</a>
+                                </p> -->
+                                
+
+                            </tbody>
+                        </table>
+                    </div>
+                
+                </article>
+            </div>
+{% endblock %}

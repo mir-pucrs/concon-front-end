@@ -1,0 +1,62 @@
+#conflicts{
+    width:100%;
+}
+
+.scroll{
+    float:left;
+    width:49%;
+    overflow-y: auto;
+    height: 400px;
+    /*border: solid 2px;*/
+    background-color: white;
+}
+
+.line{
+    color: black;
+    margin: 4px;
+    border-bottom: solid 1px;
+    width: 90%;
+    /*background-color: #c2efc2;*/
+}
+
+/* Profile */
+
+.con_name a:hover{
+    background-color: white;
+}
+
+ul li{
+    list-style-type: none;
+    float: left;    
+}
+
+.conflcit{
+
+    color:pink;
+}
+
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('http://i.stack.imgur.com/FhHRx.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modal {
+    display: block;
+}

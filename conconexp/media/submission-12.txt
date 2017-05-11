@@ -1,0 +1,163 @@
+Summary:
+
+Most reviews agree that the paper proposes an interesting problem with some originality aspects, however, due to its many negative aspects we will reject the paper.
+The negative aspects more frequent among reviews are: the paper is not mature enough to be published in COIN, its ideas are not clear and well presented needing a significant improvement on language; the mechanism definition is not clear, it has a bad case study that ignores realistic applications; about related work, it ignores some work about monitoring in normative multiagent systems.
+
+
+Positive:
+
+    - interesting problem;
+    - has some originality in some aspects;
+
+Negative: 
+
+    - disappointing case study;
+    - realistic applications must be considered;
+    - paper is still not mature enough to be published in COIN;
+    - there is no clear mechanism definition that can be assessed;
+    - language needs significant improvment and corrections;
+    - ideas are not clear;
+    - English is poor;
+    - ignores much work on monitoring in normative multiagent systems;
+    - not much is said about the actual sanctioning mechanism;
+
+--------------------------------
+
+Overall evaluation: 
+0
+The paper proposes to distinguish in a sanctioning mechanism between sanctions applied to the violator, and sanctions applied to the violator's group or hierarchical superiors.
+Relevance:  
+4
+The related work is rather partial and ignores much work on monitoring in normative multiagent systems, which seems closely related to the sanctioning mechanism. Also, it has been claimed by many authors that constitutive norms play a central role in defining sanctioning mechanisms in normative multiagent systems
+Originality:    
+3
+The paper seems very preliminary. In fact, most of the paper is used to define very standard concepts of normative multiagent systems, and not much is said about the actual sanctioning mechanism
+Readability and Organization:   
+3
+Details
+- don't write [1] [4] but [1,4]
+- non the responsibility -> nor the responsibility]
+- works -> work
+- don't use refs as nouns (e.g. don't say "According to [19]" but say "According to Silva et al [19],"
+- sec 4.1.: how a set of agents -> as a set of agents
+- why are goals associated with roles? Normally they are associated with agents
+- didnt -> did not
+- in different level -> at different levels
+- don't abbreviate references, e.g. in [5] only InPROMAS (also missing space)
+- 5.3. very short paragraph
+Technical quality and soundness:    
+3
+What is not clear is how this sanctioning based mechanism relates to methods of distributing responsibility. If not only the violator is sanctioned but also his boss, it may be modeled as shared responsibility between the agent and his boss. Similar with the group sanctioning mechanism.
+Reviewer's confidence:  
+3
+Medium
+Confidential remarks for the program committee: You can accept it for the discussion, but if you have sufficient good papers you can also let the authors write a more detailed version of their mechanism that is analyzed in a bit more detail
+
+---------------------------------
+
+The authors deal with an interesting problem, and it is likely that the presentation of the paper will initiate interesting discussions. I found the case study, however, disappointing. If normative systems research is to progress, realistic applications must be considered. 
+
+I would like to propose that the authors look at the literature of event-based systems (as an example, see the reference below); the event algebras proposed in this field for expressing composite event patterns may be used for expressing the goals of multi-agent systems, as these are defined in this paper.
+
+@inproceedings{DBLP:conf/sigmod/ZhangDI14,
+author = {Haopeng Zhang and
+Yanlei Diao and
+Neil Immerman},
+title = {On complexity and optimization of expensive queries in complex event
+processing},
+booktitle = {International Conference on Management of Data, {SIGMOD} 2014, Snowbird,
+UT, USA, June 22-27, 2014},
+pages = {217--228},
+year = {2014},
+crossref = {DBLP:conf/sigmod/2014},
+url = {http://doi.acm.org/10.1145/2588555.2593671},
+doi = {10.1145/2588555.2593671},
+timestamp = {Mon, 23 May 2016 12:16:24 +0200},
+biburl = {http://dblp.uni-trier.de/rec/bib/conf/sigmod/ZhangDI14},
+bibsource = {dblp computer science bibliography, http://dblp.org}
+}
+Relevance:  
+4
+The paper is relevant to COIN.
+Originality:    
+3
+See comments above.
+Readability and Organization:   
+2
+The authors must improve the presentation by fixing the several typos and grammatical errors.
+Technical quality and soundness:    
+3
+See comments above.
+Reviewer's confidence:  
+4
+High confidence.
+
+---------------------------------
+
+Overall evaluation: 
+-2
+The authors propose to separate sanctions according to the normal goal of the agent in an organization and to its management roles over other agents in this organization. While I appreciate the effort made by the authors, I believe the paper is still not mature enough to be published in COIN. The author state that they are introducing a mechanism for sanctioning according to hierarchy, but I could not find a clear mechanism in the paper. There is a discussion of roles, and how agents should also be punished according to their managerial role, but there is no clear mechanism definition that can be assessed on how this can be done.
+
+In addition, I am not sure I agree with adding an extra punishment if the agent has failed in supervising another agent. As I understand, the supervisor agent goal will only be achieved if its subordinate manage to achieve their goals. If these subordinate agents fail to achieve their goal, then there will be a sanction applied on them, but there will be also a sanction applied on the supervisor according to the contract. So is not it this a sanction for failing to supervise the other agents? As I understand from the case study, that was the main task of a professor, so I am not sure if it is acceptable to just add another sanction to the system without proper justification.
+
+Detailed comments:
+- The language of the paper needs significant improvment and corrections. 
+- There is some related work that I think will be directly relevant to this paper, please see:
+
+Classifying sanctions and designing a conceptual sanctioning process model for socio-technical systems
+LG Nardin, T Balke-Visser, N Ajmeri, AK Kalia, JS Sichman, MP Singh
+The Knowledge Engineering Review 31 (02), 142-166
+
+Felipe Meneguzzi, Sanjay Modgil, Nir Oren, Simon Miles, Michael Luck, Noura Faci:
+Applying electronic contracting to the aerospace aftercare domain. Eng. Appl. of AI 25(7): 1471-1487 (2012)
+
+- Section 4, the difference between point 1 and 2 is not clear. More details about the second point are needed.
+
+- Section 4.1: I am not sure of the definition of an agent being a set of roles. I understand that an agent can play multiple roles, but this should be defined separately. Also, in the case study later, each agent seems to play one role only.
+
+- "g0 and subgoals sg1 and sg2" this notation is confusing and does not help with generalization. Why not use g0 and subgoals g01 and g02.
+
+- Section 4.2: when introducing the different sanction mechanisms, I would like to know how are these sanctions calculated? How can you guarantee that you are applying a fair sanction?
+
+- Section 5.3 and 5.4: What does -12 and -26 means? Is more sanction better?
+Relevance:  
+4
+The issue of normative multi-agent system and the use of sanctions to regulate the behavior of the agents is highly relevant to COIN.
+Originality:    
+3
+The idea of having sanction according to responsibility has been studied before, but there some aspect that are original in this paper.
+Readability and Organization:   
+2
+The paper is hard to follow, and require major revision in term of language and structure.
+Technical quality and soundness:    
+2
+The notation used in the paper can be improved, and the authors need some formal definition of their model, and of how the different sanctions are calculated.
+Reviewer's confidence:  
+5
+I have been working on designing sanction mechanisms for normative multi-agent systems for the past ten years.
+
+-----------------------------
+
+Overall evaluation: 
+-3
+The ideas are not clear: the first half, or more, of the abstract applies to any organization-based multiagent system, not only to normative ones. The same applies to the first paragraph of the Introduction.
+
+There are confusing phrases, like "Three kinds (individual, collective and management) of sanction are created to analysis the influence of each non-executed actions agent didnt follow a norm.": sanctions do not analyze!
+
+Some times the English of the paper is so poor that sentences become meaningless, like "Each agent is a set of agent roles": agents are agents, not sets of agent roles.
+Relevance:  
+1
+It seems that the subject of the paper would be of interest to the COIN audience
+Originality:    
+1
+Can't be assessed from the text given.
+Readability and Organization:   
+1
+Poor English, completely compromises readability
+Technical quality and soundness:    
+1
+Can't be assessed from the text given.
+Reviewer's confidence:  
+4
+Anyone with minimal reading capacity in English will find the text poorly written.
+Confidential remarks for the program committee: Paper poorly written, unreadable for the most part.

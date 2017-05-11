@@ -1,0 +1,3 @@
+So, X can go to the toilet. Y may go to the toilet.
+X and Y can not go to the toilet.
+Y shall not go to the toilet if X is in the toilet.

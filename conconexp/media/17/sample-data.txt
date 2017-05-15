@@ -1,0 +1,2 @@
+Alice is committed to Bob that if Bob pays her money, she will give him coffee. 
+Alice is committed to Bob that if Bob pay her money, she will not give him coffee.

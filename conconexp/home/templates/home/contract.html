@@ -5,77 +5,96 @@
 {% block content %}
 
 {% load home_extras %}
+    <div id="wrapper2">
+        <article id="contract" class="active" style="display: block;width:auto">
+        
+            <div class="table-wrapper">
 
-    <article id="contract" class="active" style="display: block;width:auto">
-    
-        <div class="table-wrapper">
+                {% if clauses %}
 
-            {% if clauses %}
+                    {% if conflicts %}
 
-                {% if conflicts %}
+                        <h4 id='test_text'>Conflicts</h4>
 
-                    <h4 id='test_text'>Conflicts</h4>
+                        <select id="selector">
+                            <option value="none">-</option>
 
-                    <select id="selector">
-                        <option value="none">-</option>
+                            {% for conflict in conflicts %}
 
-                        {% for conflict in conflicts %}
+                                <option class="conflict" value="{{ conflict|get_index:0 }}_{{ conflict|get_index:1 }}">{{ conflict|get_index:0 }} - {{ conflict|get_index:1 }} Confidence: {{ conflict|get_index:2 }}%</option>
 
-                            <option class="conflict" value="{{ conflict|get_index:0 }}_{{ conflict|get_index:1 }}">{{ conflict|get_index:0 }} - {{ conflict|get_index:1 }} Confidence: {{ conflict|get_index:2 }}%</option>
+                            {% endfor %}
+                            
+                        </select>
 
-                        {% endfor %}
+                    {% else %}
+                        <h4>No conflicts found!</h4>
+                    {% endif %}
+
+                    <div id="conflicts">
                         
-                    </select>
+                        <div class="scroll">
+                            <table>
+                                <tbody>
+                                    {% for cls in cls_obj %}
+                                        <tr id='first_{{ cls.clause_id }}' class='line'>
+
+                                            <td>
+                                                {{ cls.clause_id }}
+                                            </td>
+                                            
+                                            <td>
+                                                {{ clauses|get_text:cls.clause_id }}
+                                            </td>                                        
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="scroll">
+                            <table>
+                                <tbody>
+                                    {% for cls in cls_obj %}
+                                        <tr id="second_{{ cls.clause_id }}" class='line'>
+
+                                            <td>
+                                                {{ cls.clause_id }}
+                                            </td>
+                                            
+                                            <td>
+                                                {{ clauses|get_text:cls.clause_id }}
+                                            </td>                                        
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
 
                 {% else %}
-                    <h4>No conflicts found!</h4>
+
+                    <h4>Contract: {{ contract.con_name }}</h4>
+                    <h4>Choose the classifier to process this contract.</h4>
+                    <p>Check our <a href="{% url 'home:model_description' %}">model description</a>.</p>
+                    <form id="file_form" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <select name="select_model">
+                            <option value="cnn">
+                                CNN model
+                            </option>
+                            <option value="msc">
+                                Rule-based model
+                            </option>
+                        </select>
+                        <br/>
+                        <input type="submit" value="Upload" id='select'>
+                    </form>
+
                 {% endif %}
 
-                <div id="conflicts">
-                    
-                    <div class="scroll">
-                        <table>
-                            <tbody>
-                                {% for cls in cls_obj %}
-                                    <tr id='first_{{ cls.clause_id }}' class='line'>
-
-                                        <td>
-                                            {{ cls.clause_id }}
-                                        </td>
-                                        
-                                        <td>
-                                            {{ clauses|get_text:cls.clause_id }}
-                                        </td>                                        
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="scroll">
-                        <table>
-                            <tbody>
-                                {% for cls in cls_obj %}
-                                    <tr id="second_{{ cls.clause_id }}" class='line'>
-
-                                        <td>
-                                            {{ cls.clause_id }}
-                                        </td>
-                                        
-                                        <td>
-                                            {{ clauses|get_text:cls.clause_id }}
-                                        </td>                                        
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-
-            {% endif %}
-
-        </div>
-
-    </article>
+            </div>
+        </article>
+    </div>    
 {% endblock %}

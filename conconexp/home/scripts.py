@@ -1,16 +1,133 @@
+# -*- coding:utf-8 -*-
 import os
+import sys
 import threading
-
+import pypandoc
 from constants import *
-from itertools import combinations
 from nltk.tokenize import sent_tokenize
 from models import Contracts, Clauses
-from preprocess_norms import turn_into_matrix, to_matrix
+from preprocess_norms import to_matrix
+from django.conf import settings
 from keras.models import  model_from_json
+from django.core.files.storage import FileSystemStorage
 from conflict_models.msc_model.party_identification.extracting_parties import extract_parties
 from conflict_models.msc_model.rule_functions import *
+from cStringIO import StringIO
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+from pdfminer.converter import TextConverter
+from pdfminer.layout import LAParams
+from pdfminer.pdfpage import PDFPage
 
 clause_classifier, vec = get_classifier()
+SUCCESS = 'SUCCESS'
+ERR = 'ERROR'
+WARN = 'WARNING'
+
+
+def new_confidence(x): return abs(x - 0.5) * 2
+
+
+def convert_pdf_to_txt(path):
+    rsrcmgr = PDFResourceManager()
+    retstr = StringIO()
+    codec = 'utf-8'
+    laparams = LAParams()
+    device = TextConverter(rsrcmgr, retstr, codec=codec, laparams=laparams)
+    fp = file(path, 'rb')
+    interpreter = PDFPageInterpreter(rsrcmgr, device)
+    password = ""
+    maxpages = 0
+    caching = True
+    pagenos=set()
+    for page in PDFPage.get_pages(fp, pagenos, maxpages=maxpages, password=password,caching=caching, check_extractable=True):
+        interpreter.process_page(page)
+    fp.close()
+    device.close()
+    text = retstr.getvalue()
+    retstr.close()
+    return text
+
+
+def save_contract(up_file, user_id):
+    
+    # Check if there is an existing folder for the user.
+    # If yes, check if there is an existing contract with the same name.
+    user_folder_path = os.path.join(settings.MEDIA_URL, str(user_id))
+    abs_user_folder = os.path.join(settings.MEDIA_ROOT, str(user_id))
+
+    # Check the folder existence.
+    if os.path.isdir(abs_user_folder):
+        name, _ = os.path.splitext(up_file.name)
+        file_path = os.path.join(abs_user_folder, str(name + '.txt'))
+
+        print name, "folder exists"
+
+        # Check the file existence.
+        if os.path.isfile(file_path):
+            # Return with a message.
+
+            print "file exists!!"
+            return WARN, "Hey! You've already uploaded this contract."
+
+    else:
+        os.makedirs(abs_user_folder)
+
+    # Save file as it is.    
+    fs = FileSystemStorage(location=abs_user_folder, base_url=user_folder_path)
+    filename = fs.save(up_file.name, up_file)
+    file_url = fs.url(filename)
+    full_file_url = settings.BASE_DIR + file_url
+
+    # Check its extension.
+    name, extension = os.path.splitext(filename)
+
+    if extension == '.pdf':
+
+        print "pdf", extension
+
+        print file_url
+
+        try:            
+            txt = convert_pdf_to_txt(full_file_url)
+        except: # catch *all* exceptions
+            e = sys.exc_info()[0]
+            return ERR, "Error: %s" % e
+        
+    elif extension != '.txt' and extension != '.shtml':
+
+        print "pypandoc", extension
+
+        try:
+            txt = pypandoc.convert_file(full_file_url, 'rst')
+        except: # catch *all* exceptions
+            print "some error"
+            e = sys.exc_info()[0]
+            return ERR, "Error: %s" % e
+    
+    elif extension == '.txt':
+
+        print "nothing to do here", extension
+        return SUCCESS, file_url
+
+    elif extension == '.shtml':
+
+        txt = open(full_file_url, 'r').read()
+
+
+    # Create a new path to save the converted file.
+    new_file_url = file_url[:-(len(extension))] + '.txt'
+
+    # Save new file with the same name but with a different extension.
+    with open(settings.BASE_DIR + new_file_url, 'w') as w_file:
+
+        w_file.write(txt.encode('utf-8', "ignore"))
+
+    w_file.close()
+
+    # Remove the first file.
+    os.remove(full_file_url)
+
+    return SUCCESS, new_file_url
 
 
 def insert_contract(path, user_obj):
@@ -23,13 +140,16 @@ def insert_contract(path, user_obj):
     file_text = open(path, 'r').read()
 
     # Break into sentences.
-    sentences = sent_tokenize(file_text)
+    try:
+        sentences = sent_tokenize(file_text.decode('utf-8', 'ignore'))
+    except:
+        sentences = []
 
     sent_ranges = []
 
     for ind, sentence in enumerate(sentences):
         # Run over the sentences and get their range in the text.
-        min_limit = file_text.find(sentence)
+        min_limit = file_text.find(sentence.encode('utf-8', 'ignore'))
         max_limit = min_limit + len(sentence)
 
         sent_ranges.append((min_limit, max_limit))
@@ -65,22 +185,23 @@ def get_norm_pairs(norms):
     return combinations(norms, 2)
 
 
-def check_pair(conflicts, clauses, pair, model):
+# def check_pair(conflicts, clauses, pair, model):
 
-   matrix = to_matrix(clauses[pair[0]], clauses[pair[1]], MAX_LENGTH)
+#    matrix = to_matrix(clauses[pair[0]], clauses[pair[1]], MAX_LENGTH)
 
-   pred = model.predict(matrix)
+#    pred = model.predict(matrix)
 
-   # pred_class = pred.argmax(axis=1)
+#    new_pred = new_confidence(pred) 
+    # pred_class = pred.argmax(axis=1)
 
-   if pred[0][1] > 0.7:
-       conflicts.append((pair[0], pair[1], int(pred[0][1]*100)))
+#    if new_pred > 0.7:
+#        conflicts.append((pair[0], pair[1], int(new_pred*100)))
 
 
 def check_conflict(clauses, pairs):
 
     # Get model.
-    #net = get_model(MAX_LENGTH)
+    # net = get_model(MAX_LENGTH)
     json_file = open(PATH_TO_MODEL, 'r')	
     model_json = json_file.read()
     json_file.close()
@@ -88,27 +209,31 @@ def check_conflict(clauses, pairs):
     
     model.load_weights(PATH_TO_WEIGHTS)
    
-    #net.load_weights(WEIGHTS)
+    # net.load_weights(WEIGHTS)
 
     conflicts = []
     
-    threads = []
+    # threads = []
 
     for pair in pairs:
 
-	t = threading.Thread(target=check_pair, args=(conflicts, clauses, pair, model))
-	threads.append(t)
-	t.start()        
-	t.join()
-	#matrix = to_matrix(clauses[pair[0]], clauses[pair[1]], MAX_LENGTH)
+        matrix = to_matrix(clauses[pair[0]], clauses[pair[1]], MAX_LENGTH)
 
-        #pred = model.predict(matrix)
+        pred = model.predict(matrix)
 
-        # pred_class = pred.argmax(axis=1)
+	if pred[0][1] > 0.5:
+	    new_pred = new_confidence(pred[0][1]) 
+	else:
+	    continue
+    # pred_class = pred.argmax(axis=1)
 
-        #if pred[0][1] > 0.7:
-        #    conflicts.append((pair[0], pair[1], int(pred[0][1]*100)))
+        if new_pred > 0.8:
+            conflicts.append((pair[0], pair[1], int(new_pred*100)))
 
+	# t = threading.Thread(target=check_pair, args=(conflicts, clauses, pair, model))
+	# threads.append(t)
+	# t.start()        
+	# t.join()
 
     return conflicts
 

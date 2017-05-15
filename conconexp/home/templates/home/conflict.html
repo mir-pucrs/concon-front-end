@@ -9,6 +9,12 @@
                 <article id="conflict" class="active" style="display: block;width:auto">
                     <div class="table-wrapper">
 
+            {% if message %}
+
+                <h4>{{ message }}</h4>
+
+            {% endif %}
+
             {% if clauses %}
 
                 {% if conflicts %}
@@ -91,8 +97,9 @@
                                     <form id="file_form" method="post" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <span>
-                                            Select a Model to use.
+                                            Select a Model to use. 
                                         </span>
+
                                         <select name="select_model">
                                             <option value="cnn">
                                                 CNN model
@@ -106,6 +113,9 @@
                                         <input type="submit" value="Upload" id='upload_button' name="upfile">
                                     </form>
                                 </tr>
+
+                                
+                                <p>Check our <a href="{% url 'home:model_description' %}">model description</a>.</p>
 
                                 <!-- <br/>
                                 <p>

@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^intro/$', TemplateView.as_view(template_name='home/intro.html'), name='intro'),
     url(r'^profile/$', ProfileView.as_view(), name='profile'),
     url(r'^profile/(?P<con_id>\d+)/$', views.delete_contract, name='delete-contract'),
-    url(r'^contract/(?P<con_id>\d+)/$', views.contract, name='contract')
+    url(r'^contract/(?P<con_id>\d+)/$', views.contract, name='contract'),
+    url(r'^model_description/$', TemplateView.as_view(template_name='home/introducing_models.html'), name='model_description'),
 ]

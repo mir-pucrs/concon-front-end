@@ -1,0 +1,48 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+
+                {% load static %}                
+                <!-- Intro -->
+                <div id="wrapper2"> 
+                    <header id="header">
+                        <div class="content">
+                            <div class="inner">
+                                <article id="intro">
+                                    <center><h2 class="major">Models</h2></center>
+
+                                    <h4>Rule-Based Model</h4>
+
+                                        <p> 
+                                            In this model, we break potential conflict identification into two steps.
+                                            First, we retrieve information from the contract in order to identify the parties involved and the norms it contains.
+                                            Second, we use such information to compare norms and identify potential conflicts.
+                                        </p>
+
+                                        <p>
+                                            In the information retrieval step, we use rules to identify (in the first paragraph of the contract) the parties in the contract.
+                                            We identify norms within the text simply using a set of modal verbs, thus, if a modal verb exists in a sentence, we classify it as a norm.
+                                            Finally, we compare the parties, the modal verb (and its deontic meaning), and the norm action and, using conflict rules, we identify which ones are potential conflicts.
+                                        </p>
+
+                                        <p>Check our paper for more details: <a href="https://ict2.tbm.tudelft.nl/wp/wp-content/uploads/sites/8/2015/06/COINIJCAI_2015_submission_7-1.pdf">Identifying Potential Conflicts between Norms in
+Contracts</a></p>
+
+                                    <h4>CNN Model</h4>
+
+                                        <p>
+                                            In this model, we use a CNN to process norm pairs and classify them as conflicts.
+                                            We use a matrix representation that computes a character-level similarity between two norms as input to the CNN.
+                                            To train our model, we use a set of conflicting norm pairs manually labeled and a set of non-conflicting norm pairs.
+                                        </p>
+
+                                        <p>
+                                            For further details, check our paper: <a href="https://coin-workshop.github.io/coin-2017-brazil/papers/00010033.pdf">Norm Conflict Identification using Deep Learning</a>.
+                                        </p>
+
+                                </article>
+                            </div>  
+                        </div>
+                </header>
+            </div>
+{% endblock %}

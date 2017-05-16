@@ -36,48 +36,42 @@
                     <h4>No conflicts found!</h4>
                 {% endif %}
 
-                <div id="conflicts">
-                    
-                    <div class="scroll">
-                        <table>
+                <div class = "row">
+                    <div id='first_table' style=" overflow: auto; height: 400px;  width: 50%; float: left;">
+                            <table id="table1" ><!--style="height: 400px;"> -->
+                                <tbody>
+                                    {% for cls in cls_obj %}
+                                        <tr id='first_{{ cls.clause_id }}'>
+                                            <td>
+                                                {{ cls.clause_id }}
+                                            </td>                                    
+                                            <td>
+                                                {{ clauses|get_text:cls.clause_id }}
+                                            </td>                                        
+                                        </tr>                                  
+                                    {% endfor %}
+                                </tbody>
+                             </table>
+                        </div>                                   
+                    <div id='second_table' style="overflow: auto; height: 400px; width: 50%; float: right; ">
+                           <table id="table2">
+                                <tbody>
+                                    {% for cls in cls_obj %}
+                                        <tr id="second_{{ cls.clause_id }}">
 
-                            <tbody>
-                                {% for cls in cls_obj %}
-                                    <tr id='first_{{ cls.clause_id }}' class='line'>
-
-                                        <td>
-                                            {{ cls.clause_id }}
-                                        </td>
-                                        
-                                        <td>
-                                            {{ clauses|get_text:cls.clause_id }}
-                                        </td>                                        
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                                            <td>
+                                                {{ cls.clause_id }}
+                                            </td>
+                                            
+                                            <td>
+                                                {{ clauses|get_text:cls.clause_id }}
+                                            </td>                                        
+                                        </tr>                                
+                                    {% endfor %}                      
+                                </tbody>
+                            </table>
                     </div>
-
-                    <div class="scroll">
-                        <table>
-                            <tbody>
-                                {% for cls in cls_obj %}
-                                    <tr id="second_{{ cls.clause_id }}" class='line'>
-
-                                        <td>
-                                            {{ cls.clause_id }}
-                                        </td>
-                                        
-                                        <td>
-                                            {{ clauses|get_text:cls.clause_id }}
-                                        </td>                                        
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
+               </div>
 
             {% endif %}
 

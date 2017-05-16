@@ -10,8 +10,8 @@ $(document).ready(function(){
 
         if (global_one != null) {
 
-            $(global_one).css("background-color", "white")
-            $(global_two).css("background-color", "white")
+            $(global_one).removeClass('active_norm')
+            $(global_two).removeClass('active_norm')
 
         }
 
@@ -20,15 +20,24 @@ $(document).ready(function(){
         values = values.split("_")
 
         
-        // first_conflict = $('#conflict').attr('value')
-        // second_conflict = $('#conflict').attr('name')
-
-        $('#first_'+values[0]).css("background-color", "#ff6666");
-
-        $('#second_'+values[1]).css("background-color", "#ff6666");
 
         global_one = '#first_'+values[0]
         global_two = '#second_'+values[1]
+
+        $(global_one).addClass('active_norm');
+        $(global_two).addClass('active_norm');
+
+        var ypos1 = $(global_one).offset().top - $("#first_table").height();
+        
+        $('#first_table').animate({
+                scrollTop: $('#first_table').scrollTop() + ypos1 - 60
+            }, 500);
+
+        var ypos2 = $(global_two).offset().top - $("#second_table").height();
+        
+        $('#second_table').animate({
+                scrollTop: $('#second_table').scrollTop() + ypos2 - 60
+            }, 500);
 
     });
 
@@ -41,7 +50,7 @@ $(document).ready(function(){
 
     $('#file_form').submit(function() {
 
-	alert('It may take a few minutes depending on the number of norms in the contract.');
+	   alert('It may take a few minutes depending on the number of norms in the contract.');
 
     });
 

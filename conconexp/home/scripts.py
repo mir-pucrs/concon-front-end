@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 import os
 import sys
-import threading
+# import threading
 import pypandoc
 from constants import *
 from nltk.tokenize import sent_tokenize

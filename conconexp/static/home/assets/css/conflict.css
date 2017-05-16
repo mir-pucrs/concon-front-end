@@ -60,3 +60,9 @@ body.loading {
 body.loading .modal {
     display: block;
 }
+
+.active_norm {
+
+    background-color: #ff6666 !important;
+
+}

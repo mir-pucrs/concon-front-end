@@ -1,11 +1,10 @@
 # -*- coding:utf-8 -*-
 import os
 import sys
-# import threading
 import pypandoc
 from constants import *
 from nltk.tokenize import sent_tokenize
-from models import Contracts, Clauses
+from models import AuthUser, Contracts, Clauses, Conflicts
 from preprocess_norms import to_matrix
 from django.conf import settings
 from keras.models import  model_from_json
@@ -45,7 +44,7 @@ def convert_pdf_to_txt(path):
     device.close()
     text = retstr.getvalue()
     retstr.close()
-    return text
+    return text.decode('utf-8')
 
 
 def save_contract(up_file, user_id):
@@ -60,13 +59,9 @@ def save_contract(up_file, user_id):
         name, _ = os.path.splitext(up_file.name)
         file_path = os.path.join(abs_user_folder, str(name + '.txt'))
 
-        print name, "folder exists"
-
         # Check the file existence.
         if os.path.isfile(file_path):
             # Return with a message.
-
-            print "file exists!!"
             return WARN, "Hey! You've already uploaded this contract."
 
     else:
@@ -83,30 +78,26 @@ def save_contract(up_file, user_id):
 
     if extension == '.pdf':
 
-        print "pdf", extension
-
-        print file_url
-
         try:            
             txt = convert_pdf_to_txt(full_file_url)
         except: # catch *all* exceptions
+            # Remove the first file.
+            os.remove(full_file_url)
             e = sys.exc_info()[0]
             return ERR, "Error: %s" % e
         
     elif extension != '.txt' and extension != '.shtml':
 
-        print "pypandoc", extension
-
         try:
             txt = pypandoc.convert_file(full_file_url, 'rst')
         except: # catch *all* exceptions
-            print "some error"
+            # Remove the first file.
+            os.remove(full_file_url)
             e = sys.exc_info()[0]
             return ERR, "Error: %s" % e
     
     elif extension == '.txt':
 
-        print "nothing to do here", extension
         return SUCCESS, file_url
 
     elif extension == '.shtml':
@@ -120,7 +111,29 @@ def save_contract(up_file, user_id):
     # Save new file with the same name but with a different extension.
     with open(settings.BASE_DIR + new_file_url, 'w') as w_file:
 
-        w_file.write(txt.encode('utf-8', "ignore"))
+        print "Trying to encode this text."
+        
+        try:
+            print "First try with iso"
+            w_file.write(txt.encode('iso-8859-1', "ignore"))
+        except:
+            try:
+                print "Then try with utf-8"
+                w_file.write(txt.encode('utf-8', "ignore"))
+            except:
+                try:
+                    print "Then try to decode from utf-8"
+                    w_file.write(txt.decode('utf-8', "ignore"))
+                except:
+                    try:
+                        print "Then try decode from iso"
+                        w_file.write(txt.encode('iso-8859-1', "ignore"))
+                    except:
+                        print "Finally, try removing and back home crying."
+                        # Remove the first file.
+                        os.remove(full_file_url)
+                        e = sys.exc_info()[0]
+                        return ERR, "Error> %s" % e
 
     w_file.close()
 
@@ -128,6 +141,40 @@ def save_contract(up_file, user_id):
     os.remove(full_file_url)
 
     return SUCCESS, new_file_url
+
+
+def insert_conflicts(con_id, conflicts, classifier_obj):
+
+    new_conflicts_list = []
+
+    # Run over the list of conflicts.
+    for conflict in conflicts:
+
+        # Get clauses id.
+        cls_1_id, cls_2_id = conflict[0], conflict[1]
+
+        # Get confidence.
+        confidence = conflict[2]
+
+        # Get objects to insert.
+        con_obj = Contracts.objects.get(con_id=con_id)
+        cls_1_obj = Clauses.objects.get(clause_id=cls_1_id)
+        cls_2_obj = Clauses.objects.get(clause_id=cls_2_id)
+        
+        # Save conflict.
+        ins_conf = Conflicts(
+            con=con_obj,
+            clause_id_1=cls_1_obj,
+            clause_id_2=cls_2_obj,        
+            classifier=classifier_obj,
+            confidence=confidence
+        )
+
+        ins_conf.save()
+
+        new_conflicts_list.append((ins_conf.conf_id, cls_1_id, cls_2_id, confidence))
+
+    return new_conflicts_list
 
 
 def insert_contract(path, user_obj):
@@ -185,23 +232,9 @@ def get_norm_pairs(norms):
     return combinations(norms, 2)
 
 
-# def check_pair(conflicts, clauses, pair, model):
-
-#    matrix = to_matrix(clauses[pair[0]], clauses[pair[1]], MAX_LENGTH)
-
-#    pred = model.predict(matrix)
-
-#    new_pred = new_confidence(pred) 
-    # pred_class = pred.argmax(axis=1)
-
-#    if new_pred > 0.7:
-#        conflicts.append((pair[0], pair[1], int(new_pred*100)))
-
-
 def check_conflict(clauses, pairs):
 
     # Get model.
-    # net = get_model(MAX_LENGTH)
     json_file = open(PATH_TO_MODEL, 'r')	
     model_json = json_file.read()
     json_file.close()
@@ -209,31 +242,21 @@ def check_conflict(clauses, pairs):
     
     model.load_weights(PATH_TO_WEIGHTS)
    
-    # net.load_weights(WEIGHTS)
-
     conflicts = []
     
-    # threads = []
-
     for pair in pairs:
 
         matrix = to_matrix(clauses[pair[0]], clauses[pair[1]], MAX_LENGTH)
 
         pred = model.predict(matrix)
 
-	if pred[0][1] > 0.5:
-	    new_pred = new_confidence(pred[0][1]) 
-	else:
-	    continue
-    # pred_class = pred.argmax(axis=1)
-
+        if pred[0][1] > 0.5:
+            new_pred = new_confidence(pred[0][1]) 
+        else:
+            continue
+    
         if new_pred > 0.8:
             conflicts.append((pair[0], pair[1], int(new_pred*100)))
-
-	# t = threading.Thread(target=check_pair, args=(conflicts, clauses, pair, model))
-	# threads.append(t)
-	# t.start()        
-	# t.join()
 
     return conflicts
 

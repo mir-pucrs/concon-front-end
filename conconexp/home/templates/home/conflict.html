@@ -26,11 +26,14 @@
 
                         {% for conflict in conflicts %}
 
-                            <option class="conflict" value="{{ conflict|get_index:0 }}_{{ conflict|get_index:1 }}">{{ conflict|get_index:0 }} - {{ conflict|get_index:1 }} Confidence: {{ conflict|get_index:2 }}%</option>
+                            <option class="conflict" value="{{ conflict|get_index:0 }}_{{ conflict|get_index:1 }}_{{ conflict|get_index:2 }}">{{ conflict|get_index:1 }} - {{ conflict|get_index:2 }} Confidence: {{ conflict|get_index:3 }}%</option>
 
                         {% endfor %}
                         
                     </select>
+
+                    <p></p>
+                    <p></p>
 
                 {% else %}
                     <h4>No conflicts found!</h4>
@@ -78,7 +81,9 @@
                         <table class="alt">    
                             <tbody>
                                 <p>Please, upload a contract to start our processing.</p>
-                                    
+                                 
+                                <p>Have no contracts but want to test? <a href="https://github.com/JoaoPauloAires/potential-conflict-identifier/tree/master/code/data/manufacturing" target='_blank'><b>Here</b></a> we have some contracts.</p>
+
                                 <tr>
                                     <td class="before_upload">
                                         <a class="button small">Inspect</a>

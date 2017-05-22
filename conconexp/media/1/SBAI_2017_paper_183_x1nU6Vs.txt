@@ -1,0 +1,1440 @@
+OTIMIZAÇÃO DE CLASSIFICADORES DE SINAIS DE SONAR PASSIVO BASEADOS EM CURVAS PRINCIPAIS HIERÁR-
+
+QUICAS  
+
+THIAGO CASSIN DE CARVALHO OLIVEIRA 1, JOÃO BAPTISTA DE OLIVEIRA E SOUZA FILHO 1,2. 
+
+1 Programa de Pós-Graduação em Engenharia Elétrica (PPEEL), Centro Federal de Educação Tecnológica 
+
+Celso Suckow da Fonseca (CEFET/RJ) 
+
+Avenida Maracanã 229, Maracanã, Rio de Janeiro, RJ, Brasil 
+
+2 Programa de Pós-Graduação em Engenharia Elétrica (PEE/COPPE), Departamento de Engenharia 
+
+Eletrônica e de Computação (DEL/POLI), Universidade Federal do Rio de Janeiro (UFRJ) 
+
+E-mails: thiago_cassin@yahoo.com.br, jbfilho@poli.ufrj.br 
+
+ 
+
+Abstract  Passive sonar contact classification systems require high classification efficiency, and a computational cost that ena-
+bles  its  operation in  real  time  systems.  In  the  present  work,  a hierarchical  principal  curves  classification approach is  proposed, 
+associated with optimized strategies for the definition of the curves segmentation and the appropriate depth level of the hierarchical 
+structures. The proposed system was evaluated using real irradiated signals from 28 ships belonging to 8 classes. Using the pro-
+posed technique, an average classification efficiency of 96.2% was achieved, as well as the computational cost was reduced by up 
+to 39.5% when compared to the standard technique principal curves. 
+
+Keywords  Principal curves, contact classification, feature extraction, pattern recognition, passive sonar 
+
+Resumo   Sistemas de apoio à classificação de sinais de sonar passivo devem possuir uma alta eficiência de classificação, bem 
+como custo computacional compatível a sua operação em sistemas de tempo real. No presente trabalho, é proposta uma abordagem 
+de classificação por curvas principais hierárquicas, associada a estratégias otimizadas para a definição da segmentação das curvas 
+e do nível de profundidade adequado às estruturas hierárquicas. O sistema proposto foi avaliado, utilizando sinais reais irradiados 
+de 28 navios pertencentes a 8 classes.  Com o emprego da técnica proposta, uma eficiência média de classificação da ordem de 
+96,2% foi alcançada, bem como o custo computacional foi reduzido em até 39,5%, quando comparado à técnica de curvas princi-
+pais tradicionais. 
+
+Palavras-chave Curvas principais, classificação de contatos, extração de características, reconhecimento de padrões, sonar pas-
+sivo 
+
+1 
+
+Introdução 
+
+A classificação de possíveis ameaças em subma-
+rinos  em  operação  no  âmbito  militar  é  conhecida 
+como classificação de contatos. Esta atividade é reali-
+zada por meio da aquisição de sinais de sonar passivo, 
+que  são  processados  visando  à  posterior  avaliação 
+pelo operador de sonar. Trata-se de uma tarefa de alta-
+complexidade e responsabilidade, que envolve vários 
+cenários  operativos  e  risco  de  vida,  sendo  realizada, 
+tradicionalmente, por operadores treinados e especia-
+lizados. Assim, sistemas de apoio à decisão (SAD) são 
+úteis  no  suporte  ao  processo  de  tomada  de  decisão 
+neste contexto. 
+
+Um SAD em operação no ambiente de sonar pas-
+sivo deve ser capaz de trabalhar dados não lineares, e 
+envolver classificadores com uma boa capacidade de 
+generalização, operando sob múltiplas classes. Para a 
+constituição deste SAD, a técnica de curvas principais 
+(Hastie & Stuetzle, 1989) é indicada, por possuir uma 
+boa capacidade de generalização em conjuntos de da-
+dos  intrinsecamente  não  lineares,  bem  como  custo 
+computacional compatível a operação de tais sistemas 
+em tempo real.  
+
+Em (Oliveira & Souza Filho, 2016), foi proposta 
+a adoção de curvas principais hierárquicas visando à 
+constituição de SADs para a classificação de sinais de 
+
+sonar passivo. Nesta proposta, cada classe  foi repre-
+sentada por um banco de curvas, diferentemente das 
+soluções  anteriores  que  adotaram  uma  única  curva, 
+sendo os eventos rotulados de acordo com a sua simi-
+laridade (no caso, a distância à curva) aos conjuntos 
+de  curvas  protótipo  de  cada  classe.  Para  a  obtenção 
+deste conjunto, foi adotada uma estratégia de partici-
+onamento hierárquico dos dados de cada classe, tam-
+bém baseada em curvas principais.  
+
+Dois desafios inerentes a esta proposta são o di-
+mensionamento das curvas utilizadas para a partição e 
+a classificação dos dados, bem como a determinação 
+do  número  de  níveis  hierárquicos  adotados.  Tais  as-
+pectos impactam, diretamente, na eficácia e no custo 
+computacional do classificador, e envolvem um pro-
+blema  combinatório  complexo,  visto  que  a  sintonia 
+dos parâmetros do classificador de uma classe afeta as 
+demais, sendo a busca exaustiva de uma solução ótima 
+não factível.  
+        O presente trabalho tem por objetivo discutir al-
+guns critérios de custo computacional reduzido para a 
+escolha de tais parâmetros, mais especificamente ava-
+liar  a  aplicabilidade  da  AUC  (Area  Under  the  ROC 
+Curve) (Trees, 2001) como figura de mérito para a sin-
+tonia da complexidade das curvas principais adotadas 
+em  cada  nível  de  partição  e  classificação  dos  dados, 
+bem como a proposição de um critério heurístico para 
+a seleção das curvas principais a integrarem a família 
+de  curvas  representantes  de  cada  classe.  Os  critérios 
+
+propostos  buscam  reduzir  o  total  de  segmentos  das 
+curvas principais envolvidas, portanto resultar em sis-
+temas de classificação com menor custo computacio-
+nal em fase de operação, no entanto, que possuam uma 
+eficiência de classificação igual ou superior a de siste-
+mas  análogos  baseados  em  uma  única  curva  por 
+classe,  tal  como  (Fernandes,  et  al.,  2015)  e    (Souza 
+Filho,  et  al.,  2011),  bem  aqueles  como  baseados  em 
+estruturas hierárquicas baseadas em curvas principais 
+(Oliveira & Souza Filho, 2016). 
+
+Este artigo é organizado como se segue: na Seção 
+2, é apresentada uma breve abordagem das técnicas de 
+curvas principais e dos algoritmos hierárquicos de par-
+ticionamento adotados. São também discutidos alguns 
+aspectos relativos à construção e a avaliação do clas-
+sificador proposto, bem como referentes à base de da-
+dos utilizada  e a sua partição para o desenvolvimento 
+e avaliação dos classificadores. Na Seção 3, são apre-
+sentados  os  resultados  obtidos.  Por  fim,  tem-se  as  
+conclusões e trabalhos futuros na Seção 4. 
+
+para cada uma das classes, e atribuindo-a ele, o rótulo 
+de classe referente à curva protótipo a qual tenha apre-
+sentado a menor distância, portanto, a maior similari-
+dade. Deste modo, a curva protótipo de cada classe é 
+composta por tantos segmentos quantos os necessários 
+para que a referida curva possa representar, adequada-
+mente, a classe em questão, esta curva é extraída com 
+base no conjunto de treinamento. Tal processo é ilus-
+trado na Figura 1. 
+
+ 
+
+ 
+
+ 
+
+Figura 1: Classificação multiclasse por curvas principais. Adap-
+
+tado de (Souza Filho, et al., 2011) 
+
+ 
+
+ 
+2.3 Classificador por curvas principais hierárquicas 
+
+2   Métodos 
+
+ 
+
+2.1 Curvas Principais 
+
+ 
+       As curvas principais (Hastie & Stuetzle, 1989) de-
+notam curvas suaves que passam pelo meio de uma 
+nuvem de dados, oriundas de diferentes realizações de 
+um  dado  conjunto  de  variáveis  aleatórias.  Para  uma 
+definição formal das curvas principais, considere um 
+vetor de variáveis aleatórias   , onde o valor da 
+variável  d  é  arbitrário.  A  curva  principal  () =
+[1(),  , ()] é uma função do parâmetro  tal que: 
+
+A principal diferença desta proposta em relação à 
+classificação  por  curvas  principais  ordinárias  reside 
+em,  ao  invés  de  adotar  uma  curva  de  alta-complexi-
+dade para a representação de cada classe, realiza-se a 
+extração  de  diversas  curvas  de  baixa  complexidade, 
+cada  uma  baseada  em  um  subconjunto  gerado  pela 
+partição hierárquica de seus dados constituintes. Mais 
+especificamente, iremos adotar aqui as próprias curvas 
+principais  como  critério  de  particionamento  dos  da-
+dos. Este processo é ilustrado na Figura 2. 
+
+ 
+
+ 
+
+ 
+
+            () = [|() = )]                   (1) 
+
+Nesta formulação, o valor () é definido de forma 
+a minimizar o valor esperado (E) da distância do vetor 
+ a curva, portanto cada ponto da curva () é dado 
+pela média dos pontos que nela projetam, propriedade 
+que é conhecida como autoconsistência.  
+
+Para  a  obtenção  das  curvas  principais,  um  algo-
+ritmo de destaque é o k-segment hard, desenvolvido 
+por Verbeek, Vassis e Klöse (Verbeek, et al., 2000), 
+que  aproxima  a  curva  principal  por  um  conjunto  de 
+segmentos  conectados.  Segundo  este  algoritmo,  a 
+curva  principal  é  iniciada  com  um  único  segmento, 
+sendo inseridos novos segmentos de reta, um a um, até 
+que um número máximo pré-fixado de segmentos (k) 
+seja alcançado. 
+ 
+ 
+2.2 Classificação por curvas principais ordinárias 
+
+ 
+
+Segundo a abordagem tradicional de classificação 
+por curvas principais  descrita em (Souza Filho, et al., 
+2011), a atribuição de rótulos aos eventos é realizada 
+tomando-se o dado que se deseja classificar, e calcu-
+lando a distância deste às curvas principais extraídas 
+
+ 
+
+ 
+
+Figura 2: Processo de particionamento hierárquico 
+
+ 
+Por este processo, os dados, de acordo com o va-
+lor de seu índice de projeção à curva principal do nível 
+e nó da árvore correspondente, são divididos em gru-
+pos intitulados ramo esquerdo e ramo direito, isto é, 
+aqueles cujo índice de projeção é menor que a metade 
+
+do  comprimento  da  curva  definem  o  ramo  es-
+querdo; enquanto os demais, o ramo direito. Em 
+sequência,  considerando,  individualmente,  os  novos 
+subconjuntos ramo esquerdo e ramo direito, são 
+produzidas duas novas curvas principais, com as quais 
+é realizado um novo particionamento. Este processo é 
+repetido até que uma profundidade requerida seja atin-
+gida. 
+ 
+
+2.3.1 Operação do classificador por curvas principais 
+hierárquicas 
+
+ 
+ Em fase de operação, de forma análoga às curvas 
+ordinárias, tão somente são calculadas as distâncias do 
+dado de interesse às curvas principais representantes 
+de  cada  uma  das  classes,  e  realizada  a  classificação 
+por meio da identificação da classe cuja uma das cur-
+vas representantes apresentou a menor distância den-
+tre todas as demais. 
+
+Com respeito a quais curvas produzidas na hierar-
+quia que serão efetivamente empregadas para a classi-
+ficação, foram consideradas as topologias reportadas 
+por (Silla & Freitas, 2011) como estrutura hierárquica 
+de classificação por níveis e por nós. 
+
+No classificador por nós, as curvas referentes to-
+dos  os  nós  da  árvore  competem  pelos  eventos,  con-
+forme ilustrado pela Figura 3. 
+
+ 
+
+ 
+
+ 
+
+Figura 3: Estrutura hierárquica por nós 
+
+ 
+No classificador por níveis, somente os nós refe-
+rentes a um nível de hierarquia selecionado competem 
+pela pertinência destes eventos, conforme mostrado na 
+Figura 4. Claramente, a abordagem por níveis possui 
+um  custo  computacional  significamente  inferior  em 
+fase de operação do que aquela por nós, face ao menor 
+quantitativo de curvas envolvidas. 
+
+ 
+
+classe:  a  segmentação  pré-definida  e  a  sintonia  pela  
+AUC.  
+
+Na  primeira,  é  considerado  que  todos  os  níveis 
+empregam um mesmo número de segmentos em suas 
+curvas,  a  serem  escolhidas  entre  uma  família  de 
+candidatos.  Neste  trabalho,  foram  considerados  2,  5 
+ou  7  segmentos  para  as  curvas  principais  de  cada 
+nível. 
+
+Segundo a sintonia AUC, a cada nível é escolhido 
+o melhor quantitativo de segmentos entre uma família 
+de  candidatos,  utilizando  a  AUC  como  figura  de 
+mérito. Neste caso, são considerados a distância dos 
+eventos  da  classe  correspondente  realtivamente  a 
+curva associada a dado nível e profundidade, versus as 
+distâncias  dos  eventos  remanscentes  à  esta  curva. 
+Quanto  maior  for  a  AUC,  maior  é  o  potencial  de 
+  considerando  a 
+discriminação  daquela  curva, 
+distância 
+a 
+classificação. 
+
+suficiente  para 
+
+como 
+
+estatística 
+
+ 
+2.4  Estratégia de Poda  
+
+ 
+
+imprecisas  e 
+
+As árvores de classificação frequentemente atin-
+gem grandes tamanhos e complexidades, podendo tor-
+nar-se 
+incompreensíveis  (Patil  & 
+Bichkar, 2012). Neste contexto, surgem as estratégias 
+de  poda,  que  são  divididas,  tradicionalmente,  como: 
+pré-poda  e  pós-poda  (Breiman,  et  al.,  1984).  Como 
+nossa  proposta  envolve  problemas  análogos  aos 
+envolvidos  nas  árvores  de  classificação  tradicionais, 
+iremos  explorar  alguns  conceitos  e  idéias  desta 
+estratégia de classificação.  
+
+Para  o  presente  trabalho,  foi  desenvolvida  uma 
+estratégia de poda denominada como pós-poda heurís-
+tica (PPH). A PPH visita as árvores de classificação 
+referentes à cada classe, poda estas ávores com base 
+em  uma  figura  de  mérito,  que  considera  o  compro-
+misso  entre  eficiência  e  complexidade,  e  as  recom-
+bina,  visando  a  otimização  da  estrutura  hierárquica 
+multiclasse que compõe com classificador final. A Fi-
+gura 5 apresenta o diagrama de blocos da PPH. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Figura 4: Estrutura hierárquica por níveis 
+
+ 
+
+2.3  Critérios para a seleção do número de segmen-
+
+tos das curvas. 
+
+ 
+
+Foram  considerados  dois  critérios  para  a 
+definição  do  número  de  segmentos  utilizados  para  a  
+construção do banco de curvas representantes de cada 
+
+Figura 5: Diagrama de Blocos da Pós Poda Heurística 
+
+ 
+
+O passo inicial deste processo é a indução das ár-
+vores de classificação para cada classe de forma top-
+down  (Sun  &  Lim,  2002),  até  o  nível  de  profundi-
+dade  máximo  permitido  (aqui  foi  adotado  um  limite 
+de 5 níveis), e para vários valores distintos de comple-
+xidade de curvas.  
+
+O  algoritmo  da  PPH  é  então  implementado  em 
+cinco etapas: seleção, corte, ordenação, combinação e 
+avaliação de desempenho. Na etapa de seleção, é rea-
+lizada  uma  varredura  em  todas  as  árvores  geradas  e 
+representativas  das  classes  em  busca  de  ramos  que 
+
+apresentem uma maior eficiência igual ou superior as-
+sociada  ao  emprego  de  menos  segmentos  totais  em 
+suas  curvas  quando  comparados  com  classificadores 
+baseados  em  curvas  ordinárias.  Caso  não  sejam  en-
+contrados ramos que atendam a estes requisitos, é con-
+siderada  uma  curva  ordinária  para  representar  a  res-
+pectiva classe. 
+
+Na etapa de corte, as árvores são podadas na al-
+tura dos ramos selecionados na etapa de seleção. Em 
+sequência  na  etapa  de  ordenação,  primeiramente,  as 
+novas árvores podadas têm  sua relação  de eficiência 
+versus custo computacional quantificada pelo cálculo 
+do índice S representado na Equação 2, onde  "" 
+representa  a  eficiência  de  classificação  atingida  na 
+classe  correspondente  e  ""  representa  a  complexi-
+dade (número total de segmentos empregados nas cur-
+vas). 
+ 
+
+ =
+
+
+
+
+
+                    (2) 
+
+ 
+
+As árvores podadas e quantificadas são organiza-
+das segundo seus índices S  em ordem decrescente, 
+de forma que quanto maior for o índice S, melhor é 
+a relação entre o custo computacional e a eficiência. 
+Após  esta  ordenação,  as  árvores  de  cada  classe  que 
+apresentaram o maior valor de índice S são combi-
+nadas,  compondo  o  classificador  multiclasse  otimi-
+zado. Por fim, o sistema de classificação definido pela 
+PPH tem seu desempenho avaliado, utilizando o con-
+junto de dados de teste. 
+
+  
+2.5  Base de dados 
+
+ 
+Para o desenvolvimento do presente trabalho, foi 
+utilizada  uma  base  de  dados  fornecida  pelo  Instituto 
+de  Pesquisa  da  Marinha  Brasileira  (IPqM),  que  con-
+siste em um conjunto de ruídos irradiados por 28 na-
+vios, distribuídos entre 8 classes de embarcações.  
+
+Tais  sinais  foram  pré-processados  segundo  uma 
+cadeia  descrita  detalhadamente  em  (Souza  Filho,  et 
+al.,  2011),  resultando  em  janelas  de  557  dimensões, 
+onde cada classe possui de 2143 a 7075 espectros. 
+
+ Para o desenvolvimento e a avaliação da aborda-
+gem proposta, este conjunto foi particionado, aleatori-
+amente, nos seguintes subconjuntos: treino, validação 
+e teste, segundo as seguintes proporções: 70%, 10% e 
+20%. O primeiro conjunto foi utilizado para a extração 
+das  curvas;  o  segundo,  para  o  ajuste  dos  parâmetros 
+das curvas; enquanto o último, para a avaliação do sis-
+tema proposto. 
+
+3  Resultados  
+
+Primeiramente,  realizamos  uma  avaliação  com-
+parativa  entre  os  sistemas  de  classificação  baseados 
+em  curvas  ordinárias,  curvas  hierárquicas  por  nós  e 
+curvas hierárquicas por níveis. Em sequencia, avalia-
+mos  a  adoção  do  critério  AUC  para  o  dimensiona-
+mento das curvas por níveis e o critério de pós-poda 
+
+heurística para a otimização da estrutura de classifica-
+ção adotada.  
+
+Neste  processo,  foram  construidos  os  seguintes 
+
+sistemas: 
+
+-  Sistema  1:  baseou-se  em  uma  curva  ordinária 
+para cada classe, adotando-se um número máximo de 
+segmentos igual a 30, valor que foi estabelecido con-
+forme resultados de (Fernandes, et al., 2015) e (Souza 
+Filho, et al., 2011)  
+
+- Sistema  2: trata-se de um  classificador hierár-
+quico por níveis, considerando curvas principais com-
+postas por 2, 5 ou 7 segmentos. 
+
+-  Sistema  3:  é  um  classificador  hierárquico  por 
+nós, formado por curvas principais de 2, 5 ou 7 seg-
+mentos. 
+
+ 
+Em todas as análises, as figuras de mérito foram 
+a quantidade total de segmentos envolvidos e a efici-
+ência de classificação final de cada sistema. 
+
+ 
+
+3.1  Classificadores  por  curvas  ordinárias,  hierár-
+
+quicas por nós e hierárquicas por níveis. 
+
+ 
+
+A Figura 6, resume os resultados relativos às di-
+ferentes  modalidades  de  classificadores  por  curvas 
+principais, onde L representa o quantitativo de ní-
+veis e k o número de segmentos por curva.  
+
+É possível observar que em termos de eficiência 
+de  classificação,  os  classificadores  hierárquicos  por 
+nós e níveis apresentaram  um desempenho  muito si-
+milar.  A  maior  diferença  entre  estas  abordagens  foi 
+observada  para a configuração com  L=2 e k=5 
+(0,8%). Foi também verificada uma tendência de au-
+mento das eficiências de classificação com a adoção 
+de curvas mais complexas, bem como uma maior pro-
+fundidade  da  estrutura  de  classificação.  Observa-se, 
+também, que para k=7, a partir de L=3, as abor-
+dagens hierárquicas atingem uma eficiência média de 
+classificação superior a abordagem ordinária de até 1 
+ponto percentual. 
+
+95,80%
+
+ 
+
+96,6%
+96,1%
+95,6%
+95,1%
+94,6%
+94,1%
+93,6%
+93,1%
+92,6%
+92,1%
+91,6%
+
+96,70%
+96,40%
+96,30%
+
+95,60%
+
+93,90%
+93,70%
+
+L = 1
+
+L = 2
+
+L = 3
+
+L = 4
+
+L = 5
+
+ k=2 - por niveis
+ k=5 - por níveis
+ k=7 - por níveis
+Curvas ordinárias
+
+ 
+
+'k=2 - por nós
+'k=5 - por nós
+'k=7 - por nós
+
+ 
+
+Figura 6: Eficiência dos classificadores por nós e níveis para dife-
+
+rentes valores de profundidade e de complexidade das curvas. 
+
+ 
+
+Na Figura 7 é exibido o quantitativo de segmentos 
+empregado em cada uma das abordagens de classifi-
+cação consideradas na Figura 6. 
+
+ 
+
+896
+
+448
+
+224
+
+112
+
+56
+
+28
+
+153
+
+114
+97
+74
+
+46
+
+30
+
+1201
+1015
+
+590
+
+375
+342
+
+248
+
+157
+
+L = 1
+
+L = 2
+
+L = 3
+
+L = 4
+
+L = 5
+
+ k=2 - por níveis
+ k=5 - por níveis
+ k=7 - por níveis
+Curvas ordinárias
+
+ 
+
+'k=2 - por nós'
+'k=5 - por nós'
+'k=7 - por nós'
+
+Figura 7: Total de segmentos empregados entre os classificadores 
+por nós e níveis para diferentes valores de profundidade e segmen-
+
+tação das curvas. 
+
+ 
+
+É notório que do ponto de vista do custo compu-
+tacional, a abordagem hierárquica por nós não é uma 
+opção atrativa, visto que o quantitativo de segmentos 
+envolvido é muito superior ao das abordagens hierár-
+quica por níveis e ordinária, o qual não se refletiu num 
+ganho de eficiência de classificação significativo. 
+
+ 
+
+3.2  Sintonia  das  curvas  por  nível  x  uso  de  curvas 
+
+com complexidade fixa 
+
+ 
+Esta avaliação objetiva verificar se a sintonia das 
+complexidades  das  curvas  a  cada  nível,  utilizando  a 
+AUC como figura de mérito, é mais efetiva que a ado-
+ção de um quantitativo de segmentos fixo para todos 
+os níveis, pré-definido em 2, 5 ou 7 segmentos, con-
+forme  realizado  em  (Oliveira  &  Souza  Filho,  2016). 
+Esta avaliação se restringiu ao classificador por níveis, 
+visto os resultados da análise anterior. Os resultados 
+são resumidos na Figura 8. 
+
+Através  da  Figura  8,  é  possível  verificar  que  o 
+emprego do indicador AUC resultou em valores de efi-
+ciência  superiores  às  curvas  principais  ordinárias  a 
+partir  do  nível  de  profundidade  L=3.  Uma  queda 
+brusca na taxa de variação da eficiência de classifica-
+ção também pode ser percebida a partir deste nível de 
+profundidade. 
+
+Com  relação  ao  total  de  segmentos  empregados 
+para a construção das curvas, observamos que o nível 
+L=2 de profundidade continua a representar uma pro-
+fundidade  hierárquica  limítrofe  com  respeito  a  ser 
+atrativo o emprego de curvas hierárquicas a este pro-
+blema. 
+
+ 
+
+o
+ã
+ç
+a
+c
+i
+f
+i
+s
+s
+a
+l
+c
+ 
+e
+d
+a
+d
+é
+m
+a
+i
+c
+n
+ê
+i
+c
+i
+f
+E
+
+i
+
+ 
+
+ 
+
+95,80%
+
+94,90%
+94,50%
+
+96,20%
+96,00%
+
+96,40% 96,40%
+96,20% 96,30%
+
+5
+7
+3
+
+3
+1
+3
+
+4
+9
+2
+
+7
+5
+2
+
+157
+
+5
+2
+2
+
+2
+1
+2
+
+93,00%
+93,00%
+
+5
+9
+
+7
+9
+
+4
+5
+1
+
+5
+4
+1
+
+97,0%
+
+96,5%
+
+96,0%
+
+95,5%
+
+95,0%
+
+94,5%
+
+94,0%
+
+93,5%
+
+93,0%
+
+92,5%
+
+s
+o
+d
+a
+g
+e
+r
+p
+m
+e
+
+ 
+s
+o
+t
+n
+e
+m
+g
+e
+s
+ 
+e
+d
+
+ 
+l
+
+a
+t
+o
+T
+
+370
+
+270
+
+170
+
+70
+
+L = 1
+
+L = 2
+
+L = 3
+
+L = 4
+
+L = 5
+
+Nível de profundidade na hierarquia
+
+'Total de segmentos - Curvas Hierárquicas critério AUC'
+'Total de segmentos - Curvas Hierárquicas - k=7 - pré-definido'
+'Eficiência - Curvas Hierárquicas - critério AUC'
+'Eficiência - Curvas ordinárias'
+'Eficiência - Curvas Hierárquicas - k=7 - pré-definido'
+
+ 
+
+ 
+
+Figura 8: Eficiências e total de segmentos empregados pelo uso do 
+
+ 
+
+ 
+
+critério da AUC. 
+
+Relativamente à seleção pré-definida das comple-
+xidades  das  curvas,  o  critério  AUC  empregou  um 
+quantitativo menor de segmentos para todas as profu-
+nidades  avaliadas.  Quanto  à  eficiência  de  classifica-
+ção,  embora  ambas  abordagens  tenham  apresentado 
+um  desempenho  similar,  o  critério  AUC  alcançou 
+maiores valores de eficiência média para a profundi-
+dade L=3. 
+ 
+3.3  Pós-poda heurística  
+
+ 
+
+Nesta  avaliação  foi  considerada  a  aplicação  do 
+critério  PPH  à  estrutura  de  classificação  por  níveis, 
+considerando os dois critérios anteriormente descritos 
+para o dimensionamento das curvas: fixo e por nível. 
+O  quantitativo  de  níveis  e  segmentos  selecionados 
+para cada uma das abordagens, juntamente com as efi-
+ciências médias de classificação obtidas, são resumi-
+dos na Tabela 1. 
+
+Da Tabela 1, é possível observar que o algoritmo 
+de PPH, segundo o seu índice de ordenação, selecio-
+nou apenas as profundidades L={1,2} para o particio-
+namento  dos  dados  e  geração  das  curvas  principais 
+correspondentes (que possuem até cinco níveis de pro-
+fundidade). Este fato indica que uma partição dos da-
+dos em níveis hierárquicos mais profundos não resul-
+tou em relações interessantes entre o custo computa-
+cional e a eficiência de classificação resultante, parâ-
+metros que definem o índice S. 
+
+Adicionalmente, verifica-se que, no caso do cri-
+tério AUC, a seleção pela PPH selecionou apenas cur-
+vas  com  7  segmentos,  que  corresponde  ao  valor  de 
+complexidade máximo definida a priori. Este fato in-
+dica que a adoção de curvas com menos do que 7 seg-
+mentos tendeu a produzir uma menor discriminabili-
+dade local. 
+
+ 
+ 
+
+Classe 
+
+Quantitativo Pré-definido 
+k  por 
+
+Profundidade 
+
+Quantitativo por AUC 
+
+Profundidade 
+
+k por 
+
+(L) 
+Curva ordinária 
+
+curva (máx) 
+
+(L) 
+Curva ordinária 
+
+curva (máx) 
+
+1 
+2 
+
+2 
+1 
+1 
+3 
+
+7 
+7 
+
+7 
+5 
+7 
+5 
+
+Curva ordinária 
+
+107 
+
+110 
+
+1 
+2 
+
+7 
+7 
+
+Curva ordinária 
+1 
+1 
+3 
+
+7 
+7 
+7 
+
+Curva ordinária 
+
+93,40% 
+
+94,10% 
+
+A 
+
+B 
+C 
+
+D 
+E 
+F 
+G 
+
+H 
+
+Total de 
+segmen-
+tos em-
+pregados 
+Eficiência 
+média de 
+classifica-
+
+ção 
+ 
+
+Tabela 1: Composição e resultados do classificador hierárquico 
+
+por níveis, em seus dois modos de definição da complexidade das 
+curvas principais adotadas, após a aplicação do critério de PPH. 
+
+ 
+Observa-se,  também,  que  a  PPH  selecionou  as 
+curvas ordinárias para as classes A e H (quantitativo 
+pré-definido) e A, D e H (critério AUC), o que se deve 
+ao fato de que nenhuma das árvores podadas referen-
+tes a estas classes apresentaram um compromisso en-
+tre custo computacional inferior e eficiência superior 
+à abordagem ordinária. 
+
+ 
+
+3.4  Abordagem hierárquica versus abordagem ordi-
+
+nária 
+
+ 
+
+Para possibilitar uma melhor análise do compor-
+tamento das abordagens propostas frente a técnica de 
+classificação  por  curvas  principais  ordinárias,  foram 
+seleciondas algumas configurações de classificadores 
+hierárquicos reportadas na Tabela 2.  
+ 
+
+Configuração 
+
+Definição do número de 
+
+segmentos por curva 
+
+Profundi-
+dade (L) 
+
+1 
+
+2 
+
+3 
+
+4 
+
+5 
+
+6 
+
+7 
+
+8 
+
+9 
+
+ 
+
+Pré-definido 
+
+Pré-definido 
+
+Pré-definido 
+
+Pré-definido 
+
+Sintonia pela AUC 
+
+Sintonia pela AUC 
+
+Sintonia pela AUC 
+
+Pré-definido + PPH 
+
+Sintonia pela AUC  + PPH 
+
+1 
+
+2 
+
+2 
+
+3 
+
+1 
+
+2 
+
+3 
+
+2 
+
+2 
+
+Segmentos 
+
+k por 
+curva 
+(máx.) 
+
+7 
+
+5 
+
+7 
+
+7 
+
+7 
+
+7 
+
+7 
+
+5 ou 7 
+
+7 
+
+Tabela 2: Configurações de classificadores utilizados no compara-
+tivo global. 
+
+ 
+As configurações 1, 2, 3 e 4 retratam classifica-
+dores hierárquicos por níveis com complexidades pré-
+definidas e diferentes níveis de profundidade L. As 
+configurações  5,  6  e  7  consistem  em  classificadores 
+hierárquicos por níveis, com sintonia da complexidade 
+de  suas  curvas  pela  AUC,  para  diferentes  níveis  de 
+profundade. As configurações 8 e 9 foram concebidas 
+de forma a combinar as duas diferentes estratégias de 
+segmentação propostas com a PPH. 
+
+Na  Figura  9  é  apresentada  uma  comparação  da 
+perda  ou  ganho  percentual  entre  todas  as  configura-
+ções  de  classificadores  hierárquicos  apresentados  na 
+Tabela 2, relativamente à eficiência média de classifi-
+cação  atingida,  e  ao  total  de segmentos  adotado,  em 
+comparação com a solução baseada em curvas ordiná-
+rias. 
+
+É possível verificar que o emprego de estruturas 
+hierárquicas até o nível dois de profundidade, de ma-
+neira geral, impactou em uma redução expressiva do 
+quantitativo de segmentos empregados nas curvas. É 
+interessante pontuar que foram observados significa-
+tivos ganhos relativos à redução do total de segmentos 
+empregados, da ordem de quase 40  pontos percentu-
+ais  (configuração  5),  enquanto  que  relativamente    à 
+eficiência  média  de  classificação,  as  maiores  perdas 
+(configurações 1 e 5) são da ordem de 3 pontos per-
+centuais. 
+
+As  configurações  4  e  7  apresentaram  ganhos  de 
+eficiência de classificação de 0,2  e 0,4 pontos percen-
+tuais aproximadamente, ao custo de um um  forte in-
+cremento no total de segmentos empregados (43,31% 
+e 35,03%, respectivamente).  
+
+ 
+
+%
+1
+3
+,
+3
+4
+
+%
+1
+2
+0
+
+,
+
+%
+3
+0
+,
+5
+3
+
+%
+2
+4
+0
+
+,
+
+40%
+
+30%
+
+20%
+
+10%
+
+0%
+
+-10%
+
+-20%
+
+-30%
+
+-40%
+
+%
+1
+5
+2
+-
+
+,
+
+%
+7
+7
+1
+-
+
+,
+
+%
+5
+8
+,
+1
+3
+-
+
+%
+4
+9
+,
+9
+2
+-
+
+%
+6
+3
+1
+-
+
+,
+
+%
+4
+6
+,
+7
+-
+
+%
+2
+9
+2
+-
+
+,
+
+%
+9
+4
+,
+9
+3
+-
+
+%
+4
+9
+0
+-
+
+,
+
+%
+1
+9
+,
+1
+-
+
+%
+2
+9
+2
+-
+
+,
+
+%
+2
+8
+2
+-
+
+,
+
+%
+4
+8
+,
+4
+2
+% -
+2
+2
+,
+8
+3
+-
+
+'Total de segmentos'
+
+'Ganho de eficiência'
+
+ 
+
+ 
+
+Figura 9: Valores de ganho e perda quanto a eficiência média e 
+
+custo computacional  para as diferentes implementações avaliadas 
+
+(vide texto). 
+
+ 
+
+Quanto ao melhor compromisso entre a eficiência 
+média de classificação e o custo computacional envol-
+vido, destacamos a configuração 5, que considerou a 
+sintonia  da  complexidade  das  curvas  pelo  critério 
+AUC. A configuração menos atrativa foi a número 3, 
+com uma redução do total de segmentos em torno de 
+2%, e perda de quase 1 ponto percentual de eficiência 
+média. 
+
+Silla,  C.  &  Freitas,  A.  A.,  2011.  A  Survey  of 
+ 
+Hierarquical Classification Across Different 
+Application  Domains.  Data  Mining  and 
+ 
+Knowledge Discovery, Volume vol 22, pp.  
+ 
+ 
+pp 31-72. 
+Souza Filho, J. B. D. O., Gesualdi, A. R., Seixas, J. M. 
+&  Guedes,  R.  M.,  2011.  Classificadores 
+ 
+Multi-Classe  de  Contatos  por  Curvas 
+ 
+Principais.  São  João  Del  Rei,  Sociedade 
+ 
+ 
+Brasileira de Automação Inteligente. 
+Sun,  A.  &  Lim,  E.  P.,  2002.  Hierarquical  Text 
+Classification  and  Evaluation.  California, 
+ 
+ 
+s.n., pp. p.p 521-528. 
+Trees,  V.,  2001.  Detection,  Estimation  and 
+ 
+Modulation  Theory,  part  I  and  III.  Em: 
+ 
+s.l.:Jonh Wiley Sons. 
+Verbeek,  J.,  Vlassis,  N.  &  Krose,  B.,  2000.  A  K-
+segments  Algorthm  for  Finding  Principal 
+ 
+Curves.  Pattern  Recognition  Letters, 
+ 
+ 
+Volume vol. 23, pp. pp. 1009-1017. 
+ 
+ 
+ 
+ 
+ 
+
+ 5   Conclusão 
+
+Neste trabalho  foi avaliado o potencial da cons-
+trução de sistemas de classificação baseados em cur-
+vas  principais  geradas  sobre  partições  hierárquicas 
+dos dados  para a  classificação de contatos em sinais 
+de sonar passivo.  
+
+Como resultado, verificou-se que a estrutura hie-
+rárquica por níveis é  mais atrativa  do que a por nós, 
+visto o custo computacional excessivo da última, que 
+não é acompanhado de um ganho expressivo quanto à 
+eficiência  média  de  classificação.  Adicionalmente, 
+por meio do critério proposto de dimensionamento das 
+curvas por AUC e do critério de PPH, foi possível ob-
+ter melhores compromissos entre a complexidade das 
+curvas adotadas e a eficiência do classificador resul-
+tante, obtendo-se uma estrutura para a constituição do 
+classificador com uma redução do quantitativo de seg-
+mentos da ordem de 40%, associada a uma perda da 
+eficiência  média de  aproximadamente, 3 pontos per-
+centuais.  
+
+Como  trabalhos  futuros,  visamos  explorar  algo-
+ritmos meta-heurísticos de busca para uma definição 
+dos  níveis  de  profundidade  e  segmentação  conjunta 
+das curvas, de forma a, não somente, reduzir o custo 
+computacional envolvido, mas também resultar numa 
+maior eficiência média de classificação das curvas hi-
+erárquicas. 
+
+Agradecimentos 
+
+Agradecemos ao Instituto de Pesquisas da Mari-
+nha (IPqM) pela disponibilização do banco de dados e 
+pela cooperação técnica, fundamentais para o desen-
+volvimento deste trabalho. 
+
+Referências Bibliográficas 
+
+ 
+
+E. S., 2015. Identificação de Navios em  
+Sinais  de  Sonar  Passivo  por  Curvas 
+Principais.  Curitiba,  Associação  Brasileira 
+de Inteligência Computacional. 
+
+Breiman, L., Friedman, J., Stone, C. J. & Olshen, R. 
+A.,  1984.  Classification  and  Regression 
+ 
+Trees. Florida: Chapman & Hall. 
+ 
+Fernandes, T. S. .., Souza Filho, J. B. D. O. & Alves, 
+ 
+ 
+ 
+ 
+Hastie,  T.  &  Stuetzle,  W.,  1989.  Principal  Curves. 
+the  American  Statistical 
+Journal  of 
+ 
+ 
+Association, Volume vol. 84, pp. p. 502-516. 
+Oliveira, T. C. d. C. & Souza Filho, J. B. D. O., 2016. 
+Uso  de  Curvas  Principais  Hierárquicas  na 
+ 
+Classificação de Sonar Passivo. Espírito  
+ 
+ 
+Santo, Sociedade Brasileira de Automática. 
+Patil,  D.  V.  &  Bichkar,  R.  S.,  2012.  Issues  in 
+Optimization  of  Decision  Tree  learning:  A 
+ 
+Survey.  International  Journal  of  Applied 
+ 
+ 
+Information Systems, Volume vol 3. 
+
+

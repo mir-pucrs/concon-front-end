@@ -106,13 +106,19 @@ class Clauses(models.Model):
         db_table = 'clauses'
 
 
+class Classifiers(models.Model):
+    classifier_id = models.AutoField(primary_key=True)
+    classifier_name = models.CharField(max_length=30)
+
+
 class Conflicts(models.Model):
     conf_id = models.AutoField(primary_key=True)
     con = models.ForeignKey(Contracts, on_delete=models.CASCADE, db_column='con_id')
     clause_id_1 = models.ForeignKey(Clauses, on_delete=models.CASCADE, db_column='clause_id_1', related_name='first_clause')
     clause_id_2 = models.ForeignKey(Clauses, on_delete=models.CASCADE, db_column='clause_id_2', related_name='second_clause')
-    generated = models.IntegerField(blank=True, null=True)
-    added_by = models.ForeignKey(AuthUser, on_delete=models.CASCADE, db_column='added_by')
+    classifier = models.ForeignKey(Classifiers, on_delete=models.CASCADE, null=True, db_column='classifier_id')
+    confidence = models.IntegerField(null=False)
+    added_by = models.ForeignKey(AuthUser, on_delete=models.CASCADE, null=True, db_column='added_by')
     reg_date = models.DateTimeField()
 
     class Meta:

@@ -1,0 +1,37 @@
+# Normative Industrial Symbiotic Networks: A Position Paper
+
+- Score: 2 - accept
+
+- Reviewer's confidence: 3 - medium
+
+### Summary
+
+The authors propose a formalization for a normative multi-agent system to deal with Industrial Symbiotic Networks (ISNs). The proposed formalization simplifies how the model of individual firms and treat each industry (as in each type of industry) as an agent with two types of actions: communication actions and industrial actions. Using this model, the paper proposes a normative institution to regulate and coordinate collaborative agreements between industries.
+
+### Broad review
+
+Although I believe the abstract might be rewritten, the rest of the paper is well written.
+The concepts and ideas are clear and the reader can fully understand the problem.
+The work is well organized, the sections follow a sequence with a good introduction of concepts that gives the reader a decent view of the paper's proposal.
+Nevertheless, the authors merge some concept definitions with their own approach, such as the definitions of commmunication and normative institution on pages 3 and 4.
+The approach definitions for the concepts appear again on pages 4 and 6, which, although bring more detailed information, repeat information.
+The paper provides good background to the formalization by citing recent work dealing with interactions between industrial firms, as well as industrial symbiosis concepts and normative platforms.
+The paper is easier to read and understand thanks to the use of a simple example of Industrial Symbiotic Networks.
+
+### Detailed review
+
+- The abstract is confusing, with the first few lines describing a problem without giving much previous context.
+
+- The structure is also strange since it brings a lot of information stacked, including a future work;
+
+- Along the paper I found a few typos that should be revised;
+
+- As a main issue, temporal aspects could be better explained, it is mentioned twice but does not have an example of how such issue would impact in the application;
+
+- I believe that a good alternative to deal with agent decisions on collaboration agreements should be a rank of industries, which allows agents to choose the best ones to make an agreement.
+
+### Final remarks
+
+The paper has a good contribution since it brings an original way to deal with Industrial Symbiotic Networks.
+The text is well written and clear, and the concepts presented follows well established definitions.
+Thus, I suggest the paper to be accepted.

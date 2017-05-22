@@ -1,46 +1,60 @@
 $(document).ready(function(){
 
+    // Define global variables to monitor selected norms.
+    // TODO: Try to find a better way to do this.
     var global_one = null;
     var global_two = null;
 
+    // Hide contract options while no contract is uploaded.
     $('.before_upload').hide();
-    
-    
+
     $('#selector').click(function(){
 
         if (global_one != null) {
-
+            // Remove highlight over conflicting norms.
             $(global_one).removeClass('active_norm')
             $(global_two).removeClass('active_norm')
-
         }
 
+        // Get the ids from the conflicting norms.
         var values = $(this).val();
-
         values = values.split("_")
 
-        
+        // Set a variable to select the table row corresponding to the norms.
+        global_one = '#first_'+values[1]
+        global_two = '#second_'+values[2]
 
-        global_one = '#first_'+values[0]
-        global_two = '#second_'+values[1]
-
+        // Highlight selected norms.
         $(global_one).addClass('active_norm');
         $(global_two).addClass('active_norm');
 
+        // Calculate the distance between the position of the selected norm and the table top.
         var ypos1 = $(global_one).offset().top - $("#first_table").height();
         
+        // Make table scroll to the corresponding table row.
         $('#first_table').animate({
                 scrollTop: $('#first_table').scrollTop() + ypos1 - 60
             }, 500);
 
+        // Same process to the second norm.
         var ypos2 = $(global_two).offset().top - $("#second_table").height();
         
         $('#second_table').animate({
                 scrollTop: $('#second_table').scrollTop() + ypos2 - 60
             }, 500);
 
+        // Show correction options when a conflict is selected.
+        var conflict_id = values[0];
+        var norm_id_1 = values[1];
+        var norm_id_2 = values[2];
+        var model_name = $('#correct').attr('name');
+        var html_text = "<h2>Help us!</h2><h4>Is there a conflict between norm " + norm_id_1 + " and norm " + norm_id_2 + "?<br/> If not, click below!</h4><a href=\"/conconexp/conflict/" + conflict_id + "/" + model_name + "\"><button type='button'>Not a conflict!</button>";
+        $('#correct').html(html_text);
+        $('#correct').css('text-align', 'center'); 
+        // $('#correct').css('padding-top', '20%');
     });
 
+    // Ensure that the user click the upload button only when he uploaded a file.
     $('#upload_button').attr('disabled','disabled');
     $('input[type="file"]').change(function(){
         if($(this).val != ''){
@@ -48,161 +62,9 @@ $(document).ready(function(){
         }
     });
 
+    // Message to notify about the time it will take to process the contract.
     $('#file_form').submit(function() {
-
-	   alert('It may take a few minutes depending on the number of norms in the contract.');
-
+       alert('It may take a few minutes depending on the number of norms in the contract.');
     });
 
-
-    
-    // $("#login_button").click(function(){
-        
-    //     $.post("login.php",
-    //     {
-    //       username: $("#name").val(),
-    //       password: $("#password").val()
-    //     },
-    //     function(data,status){
-
-    //         if(data){
-              
-    //             swal({
-    //               title: 'Success!',
-    //               text: 'Logged in.',
-    //               type: 'success',
-    //               confirmButtonText: 'OK'
-    //             }, function(isConfirm) {
-    //                 window.location.replace('index.php');
-    //             });
-                
-    //         }else{
-                
-    //             swal({
-    //               title: 'Error!',
-    //               text: 'Your username or password is wrong.',
-    //               type: 'error',
-    //               confirmButtonText: 'OK'
-    //               }, function(isConfirm) {
-    //                   location.reload();
-    //             });
-                
-    //         }
-
-    //     });
-        
-    // });
-
-    // $("#register_button").click(function(e){
-
-    //     var name = $("#name_reg").val();
-    //     var username = $("#username_reg").val();
-    //     var email = $("#email").val();
-    //     var password1 = $("#passwordN1").val();
-    //     var password2 = $("#passwordN2").val();
-    //     var email_ok = validate_email(email);
-
-    //     if(name === "" || username === "" || email === "" || password1 === "" || password2.length === ""){
-    //         swal({
-    //           title: 'Oops!',
-    //           text: 'All fields are required.',
-    //           type: 'warning',
-    //           confirmButtonText: 'OK'
-    //         })
-    //     }
-    //     else if (password1 != password2) {
-    //         swal({
-    //             title: 'Oops!',
-    //             text: 'Your password and confirmation must be the same.',
-    //             type: 'warning',
-    //             confirmButtonText: 'OK'
-    //         });
-    //     }else if(!email_ok){
-    //         swal({
-    //             title: 'Oops!',
-    //             text: 'You need to insert a valid email.',
-    //             type: 'warning',
-    //             confirmButtonText: 'OK'
-    //         });
-    //     }else{
-    //         $.post("register.php",
-    //         {
-    //           name: $("#name_reg").val(),
-    //           username: $("#username_reg").val(),
-    //           email: $("#email").val(),
-    //           password1: $("#passwordN1").val(),
-    //           password2: $("#passwordN2").val(),
-    //         },
-    //         function(data,status){
-    //             if(data){
-    //                 swal({
-    //                   title: "Success!",
-    //                   text: "User registered!",
-    //                   type: 'success',
-    //                   confirmButtonText: 'OK'
-    //                 });  
-    //             }
-    //         });
-    //     }
-
-    //     e.preventDefault();
-
-    // });
-
-    // $("#upload_button").click(function(e){
-
-    //     var file_data = $('#fileToUpload').prop('files')[0];
-
-    //     if (!file_data){
-    //         swal({
-    //           title: "Oops!",
-    //           text: "Please choose a file first.",
-    //           type: 'warning',
-    //           confirmButtonText: 'OK'
-    //         });
-    //     }else{
-    //         var form_data = new FormData();                  
-    //         form_data.append('file', file_data);
-    //         $.ajax({
-    //             url: 'upload.php', // point to server-side PHP script 
-    //             dataType: 'text',  // what to expect back from the PHP script, if anything
-    //             cache: false,
-    //             contentType: false,
-    //             processData: false,
-    //             data: form_data,                         
-    //             type: 'post',
-    //             success: function(data){
-    //                 if (data == 'ALREADY') {
-    //                     swal({
-    //                       title: "Oops!",
-    //                       text: "This file already exists.",
-    //                       type: 'warning',
-    //                       confirmButtonText: 'OK'
-    //                     });
-    //                 } else if (data == 'FORMAT') {
-    //                     swal({
-    //                       title: "Oops!",
-    //                       text: "File format not accepted. Please insert a .txt or .md",
-    //                       type: 'warning',
-    //                       confirmButtonText: 'OK'
-    //                     });
-    //                 } else if (data == 'ERROR') {
-    //                     swal({
-    //                       title: "Error!",
-    //                       text: "Sorry, we had a problem while processing the file. Try again later.",
-    //                       type: 'warning',
-    //                       confirmButtonText: 'OK'
-    //                     });
-    //                 } else if (data == 'SUCESS') {
-    //                     swal({
-    //                       title: "Success!",
-    //                       text: "File uploaded!",
-    //                       type: 'success',
-    //                       confirmButtonText: 'OK'
-    //                     });
-    //                 }
-    //             }
-    //         });
-    //     }
-    // });
 });

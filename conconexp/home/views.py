@@ -7,8 +7,8 @@ from django.conf import settings
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from forms import SignUpForm
-from scripts import insert_contract, cnn_model, msc_model, save_contract
-from models import AuthUser, Contracts, Clauses
+from scripts import insert_contract, cnn_model, msc_model, save_contract, insert_conflicts, Contract
+from models import AuthUser, Contracts, Clauses, Conflicts, Classifiers
 from django.views.generic import TemplateView, ListView
 from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage
@@ -53,8 +53,6 @@ class ProfileView(ListView):
         paginator = Paginator(queryset, self.paginate_by)
         page = self.request.GET.get('page')
 
-        print paginator.count, paginator.num_pages, paginator.page_range
-
         try:
             file_contracts = paginator.page(page)
         except PageNotAnInteger:
@@ -86,27 +84,85 @@ def delete_contract(request, con_id):
 
     return HttpResponseRedirect(reverse('home:profile'))
 
-def contract(request, con_id):
+
+def delete_conflict(request, conf_id, model_name):
+
+    # Find conflict and remove it.
+    del_conflict = Conflicts.objects.get(conf_id=conf_id)
+    con_id = del_conflict.con.con_id
+    del_conflict.delete()
+
+    return HttpResponseRedirect(reverse('home:contract_2', args=[con_id, model_name]))
+
+
+def contract(request, con_id, model_name=[]):
 
     # Get contract information.
     contract = Contracts.objects.get(con_id=con_id)
 
-    if request.method == 'POST':
+    if request.method == 'POST' or model_name:
         # Deal the information receive by POST.
 
         # Get selected model.
-        model_name = request.POST.get('select_model', '')
+        if not model_name:
+            model_name = request.POST.get('select_model', '')
 
         # Find conflicts using the selected model.
         if model_name == "cnn":
-            cls_obj, clauses, conflicts = cnn_model(con_id)
+
+            # Get classifier id.
+            classifier_obj = Classifiers.objects.get(classifier_name='CNN Model')
+
+            # Check if exists a previous set of annotated conflicts.
+            conflicts_query = Conflicts.objects.filter(con_id=con_id, classifier=classifier_obj.pk)
+            
+            if conflicts_query:
+
+                cntrct = Contract(con_id)
+                cntrct.process_clauses()
+                cls_obj = cntrct.clause_ranges
+                clauses = cntrct.clauses
+
+                conflicts = []
+
+                for conflict in conflicts_query:
+
+                    conflicts.append((conflict.conf_id, conflict.clause_id_1.clause_id, conflict.clause_id_2.clause_id, conflict.confidence))
+
+            else:
+                cls_obj, clauses, conflicts = cnn_model(con_id)
+                conflicts = insert_conflicts(con_id, conflicts, classifier_obj)
+
         elif model_name == "msc":
-            cls_obj, clauses, conflicts = msc_model(con_id)
+
+            # Get classifier id.
+            classifier_obj = Classifiers.objects.get(classifier_name='Rule-Based Model')
+
+            # Check if exists a previous set of annotated conflicts.
+            conflicts_query = Conflicts.objects.filter(con_id=con_id, classifier=classifier_obj.pk)
+            
+            if conflicts_query:
+
+                cntrct = Contract(con_id)
+                cntrct.process_clauses()
+                cls_obj = cntrct.clause_ranges
+                clauses = cntrct.clauses
+
+                conflicts = []
+
+                for conflict in conflicts_query:
+
+                    conflicts.append((conflict.conf_id, conflict.clause_id_1.clause_id, conflict.clause_id_2.clause_id, conflict.confidence))
+
+            else:
+                cls_obj, clauses, conflicts = msc_model(con_id)
+                conflicts = insert_conflicts(con_id, conflicts, classifier_obj)
     
         context = {
                     'cls_obj': cls_obj,
                     'clauses': clauses,
-                    'conflicts': conflicts
+                    'conflicts': conflicts,
+                    'selected_model': model_name,
                   }
 
         # Return context.
@@ -144,18 +200,7 @@ def conflict(request):
         # Insert into table.
         con_id = insert_contract(path, user_obj)
 
-        # Create new view.
-        if model_name == "cnn":
-            sel, clauses, conflicts = cnn_model(con_id)
-        elif model_name == "msc":
-            sel, clauses, conflicts = msc_model(con_id)
-
-        context = {
-            'cls_obj': sel,
-            'clauses': clauses,
-            'conflicts': conflicts,
-        }
-
-        return render(request, 'home/conflict.html', context)
-
+        # Send to profile/contract.
+        return HttpResponseRedirect(reverse('home:contract_2', args=[con_id, model_name]))
+        
     return render(request, 'home/conflict.html')

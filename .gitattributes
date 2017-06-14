@@ -1,2 +1,4 @@
 *.h5 filter=lfs diff=lfs merge=lfs -text
 *.hdf5 filter=lfs diff=lfs merge=lfs -text
+conconexp/home/conflict_models/lstm_model/dataset/dataset.csv filter=lfs diff=lfs merge=lfs -text
+conconexp/home/conflict_models/lstm_model/dataset/non-conflicts.csv filter=lfs diff=lfs merge=lfs -text

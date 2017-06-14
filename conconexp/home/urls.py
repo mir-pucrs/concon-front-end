@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^conflict/$', views.conflict, name='conflict'),
     url(r'^conflict/(?P<conf_id>\d+)/(?P<model_name>[a-z]+)/$', views.delete_conflict, name='delete_conflict'),
     url(r'^intro/$', TemplateView.as_view(template_name='home/intro.html'), name='intro'),
+    url(r'^terms/$', TemplateView.as_view(template_name='home/terms.html'), name='terms'), 
     url(r'^profile/$', ProfileView.as_view(), name='profile'),
     url(r'^profile/(?P<con_id>\d+)/$', views.delete_contract, name='delete-contract'),
     url(r'^contract/(?P<con_id>\d+)/$', views.contract, name='contract'),

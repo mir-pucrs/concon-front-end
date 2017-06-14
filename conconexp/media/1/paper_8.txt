@@ -1,0 +1,700 @@
+Norm Conict Identication using Deep
+
+Learning
+
+João Paulo Aires and Felipe Meneguzzi
+
+School of Computer Science
+
+Pontical Catholic University of Rio Grande do Sul
+
+Porto Alegre, Brazil
+
+joao.aires.(cid:0)(cid:0)(cid:1)@acad.pucrs.br
+felipe.meneguzzi@pucrs.br
+
+Abstract Contracts represent agreements between two or more parties
+formally in the form of deontic statements or norms within their clauses.
+If not carefully designed, such conicts may invalidate an entire contract,
+and thus human reviewers invest great eort to write conict-free contracts
+that, for complex and long contracts, can be time consuming and error-
+prone. In this work, we develop an approach to automate the identication
+of potential conicts between norms in contracts. We build a two-phase
+approach that uses traditional machine learning together with deep
+learning to extract and compare norms in order to identify conicts
+between them. Using a manually annotated set of conicts as train and
+test set, our approach obtains (cid:8)(cid:5)% accuracy, establishing a new state-of-
+the art.
+
+Keywords: norms, contracts, deep learning, natural language
+
+(cid:1)
+
+Introduction
+
+Regulations are often applied to social members in a society in order to min-
+imize conicting behaviors [(cid:1)(cid:8)]. Such regulations also known as social norms,
+dene expected behaviors accepted for society members and that ensure that
+individuals act according to a socially acceptable behavior. Besides regulating
+entire societies, social norms are also used to regulate interactions in smaller
+groups, and are often present in social relationships involving agreements over
+products and services. A common way to formalize a set of norms applied to an
+agreement is through contracts. In human societies, contracts are semi-structured
+documents written in natural language, which are used in almost every existing
+formal agreement. Contracts dene the parties involved in the agreement, their
+relations, and the behavior expected of each party within clauses. When written
+in natural language, contracts may use imprecise and possibly vague language to
+dene parties, obligations and objects of its clauses, leading to inconsistencies.
+Such inconsistencies may create, in the long run, unforeseen legal problems for
+one or more of the involved parties. To identify and solve such conicts and
+
+(cid:2)
+
+João Paulo Aires, and Felipe Meneguzzi
+
+inconsistencies, the contract maker needs to read the entire contract and identify
+each conicting pair of norms. As conicts tend to have a large number of norms,
+the task of identifying norm conicts is quite dicult for human beings, which
+makes it error-prone and takes substantial human eort.
+
+Our main contributions in this work are two: rst, an approach to address
+the problem of identifying and quantifying potential normative conicts between
+natural language contract clauses; and second, a corpus containing normative
+conicts (cid:1). We process raw text from contracts and identify their norms. Then,
+we train a convolutional neural network to classify norm pairs as conict or
+non-conict. We evaluate our approach using a dataset of contracts in which
+conicts have been deliberately but randomly introduced between the norms,
+obtaining an accuracy around (cid:8)(cid:5)% in conict identication for a (cid:1)(cid:0)-fold cross
+validation.
+
+(cid:2) Norms and Contracts
+
+Norms ensure that individuals act according to a dened set of behaviors and are
+punished when they are perceived not to be complying with them given a social
+setting [(cid:1)]. Norms provide a powerful mechanism for regulating conict in groups,
+governing much of our political and social lives. They are often represented using
+deontic logic, which has its origins in philosophical logic, applied modal logic,
+and ethical and legal theory. The aim of deontic logic is to describe ideal worlds,
+allowing the representation of deviations from the ideal (i.e. violations) [(cid:2)(cid:7)].
+Thus, deontic logic and the theory of normative positions are very relevant to
+legal knowledge representation, and consequently they are applied to the analysis
+and representation of normative systems [(cid:1)(cid:6)]. Norms often use deontic concepts
+to describe permissions, obligations, and prohibitions. A prohibition indicates
+an action that must not be performed, and, if such action is carried out, a
+violation occurs. Conversely, a permission indicates an action that can either be
+performed or not, and no violation occurs in either case. In most deontic systems,
+a prohibition is considered to be equivalent to the negation of a permission, thus,
+an action that is not permitted comprises a prohibition. Although these two
+modalities are sucient to represent most norms, obligations are also commonly
+employed in norm representation. An obligation represents an action that must
+be performed, and it is equivalent either to the negation of a permission not to
+act or a prohibition not to act.
+
+In contracts, norms are dened within clauses and are often directed to one
+or more parties of the contract. A contract is an agreement that two or more
+parties enter voluntarily when it is useful to formalize that a certain duty comes
+into existence by a promise made by at least one of the parties. The creation of a
+contract formalizes what each party expects from the other, creating a warranty
+that each party will fulll their duties [(cid:2)(cid:2)] and legally enforceable obligations
+between these parties. These enforceable obligations are dened by a set of norms,
+which are responsible for describing any expected behavior from the parties.
+(cid:1) https://goo.gl/(cid:3)Hbl(cid:1)r
+
+Norm Conict Identication using Deep Learning
+
+(cid:3)
+
+With the use of the Internet, electronic contracts arise as a new way to
+represent formal agreements and are increasingly explored for commercial services.
+An electronic contract is very similar to a traditional paper-based commercial
+contract, following the same rules and structure [(cid:2)(cid:0)]. Almost all types of contract
+can be represented electronically, leading to the need of managing such contracts,
+dealing with the representation and evaluation of agreements. In this work, we
+deal with contracts written in natural language, thus, the task of analyzing and
+evaluating norms is traditionally done by human readers. As more contracts
+are required to codify an increasing number of online services which span over
+multiple countries and dierent legal systems, the tasks of writing and verifying
+contracts by humans become more laborious, taking substantial time [(cid:1)(cid:0)].
+
+(cid:2).(cid:1) Norm Conicts
+
+Sadat-Akhavi [(cid:2)(cid:3)] describes four causes for a norm conict to arise. The rst
+cause is when the same act is subject to dierent types of norms. Thus, two
+norms are in conict if two dierent types of norms regulate the same act, i.e.,
+if the same act is both obligatory and prohibited, permitted and prohibited, or
+permitted and obligatory. For example, consider a norm n(cid:1) that states that
+company X must pay product Z taxes, and a norm n(cid:2) that states that company
+X may pay product Z taxes. The second cause is when one norm requires an act,
+while another norm requires or permits a contrary act. In this case, there is a
+normative conict if two contrary acts, or if one norm permits an act while the
+other norm requires a contrary act [(cid:2)(cid:3)]. For example, consider a norm n(cid:1) that
+states that Company X shall deliver product Z on location W, whereas norm n(cid:2)
+states that Company X must deliver product Z on location Q. The conict arises
+in the moment that one tries to comply with one norm and, at the same time, is
+non-complying with the other. The third case denes a cause of conict when
+a norm prohibits a precondition of another norm. For example, norm (cid:1) obliges
+company X to perform  in location , whereas norm (cid:2) prohibits company X to
+be in location . In this case, company X cannot comply with norm (cid:1) since been
+in location  implies in a violation of norm (cid:2). Finally, Sadat-Akhavi denes a
+cause of conict when one norm prohibits a necessary consequence from another
+norm. For example, norm (cid:1) states that company X shall/may replace its material
+supplier each year and the process shall not last more than two weeks, whereas
+norm (cid:2) states that company X cannot be without a material supplier. In this
+case, the process of replacing the material supplier (norm (cid:1)) implies to company
+X an amount of time without a material supplier, complying with such norm
+makes company X violate norm (cid:2).
+
+(cid:3) Deep Learning
+
+Deep learning is a branch of machine learning that tries to solve problems by
+automatically nding an internal representation based on hierarchical layers [(cid:1)(cid:2)].
+Such layers can extract complex features from data as they get deeper, which
+
+(cid:4)
+
+João Paulo Aires, and Felipe Meneguzzi
+
+makes feature design from human engineers unnecessary [(cid:3)]. There are multiple
+architectures of deep neural networks that achieve this type of learning, such as,
+convolutional neural networks (CNN) [(cid:4)], recurrent neural networks (RNN) [(cid:1)(cid:5)],
+and autoencoders [(cid:2)(cid:6)].
+
+(cid:3).(cid:1) Convolutional Neural Networks
+
+Figure (cid:1): Abstract representation of a CNN (extracted from LeCun et al. [(cid:4)])
+
+Convolutional neural networks were rst introduced by LeCun et al. [(cid:4)]. They
+modify the usual neural network by adding successive convolutional layers before
+the fully connected neural network output layer, as illustrated in Figure (cid:1). A
+convolutional layer uses the convolution mathematical operator to modify specic
+regions of input data using a set of kernels, substantially diminishing the number
+of neural connection weighs a learning algorithm must adjust close to the input
+features. A convolution can be viewed as an operation between two functions
+that produces a third one. Each kernel of a convolutional layer has a dened
+size and contains a value for each cell; these values, called weights, multiply the
+values from the input features resulting in a new feature map. The kernel goes
+through the input multiplying every matrix cell, as illustrated in Figure (cid:2). The
+result of applying multiple convolutions to an input is a set of feature maps with
+specic information from the input.
+
+In order to reduce the dimensionality of features resulting from convolu-
+tions, convolutional networks often contain pooling layers between successive
+convolutional layers. These layers have a single kernel without weights that goes
+through the input aiming to down-sample the size of the image, much in the
+same way resizing an image reduces its dimensions, as illustrated in Figure (cid:3).
+They can be either a max pooling or a mean pooling, the former outputs the
+highest value among the ones in the kernel size and the later outputs the mean
+value among the ones in the kernel. LeCun et al. use this type of neural network
+to identify handwritten numbers from zip codes in real U.S. mail. From then
+on, convolutional neural networks have been used extensively to solve image
+processing problems. More recently, researchers have used CNNs to solve classical
+natural language processing problems ([(cid:2)(cid:8)], [(cid:1)(cid:1)]), such as part-of-speech tagging,
+named entity recognition, and sentiment analysis. In most cases, approaches using
+CNNs have matched and surpassed previous approaches using rule-based and
+
+Norm Conict Identication using Deep Learning
+
+(cid:5)
+
+probabilistic approaches. The key challenge in applying CNNs to text processing
+is nding a suitable matrix representation for the input text.
+
+Figure (cid:2): Convolution example
+
+Figure (cid:3): Pooling example
+
+(cid:4) Conict Detection Approach
+
+Our approach to identifying potential conicts between norms in contracts is
+divided into two phases. In the rst one, we identify norms within contractual
+sentences by training a Support Vector classier using a manually annotated
+dataset. In the second part, we classify norm pairs as conicting or non-conicting
+using a CNN. Figure (cid:4) illustrates the architecture of our approach.
+
+(cid:4).(cid:1) Norm Identication
+
+The rst step towards norm conict identication is to identify which sentences in
+a contract contain deontic statements (norms). For this task we consider contract
+sentences to be of two exclusive types: norm sentences and non-norm sentences.
+
+01516879584224132184865620100000115Input ImageKernelNew Image01518795422432188Input ImageMax pooling Kernel 2x2New Image(cid:6)
+
+João Paulo Aires, and Felipe Meneguzzi
+
+Figure (cid:4): Architecture of the norm conict identier
+
+In order to separate norm sentences from the rest of the contract text, we train a
+classier based on Support Vector Machines (SVM) using a manually annotated
+dataset. We created the dataset using real contracts extracted from the onecle
+website(cid:2), specically contracts of the manufacturing domain(cid:3). We manually
+annotated the sentences in each contract as being either norm or non-norm,
+resulting in a set of (cid:6)(cid:9)(cid:9) norm sentences and (cid:4)(cid:9)(cid:4) non-norm sentences from a
+total of (cid:2)(cid:2) contracts, which we use as both train and test sets.
+
+(cid:4).(cid:2) Norm Conict Identication
+
+In order to identify norm conicts, we use the concepts introduced by Sadat-
+Akhavi [(cid:2)(cid:3)]. Unlike the four causes for conicts, Sadat-Akhavi identies three
+main types of conicts, which are:
+
+ Permission x Obligation;
+ Permission x Prohibition; and
+ Obligation x Prohibition.
+
+We base our conict identication on these three conict types in addition to
+the rst and second causes of norm conict dened by Sadat-Akhavi. Thus, in
+this work, we consider norm conicts to be:
+
+ Pairs of norms with dierent deontic concepts applied to the same actions
+
+ Pairs of norms where the obliged action of one clause is either prohibited or
+
+and the same parties; and
+
+permitted in another clause.
+
+(cid:2) http://contracts.onecle.com/
+(cid:3) http://contracts.onecle.com/type/(cid:4)(cid:7).shtml
+
+ContractContractual sentencesSentence ClassifierList of normsNorm Pair 2 Image ConverterNorm pairs10... 100...0............10...1Non...Na...n...Probability of conflictNorm Conict Identication using Deep Learning
+
+(cid:7)
+
+The key challenge in processing text using CNNs is to generate a representation
+suitable for the matrix-format input required for the convolutional layers. Here,
+we take inspiration from recent work that deals with natural language. The rst
+sentence representation, created by Zhang and LeCun [(cid:2)(cid:8)], in which they use a
+CNN to deal with natural language processing problems. Their approach aims
+to, among other tasks, classify the sentiment (positive, negative, and neutral) of
+product reviews from Amazon. Since CNNs are designed to process images, the
+solution they propose to translate a sentence into an image is to create a matrix
+representation with the review characters as lines and the alphabet as columns.
+Thus, given a cell {i, j}, they assign (cid:1) when the ith character is equal to the jth,
+otherwise, they assign (cid:0). Figure (cid:5) illustrates their sentence representation using
+as example a sentence that begins with above. The resulting matrix has (cid:1) where
+letters are equal (such as cell 1, 1 and 2, 2) and (cid:0) otherwise.
+
+Figure (cid:5): Sentence representation by Zhang and LeCun
+
+The second work is from Kim [(cid:1)(cid:7)], which uses a sentence representation to
+classify sentences in dierent natural language processing problems. Here, the
+representation is a matrix in which the lines are the words of a sentence and
+columns are the word embedding of each word. An embedding is a representation
+that turns words into vectors of oating point numbers. Such representation may
+have a variable size and carries semantic information from each word. In Kims
+approach, the resulting matrix is a group of word embedding lines. Figure (cid:6)
+illustrates this sentence representation.
+
+One of the key aspects in norm conicts is that both norms tend to be
+very similar in that usually both norms refer to the same party/parties with
+similar actions, and only the modality of the sentence diers. Thus, the similarity
+distance between two sentences often indicates how norm pairs are likely to
+conict. Consequently, we rely on training examples that consist of binary images
+created from each pair of norms denoting the distance between these norms.
+Thus, we created a pair-of-norms representation using a matrix to denote similar
+characters in each norm. Given two norms  and , our matrix consists of the
+
+abxyzabove0010000000000000000000001AlphabetSentence. . .. . .. . .. . .. . .. . .(cid:8)
+
+João Paulo Aires, and Felipe Meneguzzi
+
+Figure (cid:6): Sentence representation by Kim
+
+characters from  in its lines and the characters from  in its columns, as Figure (cid:7)
+illustrates. Given a cell {i, j}, we assign (cid:1) to it when the ith character of  is equal
+to the jth character of  and (cid:0) otherwise. For this work, we limit the lengths
+of both norms to (cid:2)(cid:0)(cid:0) characters, which is the mean length of norms from our
+dataset and truncate overlong sentences (which, as we see in the experiments,
+seems to have no eect in accuracy). Using this representation we train a CNN
+to generate a model to classify norm pairs as conicting and non-conicting.
+
+Figure (cid:7): Norm pair representation in our approach
+
+(cid:5) Experiments
+
+(cid:5).(cid:1) Norm Conict Dataset Annotation
+
+To evaluate our approach to detect potential conicts between norms, we required
+a corpus with contracts containing real conicts. However, since we found no
+
+Ilikethenewdevice0.9EmbeddingSentence. . .. . .. . .. . .0.50.20.30.30.40.10.60.70.10.80.30.70.20.10.60.20.60.50.50.90.10.20.40.1. . .normznormw0010000000010000010000001Norm2Norm 1. . .. . .. . .. . .. . .. . ................. . .Norm Conict Identication using Deep Learning
+
+(cid:9)
+
+such corpus available, we created a dataset with semi-automatically generated
+norm conicts using a set of real non-conicting norms as a basis. To assist
+in the creation of conicts, we developed a system to assist human users to
+insert conicts randomly in a contract, while still maintaining language syntactic
+correctness. In order to create such conicts, we relied on the assistance of two
+volunteers each of which was responsible for inserting two dierent types of
+conict. Each volunteer was asked to create one of the two causes of conict. We
+asked the rst volunteer to insert conicts that have only dierences in the modal
+verb, e.g. changing an obligation modal verb (must) for a permission one (may).
+This volunteer created (cid:9)(cid:4) conicts in (cid:1)(cid:0) dierent contracts, totaling (cid:1)(cid:3) conicts
+between Permission x Prohibition, (cid:3)(cid:6) conicts between Permission x Obligation,
+and (cid:4)(cid:6) conicts between Obligation x Prohibition. We asked the second volunteer
+to insert conicts that contain deontic conicts and modications in the norm
+actions. This volunteer created (cid:1)(cid:7) conicts in (cid:6) dierent contracts, totaling (cid:2)
+conicts between Permission x Prohibition, (cid:6) conicts between Permission x
+Obligation, and (cid:4) conicts between Obligation x Prohibition.
+
+We developed a semi-automatic process conict creation within a system that,
+when prompted, selects a random norm from a random contract, makes a copy of
+it, and asks the user to modify it. After user modication, the system creates a
+new contract containing both the original norm and the modied copy, ensuring
+that a semantically similar, but conicting, clause is present in the resulting
+contract. Thus, we use these new contracts to identify the inserted conicts.
+
+From the contracts we used to create conicts, we selected all sentences not
+used in the conict creation to produce a set for the non-conicting norm class.
+This set has a total of (cid:2)(cid:0)(cid:4),(cid:4)(cid:4)(cid:3) norm pairs.
+
+(cid:5).(cid:2) SVM
+To create the sentence classier, we trained a support vector machine (SVM)
+classier using the dataset described in the Norm Identication section. SVM is
+often used to classify datasets with few training examples with multiple features
+and a binary classication task since it creates a hyperplane that tries to nd the
+best division between two classes [(cid:1)(cid:4)]. In order to train the SVM, we turn each
+sentence into a bag-of-words representation [(cid:1)(cid:3)], which represents the frequency
+of words from a xed dictionary in sentence. Using this representation, the SVM
+learns from the frequency each word appears in a class.
+
+(cid:5).(cid:3) CNN
+To create the norm conict identier, we train a CNN using norm pairs from the
+dataset described in Norm Conict Dataset Annotation section. In this work,
+we use the classical LeNet CNN, developed by LeCun et al. [(cid:4)]. The network
+architecture consists of two convolutional layers followed by a max pooling layer
+and two fully-connected neural networks. Each convolutional layer has (cid:3)(cid:2) kernels
+that are responsible for extracting features from the input image. The network
+receives as input an image representation of each norm pair.
+
+(cid:1)(cid:0)
+
+João Paulo Aires, and Felipe Meneguzzi
+
+(cid:6) Results
+
+(cid:6).(cid:1) Sentence Classier
+To evaluate our sentence classier, we divided our manually annotated dataset
+into train and test set. We use a (cid:8)(cid:0)/(cid:2)(cid:0) division, which results in (cid:9)(cid:5)(cid:4) sentences in
+the train set and (cid:2)(cid:3)(cid:8) sentences in the test set. Both sets are balanced according to
+the number of elements in each class, i.e., (cid:5)(cid:5)(cid:9) norm sentences and (cid:3)(cid:9)(cid:5) non-norm
+sentences in the train set, and (cid:1)(cid:3)(cid:9) norm sentences and (cid:9)(cid:8) non-norm sentences in
+the test set. To compare the SVM with other linear models, we test the same
+dataset with two other classiers: Perceptron and Passive Aggressive. Perceptron
+is a well-known linear model, which can be better explained as a neuron in a
+neural network [(cid:1)(cid:9)]. It processes the input by multiplying it using a set of weights.
+The result goes to an activation function, which denes the input class. Passive
+Aggressive [(cid:2)] is a linear model that has its name based on its weight update rule
+that, in each round, can be passive, when the hinge-loss result of its update is
+zero, and aggressive, when it is a positive number. Table (cid:1) shows the results for
+each classier.
+
+Classier Prec. Rec. F-Score Acc.
+(cid:0).(cid:8)(cid:7)
+Perceptron (cid:0).(cid:8)(cid:9) (cid:0).(cid:8)(cid:8)
+Pass. Agr. (cid:0).(cid:9)(cid:2) (cid:0).(cid:8)(cid:8)
+(cid:0).(cid:8)(cid:9)
+(cid:0).(cid:8)(cid:8) (cid:0).(cid:9)(cid:4) (cid:0).(cid:9)(cid:1) (cid:0).(cid:9)(cid:0)
+Table (cid:1): Results for sentence classier
+
+(cid:0).(cid:8)(cid:8)
+(cid:0).(cid:9)(cid:0)
+
+SVM
+
+As we can see, SVM obtains the best result for the task with an accuracy of
+(cid:9)(cid:0)%. The passive aggressive algorithm has a similarly good accuracy and has
+the best precision in comparison to the others. However, since SVM obtains a
+better overall result, we use it as our sentence classier.
+
+(cid:6).(cid:2) Norm Conict Identier
+To evaluate the norm conict identier, we used a (cid:1)(cid:0)-fold cross-validation step
+dividing our dataset into train, validation, and test. Since we have a total of
+(cid:1)(cid:0)(cid:4) norm pairs with conicting norms and (cid:2)(cid:0)(cid:4),(cid:4)(cid:4)(cid:3) conict-free norm pairs,
+the rst step is to create a balanced dataset. Thus, we reduced the number of
+non-conicting norm pairs to (cid:1)(cid:0)(cid:4), which gives us a total of (cid:2)(cid:0)(cid:8) samples. Each fold
+has (cid:1)(cid:0)% of the data, which is around twenty samples, ten of each class. In each
+round, we use eight folds to train, one to validate, and one to test. To prevent
+overtting, we use the early stopping technique that monitors the accuracy in
+the train and validation set. When the accuracy in the validation set starts
+to decrease and the train accuracy keeps increasing, an overtting is detected,
+resulting in the termination of the training phase. We show the accuracy results
+for each fold and the mean accuracy overall in Table (cid:2).
+
+Norm Conict Identication using Deep Learning
+
+(cid:1)(cid:1)
+
+Fold
+
+(cid:9) Mean
+Accuracy (cid:0).(cid:8)(cid:5) (cid:0).(cid:8)(cid:5) (cid:0).(cid:7)(cid:6) (cid:0).(cid:9)(cid:5) (cid:0).(cid:8)(cid:5) (cid:0).(cid:7)(cid:6) (cid:0).(cid:7)(cid:1) (cid:0).(cid:9)(cid:5) (cid:0).(cid:9)(cid:5) (cid:0).(cid:8)(cid:0) (cid:0).(cid:8)(cid:4)
+
+(cid:0)
+
+(cid:3)
+
+(cid:8)
+
+(cid:4)
+
+(cid:5)
+
+(cid:6)
+
+(cid:7)
+
+(cid:1)
+
+(cid:2)
+
+Table (cid:2): Results for the norm conict identier
+
+(cid:7) Related Work
+
+Since our approach merges information retrieval, which is the extraction of infor-
+mation from unstructured data, and contract reasoning, which is manipulation
+and reasoning over contract elements, in this section we compare our approach
+to recent work that deals with similar concepts applied to contracts.
+
+Rosso et al. [(cid:2)(cid:1)] propose an approach to retrieve information from legal texts.
+Their approach uses JIRS(cid:4) (Java Information Retrieval System), a system that
+measures distances between sentences using n-grams, to develop a solution for
+three problems: passage retrieval in treaties, patents, and contracts. In the rst
+problem, they want to answer questions from treaty documents. Given a question
+about the content of the treaty, they use JIRS to measure the distance between
+the question and the text in the treaty, thus, they can rank the best answers
+to each question by their similarity. To the second problem, they develop an
+approach to help patent creators identify similar patents. As in the rst problem,
+given a set of patents and a new one, they use JIRS to measure how similar the
+new patent is to existing ones. To the third problem, they develop an approach
+to identify conicts between norms in contracts. To do so, they create a contract
+example between an airline and a ground operations company with a dened set
+of norms applied to both parties. They divide the process of conict identication
+into three steps, rst, they translate every norm in contract to a formal contract
+language (CL [(cid:7)]), which they call Contract Language clauses. Second, they
+analyse the clauses using a model checker performed by the contract analysis
+tool CLAN [(cid:8)]. From the identied conicts, they use JIRS to translate the
+sentences from CL to natural language. Although this work also tries to identify
+norm conicts, it diers from ours in two points. First, our work tries to identify
+normative conicts dealing directly with natural language, whereas in their work
+they use the approach proposed by Fenech et al. [(cid:8)], which uses a single contract
+that has its norms manually translated into the controlled language CL. Second,
+to identify norm conicts, CLAN uses a series of predened rules, whereas in
+our approach we rely on a convolution neural network that processes matrix
+of distances between pairs of norms automatically extracting the information
+needed to classify them.
+
+Curtotti and McCreath [(cid:5)] propose an approach to annotate contracts using
+machine learning and rule-based techniques. They aim to classify each component
+of contractual sentences based on their structure. To extract data for machine
+learning, they create a hand-coded tagger and manually correct its outcome. As
+data, they use the Australian Contract Corpus [(cid:6)] with (cid:2)(cid:5)(cid:6) contracts, containing
+
+(cid:4) http://sourceforge.net/projects/jirs/
+
+(cid:1)(cid:2)
+
+João Paulo Aires, and Felipe Meneguzzi
+
+(cid:4)(cid:2)(cid:9)(cid:1)(cid:0) sentences and a vocabulary of (cid:1)(cid:4)(cid:2)(cid:1)(cid:7) words. In their experiments, they
+randomly select (cid:3)(cid:0) contracts and divide them into three sets, one for train and
+two for test. Using dierent classiers to compare the results, they obtain (cid:0).(cid:8)(cid:6)
+of F-score. Instead of classifying each clause structure with a dierent class, in
+this work we want to identify norm clauses. However, we can use Curtotti and
+McCreath annotation for a further work with a deeper contract analysis.
+
+Gao and Singh propose two dierent solutions for problems concerning in-
+formation extraction from contracts. In the rst one, they propose an approach
+to extract exceptions within norms in contracts [(cid:1)(cid:0)]. They use a corpus with
+(cid:2),(cid:6)(cid:4)(cid:7) contracts from the Onecle repository (cid:5) as data for processing. As result,
+Enlil obtains an F-score of (cid:0).(cid:9) in classifying contracts using a manually anno-
+tated corpus. Although Gao and Singh work is similar to ours by dealing with
+contractual norms, we have dierent ends. In our work, we use norms to nd
+potential conicts, whereas they use them to identify exceptions within a contract.
+However, we can use their concept of exception in a new approach to identify
+conicts with a high-level of detail, since exceptions in norms may induce to new
+types of conicts.
+
+In their second work, Gao and Singh [(cid:9)] develop a hybrid approach for
+extracting business events and their temporal constraints from contracts. Using
+dierent machine learning algorithms they obtain an F-score of (cid:0).(cid:8)(cid:9) for event
+extraction and (cid:0).(cid:9) for temporal constraints. This, similar to the rst work, is an
+approach to extract information from contracts. The main dierence between
+their work and ours is that they try to identify temporal elements from norms.
+This is also an improvement we can apply to the norm conict identication
+process.
+
+Vasconcelos et al. [(cid:2)(cid:5)] propose an approach to deal with normative conicts
+in multi-agent systems. They develop mechanisms for detection and resolution
+of normative conicts. To resolve conicts they manipulate the constraints
+associated to the norms variables, removing any overlap in their values. In norm
+adoption, they use a set of auxiliary norms to exchange by the ones applied to
+the agent. In norm removal, they remove a certain norm and all curtailments it
+caused, bringing back a previous form of the normative state. Figueiredo and
+Silvas work [(cid:2)(cid:4)] consist of an algorithm for normative conict detection using
+rst-order logic. They use the Z language to formalize the conict types and
+then identify them between norms. Both approaches from Vasconcelos et al. and
+Figueiredo and Silva propose a solution for norm conicts applied to normative
+multi-agent systems. The main dierence between their work and ours is that
+we make the identication of potential conicts between norms from contracts
+written in natural language. It creates the need for a dierent approach since
+natural language is not structured. However, an alternative approach would
+be the translation of natural language to rst-order-logic and use one of these
+approaches to identify conicts.
+
+(cid:5) http://contracts.onecle.com
+
+Norm Conict Identication using Deep Learning
+
+(cid:1)(cid:3)
+
+(cid:8) Conclusion and Future Work
+
+In this work, we developed a two-phase approach to identify potential conicts
+between norms in contracts. Our main contributions are: ((cid:1))a dataset with
+manually annotated normative and non-normative sentences from real contracts;
+((cid:2)) a machine learning model to classify contractual sentences as normative
+and non-normative; ((cid:3)) a manually annotated dataset with contracts containing
+conicts between norms; ((cid:4)) and a deep learning model to classify norm pairs
+as conicting and non-conicting. We evaluate both models and we obtain an
+accuracy of (cid:9)(cid:0)% for the sentence classier and around (cid:8)(cid:5)% for the norm conict
+identier.
+
+As future work, we aim to develop two dierent approaches. First, we aim
+to develop a pre-processing step in the norm conict identication to identify
+elements that may improve the detection of conicts, such as temporal information.
+Second, to fairly compare our results with the work proposed by Fenech et al. [(cid:8)],
+we aim to create an approach to translate natural language to CL (contract
+language) and use CLAN to discover conicts.
+Acknowledgements: We gratefully thank Google Research Awards for Latin
+
+America for funding our project.
+
+References
+
+(cid:1). Axelrod, R.: An evolutionary approach to norms. The American Political Science
+
+Review (cid:8)(cid:0)((cid:4)), pp. (cid:1)(cid:0)(cid:9)(cid:5)(cid:1)(cid:1)(cid:1)(cid:1) ((cid:1)(cid:9)(cid:8)(cid:6)), http://www.jstor.org/stable/(cid:1)(cid:9)(cid:6)(cid:0)(cid:8)(cid:5)(cid:8)
+
+(cid:2). Crammer, K., Dekel, O., Keshet, J., Shalev-Shwartz, S., Singer, Y.: Online passive-
+aggressive algorithms. Journal of Machine Learning Research (cid:7)(Mar), (cid:5)(cid:5)(cid:1)(cid:5)(cid:8)(cid:5)
+((cid:2)(cid:0)(cid:0)(cid:6))
+
+(cid:3). Cun, L., Bengio, Y., Hinton, G.: Deep learning. Nature (cid:5)(cid:2)(cid:1)((cid:7)(cid:5)(cid:5)(cid:3)), (cid:4)(cid:3)(cid:6)(cid:4)(cid:4)(cid:4) ((cid:2)(cid:0)(cid:1)(cid:5))
+(cid:4). Cun, L., Boser, B., Denker, J.S., Henderson, D., Howard, R.E., Hubbard, W., Jackel,
+L.D.: Handwritten digit recognition with a back-propagation network. In: Advances
+in Neural Information Processing Systems. pp. (cid:3)(cid:9)(cid:6)(cid:4)(cid:0)(cid:4). Morgan Kaufmann ((cid:1)(cid:9)(cid:9)(cid:0))
+(cid:5). Curtotti, M., Mccreath, E.: Corpus based classication of text in australian contracts.
+In: Proceedings of the Australasian Language Technology Association Workshop,
+Melbourne, Australia. pp. (cid:1)(cid:8)(cid:2)(cid:6) ((cid:2)(cid:0)(cid:1)(cid:0))
+
+(cid:6). Curtotti, M., McCreath, E.C.: A corpus of australian contract language: Description,
+proling and analysis. In: Proceedings of the (cid:1)(cid:3)th International Conference on
+Articial Intelligence and Law. pp. (cid:1)(cid:9)(cid:9)(cid:2)(cid:0)(cid:8). ICAIL (cid:1)(cid:1), ACM, New York, NY, USA
+((cid:2)(cid:0)(cid:1)(cid:1)), http://doi.acm.org/(cid:1)(cid:0).(cid:1)(cid:1)(cid:4)(cid:5)/(cid:2)(cid:0)(cid:1)(cid:8)(cid:3)(cid:5)(cid:8).(cid:2)(cid:0)(cid:1)(cid:8)(cid:3)(cid:8)(cid:7)
+
+(cid:7). Fenech, S., Pace, G.J., Schneider, G.: Automatic conict detection on contracts.
+In: International Colloquium on Theoretical Aspects of Computing. pp. (cid:2)(cid:0)(cid:0)(cid:2)(cid:1)(cid:4).
+Springer ((cid:2)(cid:0)(cid:0)(cid:9))
+
+(cid:8). Fenech, S., Pace, G.J., Schneider, G.: CLAN: A tool for contract analysis and conict
+discovery. In: Automated Technology for Verication and Analysis, (cid:7)th International
+Symposium, ATVA (cid:2)(cid:0)(cid:0)(cid:9), Macao, China, October (cid:1)(cid:4)-(cid:1)(cid:6), (cid:2)(cid:0)(cid:0)(cid:9). Proceedings. pp.
+(cid:9)(cid:0)(cid:9)(cid:6) ((cid:2)(cid:0)(cid:0)(cid:9)), http://dx.doi.org/(cid:1)(cid:0).(cid:1)(cid:0)(cid:0)(cid:7)/(cid:9)(cid:7)(cid:8)-(cid:3)-(cid:6)(cid:4)(cid:2)-(cid:0)(cid:4)(cid:7)(cid:6)(cid:1)-(cid:9)_(cid:8)
+
+(cid:9). Gao, X., Singh, M.P.: Mining contracts for business events and temporal constraints
+in service engagements. Services Computing, IEEE Transactions on PP((cid:9)(cid:9)), (cid:1)(cid:1)
+((cid:2)(cid:0)(cid:1)(cid:3))
+
+(cid:1)(cid:4)
+
+João Paulo Aires, and Felipe Meneguzzi
+
+(cid:1)(cid:0). Gao, X., Singh, M.P., Mehra, P.: Mining business contracts for service exceptions.
+
+IEEE Transactions on Services Computing (cid:5)((cid:3)), (cid:3)(cid:3)(cid:3)(cid:3)(cid:4)(cid:4) ((cid:2)(cid:0)(cid:1)(cid:2))
+
+(cid:1)(cid:1). Gillick, D., Brunk, C., Vinyals, O., Subramanya, A.: Multilingual language process-
+
+ing from bytes. arXiv preprint arXiv:(cid:1)(cid:5)(cid:1)(cid:2).(cid:0)(cid:0)(cid:1)(cid:0)(cid:3) ((cid:2)(cid:0)(cid:1)(cid:5))
+
+(cid:1)(cid:2). Goodfellow, I., Bengio, Y., Courville, A.: Deep learning ((cid:2)(cid:0)(cid:1)(cid:6)), http://www.
+
+deeplearningbook.org, book in preparation for MIT Press
+
+(cid:1)(cid:3). Harris, Z.S.: Distributional Structure, pp. (cid:7)(cid:7)(cid:5)(cid:7)(cid:9)(cid:4). Springer Netherlands, Dordrecht
+
+((cid:1)(cid:9)(cid:7)(cid:0)), http://dx.doi.org/(cid:1)(cid:0).(cid:1)(cid:0)(cid:0)(cid:7)/(cid:9)(cid:7)(cid:8)-(cid:9)(cid:4)-(cid:0)(cid:1)(cid:7)-(cid:6)(cid:0)(cid:5)(cid:9)-(cid:1)_(cid:3)(cid:6)
+
+(cid:1)(cid:4). Hearst, M.A., Dumais, S.T., Osman, E., Platt, J., Scholkopf, B.: Support vector
+
+machines. IEEE Intelligent Systems and their Applications (cid:1)(cid:3)((cid:4)), (cid:1)(cid:8)(cid:2)(cid:8) ((cid:1)(cid:9)(cid:9)(cid:8))
+
+(cid:1)(cid:5). Jain, L.C., Medsker, L.R.: Recurrent Neural Networks: Design and Applications.
+
+CRC Press, Inc., Boca Raton, FL, USA, (cid:1)st edn. ((cid:1)(cid:9)(cid:9)(cid:9))
+
+(cid:1)(cid:6). Jones, A.J.I., Sergot, M.J.: Deontic logic in the representation of law: Towards a
+
+methodology. Articial Intelligence and Law (cid:1)((cid:1)), (cid:4)(cid:5)(cid:6)(cid:4) ((cid:1)(cid:9)(cid:9)(cid:2))
+
+(cid:1)(cid:7). Kim, Y.: Convolutional neural networks for sentence classication. In: Moschitti, A.,
+Pang, B., Daelemans, W. (eds.) Proceedings of the (cid:2)(cid:0)(cid:1)(cid:4) Conference on Empirical
+Methods in Natural Language Processing, EMNLP (cid:2)(cid:0)(cid:1)(cid:4), October (cid:2)(cid:5)-(cid:2)(cid:9), (cid:2)(cid:0)(cid:1)(cid:4),
+Doha, Qatar, A meeting of SIGDAT, a Special Interest Group of the ACL. pp.
+(cid:1)(cid:7)(cid:4)(cid:6)(cid:1)(cid:7)(cid:5)(cid:1). ACL ((cid:2)(cid:0)(cid:1)(cid:4)), http://aclweb.org/anthology/D/D(cid:1)(cid:4)/D(cid:1)(cid:4)-(cid:1)(cid:1)(cid:8)(cid:1).pdf
+
+(cid:1)(cid:8). Meneguzzi, F., Rodrigues, O., Oren, N., Vasconcelos, W.W., Luck, M.:
+{BDI} reasoning with normative considerations. Engineering Applications
+of Articial Intelligence (cid:4)(cid:3)((cid:0)), (cid:1)(cid:2)(cid:7)  (cid:1)(cid:4)(cid:6) ((cid:2)(cid:0)(cid:1)(cid:5)), http://www.sciencedirect.
+com/science/article/pii/S(cid:0)(cid:9)(cid:5)(cid:2)(cid:1)(cid:9)(cid:7)(cid:6)(cid:1)(cid:5)(cid:0)(cid:0)(cid:0)(cid:9)(cid:2)(cid:5)
+
+(cid:1)(cid:9). Minsky, M., Papert, S.: Neurocomputing: Foundations of research. In: Anderson,
+J.A., Rosenfeld, E. (eds.) Neurocomputing: foundations of research, chap. Per-
+ceptrons, pp. (cid:1)(cid:5)(cid:7)(cid:1)(cid:6)(cid:9). MIT Press, Cambridge, MA, USA ((cid:1)(cid:9)(cid:8)(cid:8)), http://dl.acm.
+org/citation.cfm?id=(cid:6)(cid:5)(cid:6)(cid:6)(cid:9).(cid:1)(cid:0)(cid:4)(cid:3)(cid:9)(cid:5)
+
+(cid:2)(cid:0). Prisacariu, C., Schneider, G.: A formal language for electronic contracts. In: In-
+ternational Conference on Formal Methods for Open Object-Based Distributed
+Systems. pp. (cid:1)(cid:7)(cid:4)(cid:1)(cid:8)(cid:9). Springer ((cid:2)(cid:0)(cid:0)(cid:7))
+
+(cid:2)(cid:1). Rosso, P., Correa, S., Buscaldi, D.: Passage retrieval in legal texts. The Journal of
+Logic and Algebraic Programming (cid:8)(cid:0)((cid:3)-(cid:5)), (cid:1)(cid:3)(cid:9)(cid:1)(cid:5)(cid:3) ((cid:2)(cid:0)(cid:1)(cid:1)), http://dx.doi.org/(cid:1)(cid:0).
+(cid:1)(cid:0)(cid:1)(cid:6)/j.jlap.(cid:2)(cid:0)(cid:1)(cid:1).(cid:0)(cid:2).(cid:0)(cid:0)(cid:1)
+
+(cid:2)(cid:2). Rousseau, D.M., McLean Parks, J.: The contracts of individuals and organizations,
+
+vol. (cid:1)(cid:5). JAI PRESS LTD ((cid:1)(cid:9)(cid:9)(cid:3))
+
+(cid:2)(cid:3). Sadat-Akhavi, A.: Methods of Resolving Conicts Between Treaties. Graduate
+Institute of International Studies (Series), V. (cid:3), M. Nijho ((cid:2)(cid:0)(cid:0)(cid:3)), https://books.
+google.com.br/books?id=Dv(cid:0)QZWUSGJcC
+
+(cid:2)(cid:4). da Silva Figueiredo, K., da Silva, V.T.: An algorithm to identify conicts between
+norms and values. In: Coordination, Organisations,Institutions and Norms in Multi-
+Agent Systems. pp. (cid:2)(cid:5)(cid:9)(cid:2)(cid:7)(cid:4) ((cid:2)(cid:0)(cid:1)(cid:3))
+
+(cid:2)(cid:5). Vasconcelos, W.W., Kollingbaum, M.J., Norman, T.J.: Normative conict resolution
+in multi-agent systems. Autonomous Agents and Multi-Agent Systems (cid:1)(cid:9)((cid:2)), (cid:1)(cid:2)(cid:4)
+(cid:1)(cid:5)(cid:2) ((cid:2)(cid:0)(cid:0)(cid:9)), http://dx.doi.org/(cid:1)(cid:0).(cid:1)(cid:0)(cid:0)(cid:7)/s(cid:1)(cid:0)(cid:4)(cid:5)(cid:8)-(cid:0)(cid:0)(cid:8)-(cid:9)(cid:0)(cid:7)(cid:0)-(cid:9)
+
+(cid:2)(cid:6). Vincent, P., Larochelle, H., Bengio, Y., Manzagol, P.A.: Extracting and composing
+robust features with denoising autoencoders. In: Proceedings of the (cid:2)(cid:5)th Interna-
+tional Conference on Machine Learning. pp. (cid:1)(cid:0)(cid:9)(cid:6)(cid:1)(cid:1)(cid:0)(cid:3). ICML (cid:0)(cid:8), ACM, New
+York, NY, USA ((cid:2)(cid:0)(cid:0)(cid:8)), http://doi.acm.org/(cid:1)(cid:0).(cid:1)(cid:1)(cid:4)(cid:5)/(cid:1)(cid:3)(cid:9)(cid:0)(cid:1)(cid:5)(cid:6).(cid:1)(cid:3)(cid:9)(cid:0)(cid:2)(cid:9)(cid:4)
+
+(cid:2)(cid:7). von Wright, G.H.: Deontic Logic, New Series, vol. (cid:6)(cid:0). Oxford University Press on
+
+behalf of the Mind Association ((cid:1)(cid:9)(cid:5)(cid:1)), http://www.jstor.org/stable/(cid:2)(cid:2)(cid:5)(cid:1)(cid:3)(cid:9)(cid:5)
+
+Norm Conict Identication using Deep Learning
+
+(cid:1)(cid:5)
+
+(cid:2)(cid:8). Zhang, X., Cun, L.: Text understanding from scratch. CoRR abs/(cid:1)(cid:5)(cid:0)(cid:2).(cid:0)(cid:1)(cid:7)(cid:1)(cid:0) ((cid:2)(cid:0)(cid:1)(cid:5)),
+
+http://arxiv.org/abs/(cid:1)(cid:5)(cid:0)(cid:2).(cid:0)(cid:1)(cid:7)(cid:1)(cid:0)
+
+

@@ -1,0 +1,206 @@
+**This is an example small construction contract based upon an actual contract completed by 319 project grantee Blue Ocean Society for Marine Conservation**
+
+
+CONTRACT AGREEMENT
+
+The City of Portsmouth, NH and Genericon Contracting Inc. mutually agree as follows:
+
+1. GENERAL. 
+
+1.1 In consideration for funds provided by the City of Portsmouth, 1 Junkins Avenue, Portsmouth, NH 03801, Genericon Contracting Inc. P.O. Box 95, Concord, NH 03302 shall perform that work identified and more particularly described in the scope of work attached hereto as EXHIBIT A. 
+
+1.2 The City of Portsmouth shall hereafter be referred to as the “Contract Owner”, and Genericon Contracting Inc. shall hereafter be referred to as the “Contractor”.  The scope of work detailed in the attached Exhibit ‘A’ is alternately referred to as “the Project”.
+
+2. CONTRACT AMOUNT.  
+
+2.1 The Contract Amount is $10,482.00 to be paid in accordance to the conditions set forth in this document to be made upon the satisfactory completion of all work set forth in EXIBIT A.
+2.2 The payment by the Contract Owner of the Contract Amount shall be the only, and the complete, compensation to the Contractor for all expenses, of whatever nature, incurred by the Contractor in the performance hereof, and shall be the only, and the complete, compensation to the Contractor for the Project. The Contract Owner shall have no liabilities to the Contractor other than the Contract Amount.
+2.3 All required work must be complete, inspected and approved by the Contract Owner and a University of New Hampshire Stormwater Center staff member prior to the submission of a payment request, the payment request shall be submitted to the Contract Owner, City of Portsmouth, 1 Junkins Avenue, Portsmouth, NH 03801 no later than October 15, 2010.
+
+3. CONTRACT PROVISIONS.
+
+3.1 Nondiscrimination.  The Contractor shall comply with Title 40 of the Code of Federal Regulations ( 40 CFR) Part 7 which prohibits discrimination under any program or activity receiving EPA assistance on the basis of race, color, national origin, or gender, and 40 CFR part 12 which prohibits discrimination based on handicap.  Part 7 and Part 12 detail requirements which include: Submission of an assurance that the Contractor will comply with the requirements of the regulations; maintenance of compliance information during the life of the contract and for three years after completing the project; and public notification that the Contractor does not discriminate on the basis of race, color, national origin, gender, or handicap. 
+3.2 Financial management. The Contractor shall comply with 40 CFR 31.20 and the specific standards regarding financial reporting, accounting records, internal control, budget control, allowable cost, source documentation, and cash management outlined therein.
+3.3 Allowable costs. All costs charged to the contract shall be eligible, necessary, and reasonable for performing the tasks outlined in the approved project scope of services. The costs, including match, shall be incurred during the period of performance of the project, and shall be allowable, meaning that the costs must conform to specific federal requirements detailed in 40 CFR part 31.22; and OMB Circular A-87. 
+3.4 Matching funds. Matching funds are the portion of the allowable project costs that the Contract Owner (or Contractor) contributes to a grant funded project. Matching funds may include the value of volunteer labor, donated services, donated products, etc. Any matching funds contributed by the Contractor shall conform to the same laws, regulations, and grant conditions as the federal funds in the grant and referenced in  40 CFR 31.24 and OMB Circular A-87.
+
+3.5 Property Management. The Contractor shall comply with the property management and procedures detailed in 40 CFR part 31.32 and 40 CFR 31.33. Property (e.g., equipment, supplies) purchased in whole or in part with federal funds should be itemized. Property purchased with these funds may continue to be used for its intended purpose indefinitely.  If equipment with a fair market value of less than $5,000 is sold, there are no further obligations to EPA.  If the fair market value of the item exceeds $5,000, EPA has the right to request reimbursement for its share of the item’s value. 
+
+3.6 Copyright and Use of Materials. No data produced under the contract shall be subject to copyright.  As per 40 CFR 31.34, if contract funds are used to purchase ownership in copyrighted materials, EPA is entitled to royalty-free use of the copyright.  In addition to the requirements of 40 CFR 31.34, Paragraph 9 of the Standard State Agreement provides the State rights to royalty-free, nonexclusive, and irrevocable license to reproduce, publish, or otherwise use, and to authorize others to use for state or federal government purposes, all materials produced using grant or match funds.
+3.6.1 Outreach Materials. All materials produced for public distribution shall be reviewed and approved by the Contract Owner and the State prior to distribution and shall include the NH DES logo and the following citation: “Funding for this project was provided in part by a Watershed Assistance Grant from the NH Department of Environmental Services with Clean Water Act Section 319 funds from the United States Environmental Protection Agency”.
+
+3.7 Debarrment and Suspension. The Contractor will comply with 40 CFR part 31.35.  By signing and submitting the EPA’s Certification Regarding Debarment, Suspension, and Other Responsibility Matters form, the Contractor certifies that they have not been debarred or suspended by a government agency.  The Contractor will not make any award or permit any award (subgrant or contract) at any tier to any party which is debarred or suspended or is otherwise excluded from or ineligible for participation in Federal assistance programs under Executive Order 12549, “Debarment and Suspension.”
+
+3.8 Procurement. When purchasing goods or services with grant or match funds, the Contractor shall comply with procurement regulations as detailed in 40 CFR 31.36 which include procurement standards, competition, methods of procurement, contract cost and price, agency review, bonding requirements, and contract provisions. 
+3.8.1 Assignment of Subcontracts. The Contractor shall not assign, or otherwise transfer any interest in this contract without the prior written consent of the Contract Owner and the State.  
+3.8.2 Subcontracts. The Contractor shall:
+3.8.2.1 Ensure that every subcontract includes provisions for compliance with Federal and State standards applicable to the contract;
+3.8.2.2 Ensure that every subcontract includes any clauses required by Federal statute and executive orders and their implementing regulations; and
+3.8.2.3 Ensure that subcontractors are aware of requirements imposed upon them by State and Federal statutes and regulations.
+
+3.9 Record-Keeping Specifications. The Contractor shall retain all records pertaining to this contract for seven years after the date of submission of the final financial status report or final date of reconciliation of outstanding issues. The records must be available and accessible to the State or EPA, as requested, for review or audit.  
+
+3.10 Quality Assurance. All project activities which are to be guided by a Quality Assurance document such as a Quality Assurance Project Plan (QAPP) or Site Specific Project Plan (SSPP) shall not begin prior to DES/EPA approval of that QA document. In the event that sampling, modeling, or other such activities precede QA document approval, the data will not be considered valid, and the Contractor will forfeit the ability to receive payment for those activities.
+
+3.11 Event of Default; Remedies.
+3.11.1 Any one or more of the following acts or omissions of the Contractor shall constitute an event of default hereunder (hereinafter referred to as “Events of Default”):
+3.11.1.1 failure to perform the Project satisfactorily or on schedule; or
+3.11.1.2 failure to submit any report required hereunder; or
+3.11.1.3 failure to maintain, or permit access to, the records required hereunder; or
+3.11.1.4 failure to perform any of the other covenants and conditions of this Agreement.
+3.11.2 Upon the occurrence of any Event of Default, the Contract Owner may take any one, or more, or all, of the following actions:
+3.11.3 give the Contractor a written notice specifying the Event of Default and requiring it to be remedied within, in the absence of a greater or lesser specification of time, thirty (30) days from the date of the notice; and if the Event of Default is not timely remedied, terminate this Agreement, effective two (2) days after giving the Contractor notice of termination; and
+3.11.4 give the Contractor a written notice specifying the Event of Default and suspending all payments to be made under this agreement and ordering that the portion of the Contract Amount which would otherwise accrue to the Contractor during the period from the date of such notice until such time as the Contract Owner determines that the Contractor has cured the Event of Default shall never be paid to the Contractor; and
+3.11.5 set off against any other obligation the Contract Owner may owe to the Contractor any damages the Contract Owner suffers by reason of any Event of Default; and
+3.11.6 treat the agreement as breached and pursue any of its remedies at law or in equity, or both.
+
+3.12 Termination.
+3.12.1 In the event of any early termination of this contract for any reason other than the completion of the Project, the Contractor shall deliver to the Contract Owner, not later than fifteen (15) days after the date of termination, a report (hereinafter referred to as the “Termination Report”) describing in detail all project work performed, and the contract amount earned, to and including the date of termination.
+3.12.2 In the event of Termination under paragraph 3.12.4 of these general provisions, the approval of such a Termination Report by the Contract Owner shall entitle the Contractor to receive that portion of the contract amount earned to and including the date of termination.
+3.12.3 In the event of Termination under paragraphs 3.12.4 of these provisions, the approval of such a Termination Report by the Contract Owner shall in no event relieve the Contractor from any and all liability for damages sustained or incurred by the Contract Owner as a result of the Contractor’s breach of its obligations hereunder.
+3.12.4 Notwithstanding anything in this Agreement to the contrary, either the Contract Owner or except where notice of default has been given to the Contractor hereunder, the Contractor may terminate this Agreement without cause upon thirty (30) days written notice.
+
+3.13 Conditional Nature of Agreement.  Notwithstanding anything in this Agreement to the contrary, all obligations of the Contract Owner hereunder, including without limitation, the continuance of payments hereunder, are contingent upon the availability or continued appropriation of funds, and in no event shall the Contract Owner be liable for any payments hereunder in excess of such available or appropriated funds. In the event of a reduction or termination of those funds, the Contract Owner shall have the right to withhold payment until such funds become available, if ever, and shall have the right to terminate this Agreement immediately upon giving the Contractor notice of such termination.
+
+3.14 Insurance. The Contractor shall obtain and maintain in force, or shall require any subcontractor, subgrantee or assignee performing Project work to obtain and maintain in force, the following insurance:
+3.14.1 statutory worker’s compensation and employees liability insurance for all employees engaged in the performance of the Project, and
+3.14.2 comprehensive public liability insurance against all claims of bodily injuries, death or property damage, in amounts not less than $2,000,000 for bodily injury or death any one incident, and $500,000 for property damage in any one incident; and
+3.14.3 The policies described in subparagraph 3.14 of this paragraph shall be the standard form employed in the State of New Hampshire, issued by underwriters acceptable to the State, and authorized to do business in the State of New Hampshire.  Each policy shall contain a clause prohibiting cancellation of modification of the policy earlier than ten (10) days after written notice has been received by the Contract Owner.  
+
+3.15 Observation of Law.  The Contractor shall keep fully informed of all federal and state laws, all local laws, ordinances, and regulations, and all orders and decrees of tribunals having any jurisdiction or authority, which in any manner affect those engaged or employed on the work.  The Contractor shall at all times observe and comply with all such laws, ordinances, regulations, and decrees; and shall protect and indemnify the Contract Owner and its representatives against and claim or liability arising from or based on the violation of any such law, ordinance, regulation, order, or decree whether by themselves or their employee.   
+
+3.16 Indemnification.  The Contractor shall defend, indemnify and hold harmless the Contract Owner, its officers and employees, from and against any and all losses suffered by the Contract Owner, its officers and employees, and any and all claims, liabilities or penalties asserted against the Contract Owner, its officers and employees, by or on behalf of any person, on account of, based on, resulting from, arising out of (or which may be claimed to arise out of) the acts or omissions of the Contactor, subcontractor, subgrantee or other agent of the Contractor. This covenant shall survive the termination of this agreement.
+
+3.17 Participation by Disadvantaged Business Enterprises.  The Contractor will comply with the terms of 40 CFR Part 33 Subpart C, which requires that organizations conduct a competitive procurement process making a good faith effort to utilize goods and services provided by disadvantaged businesses. A list of disadvantaged business enterprises is available on NHDOT’s website, the U.S. Small Business Administration list. 
+
+3.18 New Restrictions on Lobbying: Interim Final Rule. The Contractor will comply with the terms of 40 CFR part 34 and OMB Circulars A-87. Note that 40 CFR part 34 prohibits the use of federal grant funds to influence (or attempt to influence) a federal employee. It also requires the submission of Standard Form LLL ("Disclosure of Lobbying Activities") if nonfederal funds have been used to influence (or attempt to influence) a federal employee. 
+
+3.19 Drug-Free Workplace.  The Contractor will comply with the terms of 40 CFR Part 36 which require that as a condition of the contract, certification that they maintain a drug-free workplace. By signing and submitting the contract, the Contractor certifies that he or she will not engage in the unlawful manufacture, distribution, dispensing, possession, or use of a controlled substance in conducting any activity with the grant. 
+
+3.20 Contractor’s Relation to the State. In the performance of this Agreement, the Contractor, its employees, and any subcontractor of the Contract Owner are in all respects independent contractors, and are neither agents nor employees of the State. Neither the Contractor nor any of its officers, employees, agents, members, or subcontractors, shall have authority to bind the Contract Owner or the State nor are they entitled to any of the benefits, worker’s compensation or emoluments provided by the State to its employees.
+
+3.21 Personnel.
+3.21.1 The Contractor shall, at its own expense, provide all personnel necessary to perform the Project. The Contractor warrants that all personnel engaged in the Project shall be qualified to perform such Project, and shall be properly licensed and authorized to perform such Project under all applicable laws.
+3.21.2 The Contractor shall not hire, and it shall not permit any subcontractor, subgrantee, or other person, firm or corporation with whom it is engaged in a combined effort to perform such Project, to hire any person who has a contractual relationship with the State, or who is a State officer or employee, elected or appointed.
+3.21.3 In the event of any dispute hereunder, the interpretation of this Agreement by the Contract Owner, and his/her decision on any dispute, shall be final.
+
+3.22 Area Covered. Except as otherwise specifically provided for herein, the Contractor shall perform the project in, and with respect to, the state of New Hampshire.
+
+3.23 Waiver of Breach. No failure by the Contract Owner to enforce any provisions hereof after any Event of Default shall be deemed a waiver of its rights with regard to that Event, or any subsequent Event. No express waiver of any Event of Default shall be deemed a waiver of any provisions hereof. No such failure or waiver shall be deemed a waiver of the right of the Contract Owner to enforce each and all of the provisions hereof upon any further or other default on the part of the Contractor.
+
+3.24 Notice. Any notice by a party hereto to the other party shall be deemed to have been duly delivered or given at the time of mailing by certified mail, postage prepaid, in a United States Post Office addressed to the parties at the addresses first above given.
+
+3.25 Amendment. This agreement may be amended, waived or discharged only by an instrument in writing signed by the parties hereto and only after written consent to such amendment, waiver or discharge by the State.
+
+3.26 Construction of Agreement and Terms. This Agreement shall be construed in accordance with the law of the State of New Hampshire, and is binding upon and inures to the benefit of the parties and their respective successors and assignees. 
+
+3.27 Third Parties. The parties hereto do not intend to benefit any third parties and this Agreement shall not be construed to confer any such benefit.
+
+3.28 Entire Agreement. This Agreement, which may be executed in a number of counterparts, each of which shall be deemed an original, constitutes the entire agreement and understanding between the parties, and supersedes all prior agreements and understandings relating hereto.
+
+
+
+This agreement is enacted into and effective when signed by both parties.
+
+
+
+______________________________________                                                   __________________
+Individual’s Name, Title                                                                                            Date
+City of Portsmouth (Contract Owner)
+
+
+
+______________________________________                                                    __________________
+Individual’s Name, Title                                                                                             Date
+Genericon Contracting Inc. (Contractor)
+
+
+
+
+
+
+
+
+
+
+
+
+
+Exhibit A
+
+Title: Hodgson Brook Restoration Project - Bioretention Installation
+
+Objective: This project is construction of a small-scale stormwater treatment practice in Portsmouth, NH. The construction work must be in conformance with the plans and specifications noted on the site plan entitled PORT INN BIORETENTION AND BUFFER RESTORATION, PORT INN, 505 US HWY 1 BYPASS, PORTSMOUTH, NH, Dr. Robert Roseen, PE, and dated October 30, 2009. All work must be completed per the construction notes outlined on the Plan, and shall follow General Conditions, Division VI. All work shall also be in conformance with the NHDES Wetlands and non-site specific Permit 2009-02425. (Addendum B)
+
+Responsibility of others: The Contract Owner and others will be responsible for the following:
+a) Existing condition photographs of area;
+b) Staking of areas to be completed;
+c) Inspections of work;
+d) Obtaining amended soil for buffer amendment (as noted in Addendum A).
+e) Post construction photographs of area;
+f) Final inspection of project area.
+
+
+
+SCOPE OF WORK
+
+Work Tasks:
+
+The Contractor shall provide all labor, materials and equipment to perform the work detailed on Sheets 2-3 of the Plan entitled PORT INN BIORETENTION AND BUFFER RESTORATION, PORT INN, 505 US HWY 1 BYPASS, PORTSMOUTH, NH, Dr. Robert Roseen, PE, dated October 30, 2009, and Addendum A.
+
+The overall job entails installation of stormwater management practices as specified on the Plans and includes site preparation, site excavation, placement of materials, installation of underdrain plumbing, re-vegetation of site, and site finishing. The Contractor must provide all items within the project, as described below and as shown on the Plan or in specifications and Addendum A.
+
+1. The bioretention soil mix will be prepared as a ratio of 50% sand/ 20% fine shaven woodchips/ 20% loam/10% compost. Bioretention soil mix will be prepared as per approval with the Project Engineer. All components will be submitted to the Project Engineer for approval prior to placement.
+
+2. All cut removed for the excavation of the bioretention will be reused and mixed as one of the components of the buffer restoration soil amendment. Buffer soil amendment is not to be confused with the bioretention soil mix. Amended soils will be prepared in a ratio of 50% native materials/ 25% compost/ 25% loam.
+
+3. Appropriate siltation/erosion/turbidity controls shall be set in place by the selected Contractor prior to construction. The entire project must be completed by September 18, 2010, with all equipment and personnel off of private property at that time.
+
+
+General Requirements:
+
+The following are minimum requirements:
+
+1.1  Conformance with all applicable rules and regulations of the State of New Hampshire. Funding for the project detailed in this solicitation is provided in part with Federal EPA Section 319 grant funds obtained through an agreement with the State of New Hampshire Department of Environmental Services. Recipients of these grants and their subcontractors are required to meet certain contract requirements including the federal requirements detailed in Title 40 of the Code of Federal Regulations (CFR) parts 7, 12, 30, 33, 34, 36, and additional regulations referenced therein.
+
+1.2  All work must be completed by September 18, 2010. Construction is anticipated to start September 13, 2010 and the construction is anticipated to last 3 -5 days.
+
+1.3  Once work has commenced using equipment on the property, the Contractor must work diligently and uninterrupted in an expeditious and professional manner until all work is complete.
+
+1.4  The Contractor must keep the work site free of debris and hazards.
+
+1.5  A Contractor supervisor, with authority and ability to respond to any reasonable request of HBRP staff, the Project Engineer or landowner must be on the job site at all times.
+
+General Conditions:
+
+2.1  Selected Contractor shall be responsible for notifying “Dig Safe” and for the proper care of other utilities in the street. The cost of any corrective repairs to utilities is the responsibility of the Contractor without cost to HBRP or landowners.
+
+2.2  Cleanup of the site on a daily basis and removal or safe temporary placement of equipment and materials shall be the responsibility of the Contractor and shall be part of the work.
+
+2.3  The Contractor shall at all times conduct his work so as to assure the minimal obstruction to traffic. The Contractor shall provide for the safety and convenience of the landowner, general public and the residents along the work site route and the protection of private property. The Contractor shall be responsible for timely notification to the landowner before making any interruptions of their access.
+
+2.4  In the event of interruption to water or utility services as a result of accidental breakage or as a result of being exposed or unsupported, the Contractor shall promptly notify the proper authority and shall cooperate with said authority in the restoration of services. If water service is interrupted, repair work shall be continuous until the service is restored. If any utility service is interrupted for more than four (4) hours, the Contractor shall make provisions for temporary service at his own expense until service is resumed.
+
+2.5  In the event that stop work steps are required, no further work shall be allowed, and final construction costs to date shall be provided to the Contract Owner no later than 5 days after such stop work steps are issued. Renegotiation of final construction activities through a new proposal at a future date will be necessary.
+
+2.6  No work will be permitted at night or on Saturdays and Sundays or holidays except as approved in writing by the Contract Owner’s staff, and provided such work is not in violation of a local ordinance.
+
+2.7  A payment request may be submitted after the full completion of the project, provided that the work has been inspected and approved by the Contract Owner’s staff and the Project Engineer. The payment request for the project shall be provided to HBRP by October 15, 2010.
+
+
+
+
+HODGSON BROOK RESTORATION PROJECT – BIORETENTION INSTALLATION
+Portsmouth, NH
+ADDENDUM A
+August 4, 2010
+
+1. In the 1200 SF area labeled “BUFFER RESTORATION” on Page 1 of the Plan, HBRP is requesting that the Contractor till and/or scarify the existing soil in the new buffer area prior to amending it (1200 SF). HBRP will obtain & provide a compost / topsoil mix with the appropriate pH for the soil amendment, which will need to be mixed in to a depth of at least 6 inches. All cut removed for the excavation of the bioretention will be reused and mixed as one of the components of the buffer restoration soil amendment. Buffer soil amendment is not to be confused with the bioretention soil mix. Amended soils will be prepared in a ratio of 50% native materials/ 25% compost/ 25% loam.
+
+2. Please note that on Page 2 of the Plan, the language “or equivalent” should be added to the item shown as “GRATE #2578 NEENAH FOUNDRY.” With said language change, that item is now specified as: “GRATE #2578 NEENAH FOUNDRY OR EQUIVALENT”.
+
+
+
+
+
+***Attachments NH DES Wetlands Permit and Construction Specification/Plans***

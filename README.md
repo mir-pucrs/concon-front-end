@@ -1,6 +1,6 @@
 # Project Name
 
-This is the frontEnd of the project that have as purpose to do a Deep Learning Approach for Norm Conflict Identification.
+>This is the frontEnd of the project that have as purpose to do a Deep Learning Approach for Norm Conflict Identification.
 it's a two-phase approach that uses traditional machine learning together with deep learning to extract and compare norms in order to identify conflicts between them.
 
 ## Demo
@@ -119,11 +119,12 @@ python manage.py runserver
  '/conconexp/conconexp/settings.py' 
  ```
  and change the variable _LOGIN_REDIRECT_URL_ to just '/', removing the 'conconexp' of it;
-    * *Logout*: go to
+  
+  * *Logout*: go to
   ```
  '/conconexp/conconexp/urls.py' 
  ```
- and you have to modify the definition of url to logout. It's a 'url' function(in the thrid argument exist a dictionary with a 'next_page' ke. You have to modify the value of _'/conconexp'_ to '/' as in the login.
+ and you have to modify the definition of url to logout. It's a 'url' function(in the third argument exist a dictionary with a 'next_page' ke. You have to modify the value of _'/conconexp'_ to '/' as in the login.
 
 #### Load dump
 * You have to download the last dump in your local database, so, enter in mysql:

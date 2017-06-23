@@ -115,12 +115,12 @@ DATABASES = {
 }
 ```
 * Two alterations have to bo done to not to have issues when redirect in login/logout due to differences between the root path of the website and the root local path of the website:
- * Login: go to 
+  * Login: go to 
  ```
  '/conconexp/conconexp/settings.py' 
  ```
  and change the variable LOGIN_REDIRECT_URL to just '/', removing the 'conconexp' of it;
- * logout: go to
+  * Logout: go to
   ```
  '/conconexp/conconexp/urls.py' 
  ```

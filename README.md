@@ -114,13 +114,12 @@ python manage.py runserver
          ```
 #### Login/logout issues
 * Two alterations have to be done to not to have issues when redirect in login/logout due to differences between the root path of the website and the root local path of the website:
-    * *Login*: go to 
+   * *Login*: go to 
  ```
  '/conconexp/conconexp/settings.py' 
  ```
  and change the variable _LOGIN_REDIRECT_URL_ to just '/', removing the 'conconexp' of it;
- 
-    * *Logout*: go to
+   * *Logout*: go to
   ```
  '/conconexp/conconexp/urls.py' 
  ```

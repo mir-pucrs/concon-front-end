@@ -25,9 +25,12 @@ http://lsa.pucrs.br/conconexp
   * TensorFlow is the backend, upgrading it will download protobuf, pbr, funcsigs, mock, werkzeug and tensorflow 
   * If gives you this error: Resource u'tokenizers/punkt/english.pickle' not found.  Please
   use the NLTK Downloader to obtain the resource:  >>> nltk.download() 
-    * -->Do : sudo python -m nltk.downloader punkt 
-    -->pip install h5py
-   -->sudo pip install keras --upgrade
+    * -->Do : sudo python -m nltk.downloader punkt    
+    
+    -->pip install h5py    
+    
+   -->sudo pip install keras --upgrade    
+   
 * pdfminer.six [will run setup.py bdist_wheel for pycrypto and built pdfminer.six and pycrypto
 
 ## API Reference

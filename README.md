@@ -98,7 +98,7 @@ python manage.py runserver
 
 ## Possible issues that you will have and how to fix them
 #### You will have to modify the values of 'USER' and 'PASSWORD' of 'DATABASES' dictonary 
- * In the archive *settings.py*, who is at _'/conconexp/conconexp'_ set the user and password of your localBase;
+ * In the archive *settings.py*, who is at _'/conconexp/conconexp'_ set the user and password to your localBase;
     * For example, you can change to:
          ```
          DATABASES = {
@@ -113,14 +113,14 @@ python manage.py runserver
          }
          ```
 #### Login/logout issues
-* Two alterations have to bo done to not to have issues when redirect in login/logout due to differences between the root path of the website and the root local path of the website:
-  * *Login*: go to 
+* Two alterations have to be done to not to have issues when redirect in login/logout due to differences between the root path of the website and the root local path of the website:
+    * *Login*: go to 
  ```
  '/conconexp/conconexp/settings.py' 
  ```
  and change the variable _LOGIN_REDIRECT_URL_ to just '/', removing the 'conconexp' of it;
  
-   * *Logout*: go to
+    * *Logout*: go to
   ```
  '/conconexp/conconexp/urls.py' 
  ```

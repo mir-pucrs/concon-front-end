@@ -139,4 +139,4 @@ $ python manage.py runserver
  '\. path_to/dump'
  ```
 ## License
-Design of the page is under licence of [HTML5 UP](https://html5up.net/license)
+Design of the page is free for personal and commercial use under the CCA 3.0 license [HTML5 UP](https://html5up.net/license) (html5up.net/license)

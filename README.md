@@ -12,31 +12,26 @@ http://lsa.pucrs.br/conconexp
 * Mysql
 * Mysql-python
 * HomeBrew [Due to mysql-python needs]
-* pypandoc [https://pypi.python.org/pypi/pypandoc]
-* scikit-learn [http://scikit-learn.org/stable/install.html]
-* numpy [http://www.numpy.org/]
-* scipy [https://www.scipy.org/]
-* nltk  [http://www.nltk.org/install.html]
-* six [https://pypi.python.org/pypi/six]
-* keras [https://keras.io]
+* [pypandoc](https://pypi.python.org/pypi/pypandoc)
+* [scikit-learn](http://scikit-learn.org/stable/install.html)
+* [numpy](http://www.numpy.org/)
+* [scipy](https://www.scipy.org/)
+* [nltk](http://www.nltk.org/install.html)
+* [six](https://pypi.python.org/pypi/six)
+* [keras](https://keras.io)
   * theano
   * pyyaml [have to have six, numpy and scipy, and keras will download this theano ans pyyaml for you as well]
-* upgrade tensorflow [https://www.tensorflow.org/install]
+* [upgrade tensorflow](https://www.tensorflow.org/install)
   * TensorFlow is the backend, upgrading it will download protobuf, pbr, funcsigs, mock, werkzeug and tensorflow 
   * If gives you this error: Resource u'tokenizers/punkt/english.pickle' not found.  Please
   use the NLTK Downloader to obtain the resource:  >>> nltk.download() 
     * -->Do : sudo python -m nltk.downloader punkt    
-    
-    -->pip install h5py    
-    
-   -->sudo pip install keras --upgrade    
-   
-* pdfminer.six [will run setup.py bdist_wheel for pycrypto and built pdfminer.six and pycrypto
-
-## API Reference
+    * -->pip install h5py    
+    * -->sudo pip install keras --upgrade    
+* pdfminer.six [will run setup.py bdist_wheel for pycrypto and built pdfminer.six and pycrypto]
 
 ## Installation of dependencies
-*We reccomend to run the project with a virtual env
+* We reccomend to run the project with a virtual env
 ### OS X & Linux:
 
 ```sh$
@@ -89,7 +84,7 @@ pip install pdfminer.six
 ### Windows:
 
 ```sh
-cd
+
 ```
 
 ## Usage
@@ -102,9 +97,9 @@ python manage.py runserver
 * All set! Go to localhost:8000 and its running locally!
 
 
-### Possible errors thet you will have and how to fix them
+## Possible issues that you will have and how to fix them
 ### You will have to modify the values of 'USER' and 'PASSWORD' of 'DATABASES' dictonary 
- * In the archieve settings.py, who is at '/conconexp/conconexp' set the user and password of your localBase;
+ * In the archive *settings.py*, who is at _'/conconexp/conconexp'_ set the user and password of your localBase;
     * For example, you can change to:
          ```
          DATABASES = {
@@ -120,16 +115,17 @@ python manage.py runserver
          ```
 ### Login/logout issues
 * Two alterations have to bo done to not to have issues when redirect in login/logout due to differences between the root path of the website and the root local path of the website:
-  * Login: go to 
+  * *Login*: go to 
  ```
  '/conconexp/conconexp/settings.py' 
  ```
- and change the variable LOGIN_REDIRECT_URL to just '/', removing the 'conconexp' of it;
-   * Logout: go to
+ and change the variable _LOGIN_REDIRECT_URL_ to just '/', removing the 'conconexp' of it;
+ 
+   * *Logout*: go to
   ```
  '/conconexp/conconexp/urls.py' 
  ```
- and you have to modify the definition of url to logout. It's a 'url' function(in the thrid argument exist a dictionary with a 'next_page' ke. You have to modify the value of '/conconexp' to '/' as in the login.
+ and you have to modify the definition of url to logout. It's a 'url' function(in the thrid argument exist a dictionary with a 'next_page' ke. You have to modify the value of _'/conconexp'_ to '/' as in the login.
 
 ### Load dump
 * You have to download the last dump in your local database, so, enter in mysql:

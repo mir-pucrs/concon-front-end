@@ -130,11 +130,11 @@ python manage.py runserver
 
 ### Load dump
 * You have to download the last dump in your local database, so, enter in mysql:
-   ```
- 'mysql -u user_name -p'
  ```
-   and, once inside mysql 
-   ```
-    '\. caminho/para/o/dump'
-   ```
+ 'mysql -u root -p' 
+ ```
+ and, once inside mysql;
+  ```
+ '\. caminho/para/o/dump'
+ ```
 ## License

@@ -129,10 +129,10 @@ python manage.py runserver
  and you have to modify the definition of url to logout. It's a 'url' function(in the thrid argument exist a dictionary with a 'next_page' ke. You have to modify the value of '/conconexp' to '/' as in the login.
 
 ### Load dump
-* You have to download the last dump in your local database, so, enter in mysql
-  ```
- 'mysql -u user_name -p'
+* You have to download the last dump in your local database, so, enter in mysql:
    ```
+ 'mysql -u user_name -p'
+ ```
    and, once inside mysql 
    ```
     '\. caminho/para/o/dump'

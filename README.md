@@ -100,31 +100,41 @@ python manage.py runserver
 
 
 ### Possible errors thet you will have and how to fix them
-* You will have to modify the values of 'USER' and 'PASSWORD' of 'DATABASES' dictonary in the archieve settings.py, who is at '/conconexp/conconexp' setting the user and password of your localBase;
- * For example, you can change to:
-```
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'concon',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
-```
+### You will have to modify the values of 'USER' and 'PASSWORD' of 'DATABASES' dictonary 
+ * In the archieve settings.py, who is at '/conconexp/conconexp' set the user and password of your localBase;
+    * For example, you can change to:
+         ```
+         DATABASES = {
+             'default': {
+                 'ENGINE': 'django.db.backends.mysql',
+                 'NAME': 'concon',
+                 'USER': 'root',
+                 'PASSWORD': '',
+                 'HOST': 'localhost',
+                 'PORT': '',
+             }
+         }
+         ```
+### Login/logout issues
 * Two alterations have to bo done to not to have issues when redirect in login/logout due to differences between the root path of the website and the root local path of the website:
   * Login: go to 
  ```
  '/conconexp/conconexp/settings.py' 
  ```
  and change the variable LOGIN_REDIRECT_URL to just '/', removing the 'conconexp' of it;
-  * Logout: go to
+   * Logout: go to
   ```
  '/conconexp/conconexp/urls.py' 
  ```
  and you have to modify the definition of url to logout. It's a 'url' function(in the thrid argument exist a dictionary with a 'next_page' ke. You have to modify the value of '/conconexp' to '/' as in the login.
 
-
+### Load dump
+* You have to download the last dump in your local database, so, enter in mysql
+  ```
+ 'mysql -u user_name -p'
+   ```
+   and, once inside mysql 
+   ```
+    '\. caminho/para/o/dump'
+   ```
 ## License

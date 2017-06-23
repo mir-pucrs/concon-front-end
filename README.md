@@ -136,6 +136,6 @@ $ python manage.py runserver
  ```
   and, once inside mysql;
   ```
- '\. caminho/para/o/dump'
+ '\. path_to/dump'
  ```
 ## License

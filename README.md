@@ -25,19 +25,19 @@ it's a two-phase approach that uses traditional machine learning together with d
   * TensorFlow is the backend, upgrading it will download protobuf, pbr, funcsigs, mock, werkzeug and tensorflow 
   * If gives you this error: Resource u'tokenizers/punkt/english.pickle' not found.  Please
   use the NLTK Downloader to obtain the resource:  >>> nltk.download() 
-    *Do : sudo python -m nltk.downloader punkt 
-    pip install h5py
-   sudo pip install keras --upgrade
-*pdfminer.six [will run setup.py bdist_wheel for pycrypto and built pdfminer.six and pycrypto
+    -->Do : sudo python -m nltk.downloader punkt 
+    -->pip install h5py
+   -->sudo pip install keras --upgrade
+* pdfminer.six [will run setup.py bdist_wheel for pycrypto and built pdfminer.six and pycrypto
 
 ## API Reference
 
-## Installation
+## Installation of dependencies
 *We reccomend to run the project with a virtual env
 ### OS X & Linux:
 
 ```sh$
-cd ~/your_project_directory
+cd ~/project_directory
 $ source env/bin/activate
 ```
 ```sh$
@@ -83,18 +83,48 @@ sudo pip install keras --upgrade
 pip install pdfminer.six
 ```
 
-
-
 ### Windows:
 
 ```sh
-
+cd
 ```
 
 ## Usage
+```sh$
+cd ~/project_directory/conconexp
+```
+```sh$
+python manage.py runserver  
+```
+* All set! Go to localhost:8000 and its running locally!
 
 
 ### Possible errors thet you will have and how to fix them
+* You will have to modify the values of 'USER' and 'PASSWORD' of 'DATABASES' dictonary in the archieve settings.py, who is at '/conconexp/conconexp' setting the user and password of your localBase;
+ * For example, you can change to:
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'concon',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
+```
+* Two alterations have to bo done to not to have issues when redirect in login/logout due to differences between the root path of the website and the root local path of the website:
+ * Login: go to 
+ ```
+ '/conconexp/conconexp/settings.py' 
+ ```
+ and change the variable LOGIN_REDIRECT_URL to just '/', removing the 'conconexp' of it;
+ * logout: go to
+  ```
+ '/conconexp/conconexp/urls.py' 
+ ```
+ and you have to modify the definition of url to logout. It's a 'url' function(in the thrid argument exist a dictionary with a 'next_page' ke. You have to modify the value of '/conconexp' to '/' as in the login.
 
 
 ## License

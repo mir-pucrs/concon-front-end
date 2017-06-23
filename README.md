@@ -119,7 +119,7 @@ python manage.py runserver
  '/conconexp/conconexp/settings.py' 
  ```
  and change the variable _LOGIN_REDIRECT_URL_ to just '/', removing the 'conconexp' of it;
-   * *Logout*: go to
+    * *Logout*: go to
   ```
  '/conconexp/conconexp/urls.py' 
  ```

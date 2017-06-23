@@ -3,6 +3,8 @@
 This project is the frontEnd of the project that have as purpose to do a Deep Learning Approach for Norm Conflict Identification.
 it's a two-phase approach that uses traditional machine learning together with deep learning to extract and compare norms in order to identify conflicts between them.
 
+## Demo
+
 ## Dependencies
 * We reccomend to install the dependencies with a virtual env from here 
 * Django
@@ -10,22 +12,25 @@ it's a two-phase approach that uses traditional machine learning together with d
 * Mysql
 * Mysql-python
 * HomeBrew [Due to mysql-python needs]
-* pypandoc
+* pypandoc [https://pypi.python.org/pypi/pypandoc]
 * scikit-learn [http://scikit-learn.org/stable/install.html]
-* numpy
-* scipy
-* nltk [http://www.nltk.org/install.html]
-* keras][https://keras.io]
+* numpy [http://www.numpy.org/]
+* scipy [https://www.scipy.org/]
+* nltk  [http://www.nltk.org/install.html]
+* six [https://pypi.python.org/pypi/six]
+* keras [https://keras.io]
   * theano
-  * pyyaml [have to have six, numpy and scipy, and keras will download this tree for you]
+  * pyyaml [have to have six, numpy and scipy, and keras will download this theano ans pyyaml for you as well]
 * upgrade tensorflow [https://www.tensorflow.org/install]
-  * TensorFlow is the backend, upgrading it will download protobuf, pbr, funcsigs, mock, werkzeug, tensorflow 
+  * TensorFlow is the backend, upgrading it will download protobuf, pbr, funcsigs, mock, werkzeug and tensorflow 
   * If gives you this error: Resource u'tokenizers/punkt/english.pickle' not found.  Please
-  use the NLTK Downloader to obtain the resource:  >>> nltk.download() do : sudo python -m nltk.downloader punkt 
- pip install h5py
- sudo pip install keras --upgrade
-* [pdfminer.six] [will Running setup.py bdist_wheel for pycrypto and Successfully built pdfminer.six pycrypto
-Installing collected packages: pycrypto, pdfminer.six]
+  use the NLTK Downloader to obtain the resource:  >>> nltk.download() 
+    *Do : sudo python -m nltk.downloader punkt 
+    pip install h5py
+   sudo pip install keras --upgrade
+*pdfminer.six [will run setup.py bdist_wheel for pycrypto and built pdfminer.six and pycrypto
+
+## API Reference
 
 ## Installation
 *We reccomend to run the project with a virtual env

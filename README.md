@@ -133,7 +133,7 @@ python manage.py runserver
  ```
  'mysql -u root -p' 
  ```
- and, once inside mysql;
+      * and, once inside mysql;
   ```
  '\. caminho/para/o/dump'
  ```

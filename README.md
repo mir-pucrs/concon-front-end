@@ -98,7 +98,7 @@ python manage.py runserver
 
 ## Possible issues that you will have and how to fix them
 #### You will have to modify the values of 'USER' and 'PASSWORD' of 'DATABASES' dictonary 
-======
+------
  * In the archive *settings.py*, who is at _'/conconexp/conconexp'_ set the user and password to your localBase;
     * For example, you can change to:
          ```

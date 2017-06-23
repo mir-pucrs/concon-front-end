@@ -50,34 +50,34 @@ $ pip install django
 $ pip install mysql-python
 ```
 ```sh$
-pip install pypandoc
+$ pip install pypandoc
 ```
 ```sh$
-pip install -U scikit-learn
+$ pip install -U scikit-learn
 ```
 ```sh$
-sudo pip install numpy
+$ sudo pip install numpy
 ```
 ```sh$
-sudo pip install -U nltk 
+$ sudo pip install -U nltk 
 ```
 ```sh$
-sudo pip install keras
+$ sudo pip install keras
 ```
 ```sh$
-pip install --upgrade tensorflow 
+$ pip install --upgrade tensorflow 
 ```
 ```sh$
-sudo python -m nltk.downloader punkt 
+$ sudo python -m nltk.downloader punkt 
 ```
 ```sh$ 
-pip install h5py
+$ pip install h5py
 ```
 ```sh$
-sudo pip install keras --upgrade
+$ sudo pip install keras --upgrade
 ```
 ```sh$
-pip install pdfminer.six
+$ pip install pdfminer.six
 ```
 
 ### Windows:
@@ -88,10 +88,10 @@ pip install pdfminer.six
 
 ## Usage
 ```sh$
-cd ~/project_directory/conconexp
+$ cd ~/project_directory/conconexp
 ```
 ```sh$
-python manage.py runserver  
+$ python manage.py runserver  
 ```
 * All set! Go to localhost:8000 and its running locally!
 

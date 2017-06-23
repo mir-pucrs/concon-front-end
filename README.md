@@ -1,12 +1,12 @@
 # Project Name
 
-This project is the frontEnd of the project that have as purpose to do a Deep Learning Approach for Norm Conflict Identification.
+This is the frontEnd of the project that have as purpose to do a Deep Learning Approach for Norm Conflict Identification.
 it's a two-phase approach that uses traditional machine learning together with deep learning to extract and compare norms in order to identify conflicts between them.
 
 ## Demo
-
+http://lsa.pucrs.br/conconexp
 ## Dependencies
-* We reccomend to install the dependencies with a virtual env from here 
+* We reccomend to install the dependencies with a virtual env
 * Django
 * Python
 * Mysql
@@ -25,7 +25,7 @@ it's a two-phase approach that uses traditional machine learning together with d
   * TensorFlow is the backend, upgrading it will download protobuf, pbr, funcsigs, mock, werkzeug and tensorflow 
   * If gives you this error: Resource u'tokenizers/punkt/english.pickle' not found.  Please
   use the NLTK Downloader to obtain the resource:  >>> nltk.download() 
-    -->Do : sudo python -m nltk.downloader punkt 
+    * -->Do : sudo python -m nltk.downloader punkt 
     -->pip install h5py
    -->sudo pip install keras --upgrade
 * pdfminer.six [will run setup.py bdist_wheel for pycrypto and built pdfminer.six and pycrypto
@@ -133,7 +133,7 @@ python manage.py runserver
  ```
  'mysql -u root -p' 
  ```
-      * and, once inside mysql;
+  and, once inside mysql;
   ```
  '\. caminho/para/o/dump'
  ```

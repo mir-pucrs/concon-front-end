@@ -1,14 +1,83 @@
-# Concon website
+# Project Name
 
-Repository to store website files.
+This project is the frontEnd of the project that have as purpose to do a Deep Learning Approach for Norm Conflict Identification.
+it's a two-phase approach that uses traditional machine learning together with deep learning to extract and compare norms in order to identify conflicts between them.
 
-Run: 
-Pre requisites: You have to have django in your machine, we are going to run in apache  
+## Dependencies
+* We reccomend to install the dependencies with a virtual env from here 
+* [Django]
+* [Python]
+* [Mysql]
+* [Mysql-python]
+* [HomeBrew] [Due to mysql-python needs]
+* [pypandoc]
+* [scikit-learn] [http://scikit-learn.org/stable/install.html]
+* [numpy]
+* scipy
+* [nltk] [http://www.nltk.org/install.html]
+* [keras] [https://keras.io]
+  * theano
+  * pyyaml [have to have six, numpy and scipy, and keras will download this tree for you]
+* [upgrade tensorflow] [https://www.tensorflow.org/install]
+  * TensorFlow is the backend, upgrading it will download protobuf, pbr, funcsigs, mock, werkzeug, tensorflow 
+  * If gives you this error: Resource u'tokenizers/punkt/english.pickle' not found.  Please
+  use the NLTK Downloader to obtain the resource:  >>> nltk.download() do : sudo python -m nltk.downloader punkt 
+ pip install h5py
+ sudo pip install keras --upgrade
+* [pdfminer.six] [will Running setup.py bdist_wheel for pycrypto and Successfully built pdfminer.six pycrypto
+Installing collected packages: pycrypto, pdfminer.six]
 
-01)go to the path of the files of master or current branch you have cloned  
+## Installation
+*We reccomend to run the project with a virtual env
+### OS X & Linux:
 
-02) goto conconexp  
+```sh$
+cd ~/your_project_directory
+$ virtualenv env
+$ source env/bin/activate
+```
+```sh$
+$ pip install django
+$ pip install mysql-python
+```
+```sh$
+pip install pypandoc
+```
+```sh$
+pip install -U scikit-learn
+```
+```sh$
+sudo pip install numpy
+```
+```sh$
+sudo pip install -U nltk 
+```
+```sh$
+sudo pip install keras
+```
+```sh$
+pip install --upgrade tensorflow 
+```
+```sh$
+sudo python -m nltk.downloader punkt 
+pip install h5py
+sudo pip install keras --upgrade
+```
+```sh$
+pip install pdfminer.six
+```
 
-03) do a sudo phyton manage.py runserver  
 
-04) Done! goto localhost 8000(probabily) and you will see the app running  
+### Windows:
+
+```sh
+edit autoexec.bat
+```
+
+## Usage
+
+
+### Possible errors thet you will have and how to fix them
+
+
+## License

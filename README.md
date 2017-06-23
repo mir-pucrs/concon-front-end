@@ -7,11 +7,9 @@ it's a two-phase approach that uses traditional machine learning together with d
 http://lsa.pucrs.br/conconexp
 ## Dependencies
 * We reccomend to install the dependencies with a virtual env
-* Django
-* Python
-* Mysql
-* Mysql-python
-* HomeBrew [Due to mysql-python needs]
+* [Django](https://www.djangoproject.com/download/)
+* [Python](https://www.python.org/downloads/)
+* [Mysql](https://www.mysql.com/downloads/)
 * [pypandoc](https://pypi.python.org/pypi/pypandoc)
 * [scikit-learn](http://scikit-learn.org/stable/install.html)
 * [numpy](http://www.numpy.org/)
@@ -29,6 +27,7 @@ http://lsa.pucrs.br/conconexp
     * -->pip install h5py    
     * -->sudo pip install keras --upgrade    
 * pdfminer.six [will run setup.py bdist_wheel for pycrypto and built pdfminer.six and pycrypto]
+* [HomeBrew](https://brew.sh/index_pt-br.html) -->If in MacOs
 
 ## Installation of dependencies
 * We reccomend to run the project with a virtual env

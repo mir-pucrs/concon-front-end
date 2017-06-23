@@ -35,7 +35,6 @@ http://lsa.pucrs.br/conconexp
 
 ```sh$
 cd ~/project_directory
-$ source env/bin/activate
 ```
 ```sh$
 $ virtualenv env

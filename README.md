@@ -1,12 +1,12 @@
 # Project Name
 
->This is the frontEnd of the project that have as purpose to do a Deep Learning Approach for Norm Conflict Identification.
-it's a two-phase approach that uses traditional machine learning together with deep learning to extract and compare norms in order to identify conflicts between them.
+This is the frontEnd of the project whose purpose is to identify norm conflicts using deep learning.
+At the moment we use a two-phase approach that uses traditional machine learning together with deep learning to extract and compare norms in order to identify conflicts between them.
 
 ## Demo
 http://lsa.pucrs.br/conconexp
 ## Dependencies
-* We reccomend to install the dependencies with a virtual env
+Below we list the dependencies, which we recommend to be installed within a virtual env
 * [Django](https://www.djangoproject.com/download/)
 * [Python](https://www.python.org/downloads/)
 * [Mysql](https://www.mysql.com/downloads/)
@@ -21,15 +21,15 @@ http://lsa.pucrs.br/conconexp
   * pyyaml [have to have six, numpy and scipy, and keras will download this theano ans pyyaml for you as well]
 * [upgrade tensorflow](https://www.tensorflow.org/install)
   * TensorFlow is the backend, upgrading it will download protobuf, pbr, funcsigs, mock, werkzeug and tensorflow 
-  * If gives you this error: Resource u'tokenizers/punkt/english.pickle' not found.  Please
-  use the NLTK Downloader to obtain the resource:  >>> nltk.download() 
-    * -->Do : sudo python -m nltk.downloader punkt    
+  * If you get the following error ```Resource u'tokenizers/punkt/english.pickle' not found.```  Please
+  use the NLTK Downloader to obtain the missing resource  ```nltk.download() ```
+    * -->Do : sudo python -m nltk.downloader punkt    
     * -->pip install h5py    
     * -->sudo pip install keras --upgrade    
 * pdfminer.six [will run setup.py bdist_wheel for pycrypto and built pdfminer.six and pycrypto]
 * [HomeBrew](https://brew.sh/index_pt-br.html) -->If in MacOs
 
-## Installation of dependencies
+## Installation of dependencies <!-- This is a bit replicated -->
 * We reccomend to run the project with a virtual env
 ### OS X & Linux:
 
@@ -79,8 +79,9 @@ $ sudo pip install keras --upgrade
 $ pip install pdfminer.six
 ```
 
-### Windows:
+### Windows: <!-- Missing info? -->
 
+Why would anyone use Windows?
 ```sh
 
 ```
@@ -92,7 +93,7 @@ $ cd ~/project_directory/conconexp
 ```sh$
 $ python manage.py runserver  
 ```
-* All set! Go to localhost:8000 and its running locally!
+* All set! Go to localhost:8000 and Django should be running locally!
 
 
 ## Possible issues that you will have and how to fix them

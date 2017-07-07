@@ -971,6 +971,12 @@
 		text-transform: uppercase;
 		white-space: nowrap;
 	}
+	   .button.margin{
+	   	margin-top: 5%;
+	   }
+	   .margin-top{
+	   	margin-top: 5%;
+	   }
 
 		input[type="submit"]:hover,
 		input[type="reset"]:hover,
@@ -1488,9 +1494,9 @@
 
 		}
 
-/* Main */
+/* modal */
 
-	#main {
+	#instructions, #error, #confirm {
 		-moz-flex-grow: 1;
 		-webkit-flex-grow: 1;
 		-ms-flex-grow: 1;
@@ -1520,35 +1526,21 @@
 		z-index: 3;
 	}
 
-		#main article {
-			-moz-transform: translateY(0.25rem);
-			-webkit-transform: translateY(0.25rem);
-			-ms-transform: translateY(0.25rem);
-			transform: translateY(0.25rem);
-			-moz-transition: opacity 0.325s ease-in-out, -moz-transform 0.325s ease-in-out;
-			-webkit-transition: opacity 0.325s ease-in-out, -webkit-transform 0.325s ease-in-out;
-			-ms-transition: opacity 0.325s ease-in-out, -ms-transform 0.325s ease-in-out;
-			transition: opacity 0.325s ease-in-out, transform 0.325s ease-in-out;
+		#instructions article, #error article, #confirm article{
+
 			padding: 4.5rem 2.5rem 1.5rem 2.5rem ;
-			position: relative;
+			position: fixed;
 			width: 40rem;
 			max-width: 100%;
-			background-color: rgba(27, 31, 34, 0.85);
+			background-color: rgba(27, 31, 34, 0.95);
 			border-radius: 4px;
-			opacity: 0;
+			opacity: 1;
 		}
 
-			#main article.active {
-				-moz-transform: translateY(0);
-				-webkit-transform: translateY(0);
-				-ms-transform: translateY(0);
-				transform: translateY(0);
-				opacity: 1;
-			}
-
-			#main article .close {
+			#instructions article .close, #error article .close, #confirm article .close {
 				display: block;
 				position: absolute;
+				z-index: 10;
 				top: 0;
 				right: 0;
 				width: 4rem;
@@ -1559,7 +1551,7 @@
 				white-space: nowrap;
 			}
 
-				#main article .close:before {
+				#instructions article .close:before, #error article .close:before , #confirm article .close:before{
 					-moz-transition: background-color 0.2s ease-in-out;
 					-webkit-transition: background-color 0.2s ease-in-out;
 					-ms-transition: background-color 0.2s ease-in-out;
@@ -1578,21 +1570,21 @@
 					background-repeat: no-repeat;
 				}
 
-				#main article .close:hover:before {
+				#instructions article .close:hover:before, #error article .close:hover:before,  #confirm article .close:hover:before {
 					background-color: rgba(255, 255, 255, 0.075);
 				}
 
-				#main article .close:active:before {
+				#instructions article .close:active:before, #error article .close:active:before,  #confirm article .close:active:before {
 					background-color: rgba(255, 255, 255, 0.175);
 				}
 
 		@media screen and (max-width: 736px) {
 
-			#main article {
+			#instructions article, #error article,  #confirm article {
 				padding: 3.5rem 2rem 0.5rem 2rem ;
 			}
 
-				#main article .close:before {
+				#instructions article .close:before, #error article .close:before,  #confirm article .close:before {
 					top: 0.875rem;
 					left: 0.875rem;
 					width: 2.25rem;
@@ -1604,7 +1596,7 @@
 
 		@media screen and (max-width: 480px) {
 
-			#main article {
+			#instructions article, #error article,  #confirm article{
 				padding: 3rem 1.5rem 0.5rem 1.5rem ;
 			}
 
@@ -1645,4 +1637,10 @@
 
 		body.is-loading #footer {
 			opacity: 0;
+		}
+
+		/*Created by catarina nogueira 23/06/2017*/
+
+		.hidden{
+			display: hidden!important;
 		}

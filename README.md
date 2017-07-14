@@ -34,49 +34,7 @@ Below we list the dependencies, which we recommend to be installed within a virt
 ### OS X & Linux:
 
 ```sh$
-cd ~/project_directory
-```
-```sh$
-$ virtualenv env
-```
-```sh$
-$ source env/bin/activate
-```
-```sh$
-$ pip install django
-```
-```sh$
-$ pip install mysql-python
-```
-```sh$
-$ pip install pypandoc
-```
-```sh$
-$ pip install -U scikit-learn
-```
-```sh$
-$ sudo pip install numpy
-```
-```sh$
-$ sudo pip install -U nltk 
-```
-```sh$
-$ sudo pip install keras
-```
-```sh$
-$ pip install --upgrade tensorflow 
-```
-```sh$
-$ sudo python -m nltk.downloader punkt 
-```
-```sh$ 
-$ pip install h5py
-```
-```sh$
-$ sudo pip install keras --upgrade
-```
-```sh$
-$ pip install pdfminer.six
+cd ~/project_directory && virtualenv env && source env/bin/activate && pip install django && pip install mysql-python && pip install pypandoc && pip install -U scikit-learn && sudo pip install numpy && sudo pip install -U nltk  &&sudo pip install keras && pip install --upgrade tensorflow  && sudo python -m nltk.downloader punkt  &&pip install h5py && sudo pip install keras --upgrade && pip install pdfminer.six
 ```
 
 ### Windows: <!-- Missing info? -->

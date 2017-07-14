@@ -29,7 +29,7 @@ Below we list the dependencies, which we recommend to be installed within a virt
 * pdfminer.six [will run setup.py bdist_wheel for pycrypto and built pdfminer.six and pycrypto]
 * [HomeBrew](https://brew.sh/index_pt-br.html) -->If in MacOs
 
-## Installation of dependencies <!-- This is a bit replicated -->
+## Installation of dependencies 
 * We reccomend to run the project with a virtual env
 ### OS X & Linux:
 
@@ -37,7 +37,7 @@ Below we list the dependencies, which we recommend to be installed within a virt
 cd ~/project_directory && virtualenv env && source env/bin/activate && pip install django && pip install mysql-python && pip install pypandoc && pip install -U scikit-learn && sudo pip install numpy && sudo pip install -U nltk  &&sudo pip install keras && pip install --upgrade tensorflow  && sudo python -m nltk.downloader punkt  &&pip install h5py && sudo pip install keras --upgrade && pip install pdfminer.six
 ```
 
-### Windows: <!-- Missing info? -->
+### Windows:
 
 Why would anyone use Windows?
 ```sh

@@ -35,7 +35,7 @@ class Conflict{
 		if(conflicts.values != null && conflicts.global_left!=null && conflicts.global_right!=null && !($('.changeText').hasClass('changeTextActive'))){
 			var conflict_id = conflicts.values[0];
 			var model_name = $('#correct').attr('name');
-			var html_text = "<div><h4>Is there a conflict between norm " + conflicts.global_right.split('_')[1] + " and norm " + conflicts.global_left.split('_')[1] + "?<br/> If not, click below!</h4><a href=\"/conconexp/conflict/" + conflict_id + "/" + model_name + "\"><button type='button'>Not a conflict!</button></div>";
+			var html_text = "<div><h3>Is there a conflict between norm " + conflicts.global_right.split('_')[1] + " and norm " + conflicts.global_left.split('_')[1] + "?<br/> If not, click below!</h3><a href=\"/conconexp/conflict/" + conflict_id + "/" + model_name + "\"><button type='button'>Not a conflict!</button></div>";
 			$('#correct').html(html_text);
 			$('#correct').css('text-align', 'right'); 
 			$('#correct').show('#correct'); 
@@ -216,9 +216,11 @@ var conflicts = new Conflict();
 		   if($(this).hasClass('active_norm')){ //first of all the function check if the user is clicking in one that is already marked, if so the function unmark the correspondent cell and return 
 				$(this).removeClass('active_norm');		
 				conflicts.removeLeftActive();
+				conflicts.reestartOptions();
 			return false;
 		}
 		conflicts.markLeftConflicts(this);
+		conflicts.reestartOptions();
 		e.stopPropagation();
 	});
 
@@ -227,9 +229,11 @@ var conflicts = new Conflict();
 		   if($(this).hasClass('active_norm')){ //first of all the function check if the user is clicking in one that is already marked, if so the function unmark the correspondent cell and return 
 				$(this).removeClass('active_norm');
 				conflicts.removeRightActive();
+				conflicts.reestartOptions();
 			return false;
 		}
 		conflicts.markRightConflicts(this);
+		conflicts.reestartOptions();
 		e.stopPropagation();
 	});
 
@@ -265,3 +269,5 @@ var conflicts = new Conflict();
 		e.stopImmediatePropagation()
 	})
 });
+
+

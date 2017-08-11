@@ -8,13 +8,14 @@
 
 
 <div id="wrapper2">
-    <article id="contract" class="active" style="display: block;width:auto">
 
-        <div class="table-wrapper">
 
             {% if clauses %}
 
             {% if conflicts %}
+               <article id="contract" class="active contract-adjust-padding" style="display: block;">
+
+                <div class="table-wrapper">
 
             <h4 id='test_text'>Conflicts</h4>
 
@@ -102,12 +103,12 @@
                     <h2 align="center" class="changeText" >Help Us!</h2>
                     <div align="center" id="anotherOne" style="display:none;"> <button>Submit another one?</button></div>
                     <div class = "row">
-                        <div id='first_table' style=" overflow: auto; height: 400px;  width: 50%; float: left;">
+                        <div id='first_table' style=" overflow: auto; height: 300px;  width: 50%; float: left;">
                             <table>
                                 <tbody>
                                     <div id="{{user.id}}" class="userId">
-                                        <h4 class="submitNewConflict">Submit a new conflict clicking in those which you <br>think that are conflitant! </h4>
-                                            <button id="submitNewConflict" class="align-center button ">Submit a new Conflict!</button>
+                                        <h3 class="submitNewConflict">Submit a new conflict clicking in those which you <br>think that are conflitant! </h3>
+                                            <button id="submitNewConflict" type="button" class="align-center ">Submit a new Conflict!</button>
                                     </div>
                                 </tbody>
                             </table>
@@ -124,34 +125,31 @@
                     </div>
                 </div>        
     </div>
-
-{% else %}
-
-<h4>Contract: {{ contract.con_name }}</h4>
-<h4>Choose the classifier to process this contract.</h4>
-<p>Check our <a href="{% url 'home:model_description' %}">model description</a>.</p>
-<form id="file_form" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <select name="select_model">
-        <option value="cnn">
-            CNN model
-        </option>
-        <option value="msc">
-            Rule-based model
-        </option>
-    </select>
-    <br/>
-    <input type="submit" value="Open" id='select'>
-</form>
-
-{% endif %}
+</article>
+        {% else %}
+    <article id="contract" class="active contract-adjust-padding2" style="display: block;">
+        <h4 class="title-of-contracts-of-user">Contract: {{ contract.con_name }}</h4>
+        <h4 class="subtitle-of-contracts-of-user">Choose the classifier to process this contract.</h4>
+        <p>Check our <a href="{% url 'home:model_description' %}">model description</a>.</p>
+        <form id="file_form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <select name="select_model">
+                <option value="cnn">
+                    CNN model
+                </option>
+                <option value="msc">
+                    Rule-based model
+                </option>
+            </select>
+            <br/>
+            <input type="submit" value="Open" id='select'>
+        </form>
+    </article>
+        {% endif %}
 
 </div>
-<p></p>
-<p></p>             
+          
 
 
-
-</article>
 </div>    
 {% endblock %}

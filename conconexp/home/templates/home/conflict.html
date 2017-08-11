@@ -5,13 +5,13 @@
 {% block content %}
 
 {% load home_extras %}
-            <div id="wrapper2"> 
+            <div id="wrapper2" class="padding-on-extra-large-screens"> 
                 <article id="conflict" class="active" style="display: block;width:auto">
                     <div class="table-wrapper">
 
             {% if message %}
 
-                <h4>{{ message }}</h4>
+                <h3 class="alert"><strong style="color: #e74c3c;font-weight: bolder;">{{ message }}</strong></h3>
 
             {% endif %}
 
@@ -78,13 +78,13 @@
 
             {% endif %}
 
-                        <table class="alt">    
-                            <tbody>
+                        <div class="alt">    
+                
                                 <p>Please, upload a contract to start our processing.</p>
                                  
                                 <p>Have no contracts but want to test? <a href="https://github.com/JoaoPauloAires/potential-conflict-identifier/tree/master/code/data/manufacturing" target='_blank'><b>Here</b></a> we have some contracts.</p>
 
-                                <tr>
+                               <!--  <tr>
                                     <td class="before_upload">
                                         <a class="button small">Inspect</a>
                                         <a href="#" class="button ">Select</a>
@@ -92,7 +92,7 @@
                                         <a href="#" class="button special icon fa-download">Download</a>
                                     </td>
                                 </tr>
-                                <tr>
+                                <tr> -->
                                     <form id="file_form" method="post" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         <span>
@@ -108,8 +108,17 @@
                                             </option>
                                         </select>
                                         <br/>
-                                        <input type="file" name="up_file" id="fileToUpload">
-                                        <input type="submit" value="Upload" id='upload_button' name="upfile">
+                                        <!-- estava assim antes(o novo ta abaixo), o id é diferente, nao sei se esse id interfere em algo, mas acho que nao<input type="file" name="up_file" id="fileToUpload"> data: 28/07/2017 by Catarina Nogueira-->
+                                      
+                                        
+                                         <!--choose file button-->
+                                        <input type="file" name="up_file" id="file" class="inputfile" />
+                                        <label for="file">Choose a file</label>
+                                         <!--choose file button-->
+                                         
+                                        <!--upload button-->
+                                        <input type="submit" value="Upload" id='upload_button' name="up_file">
+                                        <!--upload button-->
                                     </form>
                                 </tr>
 
@@ -122,8 +131,8 @@
                                 </p> -->
                                 
 
-                            </tbody>
-                        </table>
+                      
+                        </div>
                     </div>
                 
                 </article>

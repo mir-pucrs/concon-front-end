@@ -8,7 +8,7 @@ http://lsa.pucrs.br/conconexp
 ## Dependencies
 Below we list the dependencies, which we recommend to be installed within a virtual env
 * [Django](https://www.djangoproject.com/download/)
-* [Python](https://www.python.org/downloads/)
+* [Python] 2.7.3 ou 2.7.6 (https://www.python.org/downloads/)
 * [Mysql](https://www.mysql.com/downloads/)
 * [pypandoc](https://pypi.python.org/pypi/pypandoc)
 * [scikit-learn](http://scikit-learn.org/stable/install.html)

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import os
+import os, math
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 from django.contrib.auth import login, authenticate
@@ -14,6 +14,9 @@ from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage
 from django.core.paginator import PageNotAnInteger
 from django.core.urlresolvers import reverse
+
+
+
 
 BACKUP_FOLDER = os.path.join(settings.BASE_DIR, 'media/backup_contracts')
 
@@ -40,18 +43,19 @@ def register(request):
 
 
 class ProfileView(ListView):
-
+    
+    
     model = Contracts
     template_name = 'home/profile.html'
-    paginate_by = 10
+    paginate_by = 10.0 #this number has to be in double due to math.ceil
 
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
         user_id = self.request.user.id
         queryset = Contracts.objects.filter(added_by=user_id).order_by('reg_date')
-
+        
+        page = self.request.GET.get('page', 1)
         paginator = Paginator(queryset, self.paginate_by)
-        page = self.request.GET.get('page')
 
         try:
             file_contracts = paginator.page(page)
@@ -61,6 +65,7 @@ class ProfileView(ListView):
             file_contracts = paginator.page(paginator.num_pages)
 
         context['contracts'] = file_contracts
+        context['contracts_per_page'] = math.ceil(len(queryset)/self.paginate_by) #variable that stores the numberOfContractsOfTheUser division how many contacts per page
 
         return context
 
@@ -190,6 +195,7 @@ def conflict(request):
             context = {
                 'message': string
             }
+
             return render(request, 'home/conflict.html', context)
 
         # Get info to insert contract into table.
@@ -204,3 +210,6 @@ def conflict(request):
         return HttpResponseRedirect(reverse('home:contract_2', args=[con_id, model_name]))
         
     return render(request, 'home/conflict.html')
+
+
+#created by Catarina Nogueira 23/06/2017

@@ -3,13 +3,13 @@
 {% load static %}
 
 {% block content %}
-<div id="wrapper2"> 
+<div id="wrapper2" class="padding-on-extra-large-screens"> 
     <!-- <header id="header">  -->
-        <div class="content">
+        <div class="content content-of-user-contracts">
             <div class="inner">
     <article id="profile" class="active" style="display: block;width:auto">
     
-        <div class="table-wrapper">
+        <div class="table-wrapper" >
 
             <div>
 
@@ -32,8 +32,8 @@
 
                         <tbody>
                             
-                            <h3>
-                                Your contracts
+                            <h3 class="title-of-table">
+                                Your contracts:
                             </h3>
 
                             {% for contract in contracts %}
@@ -66,16 +66,20 @@
                           <li class="disabled"><span>&laquo;</span></li>
                         {% endif %}
                         {% for i in paginator.page_range %}
-                          {% if page_obj.number == i %}
-                            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-                          {% else %}
-                            <li><a href="?page={{ i }}">{{ i }}</a></li>
-                          {% endif %}
+                           {% if i <= contracts_per_page %} 
+                                {% if page_obj.number == i %}
+                                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                {% else %}
+                                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                            {% endif %}
                         {% endfor %}
                         {% if page_obj.has_next %}
-                          <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
-                        {% else %}
-                          <li class="disabled"><span>&raquo;</span></li>
+                            {% if page_obj.next_page_number <= contracts_per_page %}
+                                <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                                {% else %}
+                                    <li class="disabled"><span>&raquo;</span></li>
+                            {% endif %}
                         {% endif %}
                       </ul>
                     {% endif %}

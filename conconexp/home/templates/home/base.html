@@ -8,8 +8,10 @@
     <head>
         <title>ConCon</title>
         <meta charset="utf-8" />
+
         {% load static %}
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
         <link rel="stylesheet" href="{% static 'home/assets/css/main.css' %}"/>
         <link rel="stylesheet" href="{% static 'home/assets/css/conflict.css' %}"/>
             <!-- for IE and Android native browser support -->
@@ -22,22 +24,22 @@
         <!-- <script type="text/javascript" src="diff2html/dist/diff2html.js"></script> -->
         <script src="{% static 'home/node_modules/jquery/dist/jquery.min.js' %}"></script>
 
-<!--         <script src="{% static 'node_modules/sweetalert2/dist/sweetalert2.min.js' %}"></script>
+<!--    <script src="{% static 'node_modules/sweetalert2/dist/sweetalert2.min.js' %}"></script>
         <link rel="stylesheet" href="node_modules/sweetalert2/dist/sweetalert2.min.css"> -->
         <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
         <noscript><link rel="stylesheet" href="{% static 'home/assets/css/noscript.css' %}" /></noscript>
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script> -->
         <script src="{% static 'home/js/main_functions.js' %}"></script>
 
-
     </head>
     <body>
 
-        <div id="wrapper2">
-            <header id=header>
+        <div id="wrapper2" class="padding-on-extra-large-screens-header">
+            
                 {% if user.is_authenticated %}
+                <header id="header">
                     <h3>
-                        Hi {{ user.username }}!</h3>
+                        Hi, {{ user.username }}!</h3>
                         <nav>
                         <ul>
                         <li><a href="{% url 'home:index' %}">Home</a></li>
@@ -47,38 +49,32 @@
                         <li><a href="{% url 'logout' %}">Logout</a></li>
                         </ul>
                         </nav>
-                    
+                 </header>   
                 {% else %}
+                <header id=header class="not-autenticated-user-header">
                     <nav>
                     <ul>
                         <li><a href="{% url 'home:index' %}">Home</a></li>
                         <li><a href="{% url 'home:intro' %}">Intro</a></li>
                         <li><a href="{% url 'login' %}">Login</a></li>
-                        <!-- <li><a href="logout.php">Logout</a></li> -->
                     </ul>
                     </nav>
-
+                </header>
                 {% endif %}
-            </header>
+            
 
 
             {% block content %}            
             {% endblock %}
-
-	    <div id=social_network>
-            <a href="https://twitter.com/share" class="twitter-share-button" data-text="Check for contract conflicts using deep learning http://lsa.pucrs.br/concon" data-hashtags="contracts" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-            <iframe src="https://www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Flsa.pucrs.br%2Fconconexp%2F&layout=button&size=small&mobile_iframe=true&width=59&height=20&appId" width="61" height="20" style="float:right;border:none;overflow:hidden;margin: 1%" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
-        </div>
-	    
-        </div>
-        <!-- Footer -->
-        <footer id="footer">
-            <p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-        </footer>
-
+  </div>
         <!-- BG -->
-        <div id="bg"></div>
+      <div id="bg"></div>
+
+          <div class="footer_copyright">
+             <a href="https://twitter.com/share" class="twitter-share-button" data-text="Check for contract conflicts using deep learning http://lsa.pucrs.br/concon" data-hashtags="contracts" data-show-count="false"></a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+             <iframe  class="facebook-share-button"  src="https://www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Flsa.pucrs.br%2Fconconexp%2F&layout=button&size=small&mobile_iframe=true&width=59&height=20&appId" scrolling="no" allowTransparency="true"></iframe><br>
+             <small  style="font-size: 0.4rem">&copy; Design: <a href="https://html5up.net" style="font-size: 0.4rem">HTML5 UP</a></small> 
+          </div>
 
 	<div class="modal"><!-- Place at bottom of page --></div>
         <!-- Scripts -->
@@ -86,5 +82,6 @@
         <script src="{% static 'home/assets/js/skel.min.js' %}"></script>
         <script src="{% static 'home/assets/js/util.js' %}"></script>
         <script src="{% static 'home/assets/js/main.js' %}"></script>
+    
     </body>
 </html>

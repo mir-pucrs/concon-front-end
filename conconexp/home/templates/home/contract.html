@@ -5,100 +5,151 @@
 {% block content %}
 
 {% load home_extras %}
-    <div id="wrapper2">
-        <article id="contract" class="active" style="display: block;width:auto">
-        
-            <div class="table-wrapper">
 
-                {% if clauses %}
 
-                    {% if conflicts %}
+<div id="wrapper2">
 
-                        <h4 id='test_text'>Conflicts</h4>
 
-                        <select id="selector">
-                            <option value="none">-</option>
+            {% if clauses %}
 
-                            {% for conflict in conflicts %}
+            {% if conflicts %}
+               <article id="contract" class="active contract-adjust-padding" style="display: block;">
 
-                                <option class="conflict" value="{{ conflict|get_index:0 }}_{{ conflict|get_index:1 }}_{{ conflict|get_index:2 }}">{{ conflict|get_index:1 }} - {{ conflict|get_index:2 }} Confidence: {{ conflict|get_index:3 }}%</option>
+                <div class="table-wrapper">
+
+            <h4 id='test_text'>Conflicts</h4>
+
+            <select id="selector">
+                <option value="none">-</option>
+
+                {% for conflict in conflicts %}
+
+                <option class="conflict" value="{{ conflict|get_index:0 }}_{{ conflict|get_index:1 }}_{{ conflict|get_index:2 }}">{{ conflict|get_index:1 }} - {{ conflict|get_index:2 }} Confidence: {{ conflict|get_index:3 }}%</option>
+
+                {% endfor %}
+
+            </select>
+
+            <p></p>
+            <p></p>
+
+            {% else %}
+            <h4>No conflicts found!</h4>
+            {% endif %}
+
+             <div id="instructions" style="display:none;">
+                <article>
+                    <h2 class="major">Instruções</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mattis ligula ut diam egestas, id vestibulum metus vulputate. Sed ipsum justo, ultricies at lorem eget, porta accumsan lectus. Mauris ut condimentum nulla, eleifend efficitur odio. In eget volutpat nibh. Sed vehicula tortor nec elit tempus hendrerit.</p>
+                    <div class="close" id="close">Close</div>
+                </article>
+            </div>
+            <div id="error" style="display:none;">
+                <article>
+                    <h2 class="major">Os dois sao iguais!</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mattis ligula ut diam egestas, id vestibulum metus vulputate. Sed ipsum justo, ultricies at lorem eget, porta accumsan lectus. Mauris ut condimentum nulla, eleifend efficitur odio. In eget volutpat nibh. Sed vehicula tortor nec elit tempus hendrerit.</p>
+                    <div class="close" id="close">Close</div>
+                </article>
+            </div>
+            <div id="confirm" style="display:none;">
+                <article>
+                    <h3 class="major">Deseja confirmar que esse é um novo conflito?</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mattis ligula ut diam egestas, id vestibulum metus vulputate. Sed ipsum justo, ultricies at lorem eget, porta accumsan lectus. Mauris ut condimentum nulla, eleifend efficitur odio. In eget volutpat nibh. Sed vehicula tortor nec elit tempus hendrerit.</p>
+                    <div class="close" id="close">Close</div>
+                    <button class="confirmTheConflict">Sim</button>
+                </article>
+            </div>
+
+            <div class = "row">
+                <div id='first_table' style=" overflow: auto; height: 400px;  width: 50%; float: left;">
+                    <table id="table1" ><!--style="height: 400px;"> -->
+                        <tbody class="allContract-right">
+                            {% for cls in cls_obj %}
+
+                            <tr id='first_{{ cls.clause_id }}' class="btn-group-right">
+                                <td> 
+                                    {{ cls.clause_id }}
+                                </td>                                    
+                                <td>
+                                    {{ clauses|get_text:cls.clause_id }}
+                                </td>                                        
+                            </tr> 
 
                             {% endfor %}
-                            
-                        </select>
+                        </tbody>
+                    </table>
+                </div>                                   
+                <div id='second_table' style="overflow: auto; height: 400px; width: 50%; float: right; ">
+                     <table id="table2">
+                        <tbody class="allContract-left">
+                            {% for cls in cls_obj %}
+                            <tr id="second_{{ cls.clause_id }}" class="btn-group-left">
 
-                        <p></p>
-                        <p></p>
+                                <td>
+                                    {{ cls.clause_id }}
+                                </td>
 
-                    {% else %}
-                        <h4>No conflicts found!</h4>
-                    {% endif %}
-
+                                <td>
+                                    {{ clauses|get_text:cls.clause_id }}
+                                </td>                                        
+                            </tr>                                
+                            {% endfor %}                      
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+                <div class="margin-top">          
+                    <h2 align="center" class="changeText" >Help Us!</h2>
+                    <div align="center" id="anotherOne" style="display:none;"> <button>Submit another one?</button></div>
                     <div class = "row">
-                    <div id='first_table' style=" overflow: auto; height: 400px;  width: 50%; float: left;">
-                            <table id="table1" ><!--style="height: 400px;"> -->
+                        <div id='first_table' style=" overflow: auto; height: 300px;  width: 50%; float: left;">
+                            <table>
                                 <tbody>
-                                    {% for cls in cls_obj %}
-                                        <tr id='first_{{ cls.clause_id }}'>
-                                            <td>
-                                                {{ cls.clause_id }}
-                                            </td>                                    
-                                            <td>
-                                                {{ clauses|get_text:cls.clause_id }}
-                                            </td>                                        
-                                        </tr>                                  
-                                    {% endfor %}
-                                </tbody>
-                             </table>
-                        </div>                                   
-                    <div id='second_table' style="overflow: auto; height: 400px; width: 50%; float: right; ">
-                           <table id="table2">
-                                <tbody>
-                                    {% for cls in cls_obj %}
-                                        <tr id="second_{{ cls.clause_id }}">
-
-                                            <td>
-                                                {{ cls.clause_id }}
-                                            </td>
-                                            
-                                            <td>
-                                                {{ clauses|get_text:cls.clause_id }}
-                                            </td>                                        
-                                        </tr>                                
-                                    {% endfor %}                      
+                                    <div id="{{user.id}}" class="userId">
+                                        <h3 class="submitNewConflict">Submit a new conflict clicking in those which you <br>think that are conflitant! </h3>
+                                            <button id="submitNewConflict" type="button" class="align-center ">Submit a new Conflict!</button>
+                                    </div>
                                 </tbody>
                             </table>
+                        </div>                                   
+                        <div id='second_table' style="overflow: auto; height: 400px; width: 50%; float: right; ">
+                             <table id="table2">
+                                <tbody >
+                                 <div>
+                                    <div id="correct" name="{{ selected_model }}"></div>
+                                </div>             
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-               </div>
+                </div>        
+    </div>
+</article>
+        {% else %}
+    <article id="contract" class="active contract-adjust-padding2" style="display: block;">
+        <h4 class="title-of-contracts-of-user">Contract: {{ contract.con_name }}</h4>
+        <h4 class="subtitle-of-contracts-of-user">Choose the classifier to process this contract.</h4>
+        <p>Check our <a href="{% url 'home:model_description' %}">model description</a>.</p>
+        <form id="file_form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <select name="select_model">
+                <option value="cnn">
+                    CNN model
+                </option>
+                <option value="msc">
+                    Rule-based model
+                </option>
+            </select>
+            <br/>
+            <input type="submit" value="Open" id='select'>
+        </form>
+    </article>
+        {% endif %}
 
-                {% else %}
+</div>
+          
 
-                    <h4>Contract: {{ contract.con_name }}</h4>
-                    <h4>Choose the classifier to process this contract.</h4>
-                    <p>Check our <a href="{% url 'home:model_description' %}">model description</a>.</p>
-                    <form id="file_form" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <select name="select_model">
-                            <option value="cnn">
-                                CNN model
-                            </option>
-                            <option value="msc">
-                                Rule-based model
-                            </option>
-                        </select>
-                        <br/>
-                        <input type="submit" value="Open" id='select'>
-                    </form>
 
-                {% endif %}
-
-            </div>
-            <p></p>
-            <p></p>                
-
-            <div id="correct" name="{{ selected_model }}">
-                
-            </div>
-        </article>
-    </div>    
+</div>    
 {% endblock %}

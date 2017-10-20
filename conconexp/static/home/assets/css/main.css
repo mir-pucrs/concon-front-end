@@ -9,6 +9,7 @@
 
 /* Reset */
 
+
 	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
 		margin: 0;
 		padding: 0;
@@ -17,7 +18,24 @@
 		font: inherit;
 		vertical-align: baseline;
 	}
+	body {
+		position: relative;
+		margin: 0;
+		height: 100%;
+		padding-bottom: 3rem;
+		min-height: 100%;
+		height: 100%;
+  		margin: 0;
+	}
+	html{
+		height: 100%;
+  		margin: 0;
+	}
+	span{
+	    font-size: 1.5rem;
+	}
 
+	/*end*/
 	article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
 		display: block;
 	}
@@ -95,6 +113,7 @@
 		font-size: 16pt;
 	}
 
+
 		@media screen and (max-width: 1680px) {
 
 			html {
@@ -135,6 +154,7 @@
 		border-bottom: dotted 1px rgba(255, 255, 255, 0.5);
 		text-decoration: none;
 		color: inherit;
+		font-size: 1.3rem;
 	}
 
 		a:hover {
@@ -152,6 +172,7 @@
 
 	p {
 		margin: 0 0 2rem 0;
+		font-size: 1.3rem;
 	}
 
 	h1, h2, h3, h4, h5, h6 {
@@ -189,9 +210,12 @@
 		line-height: 1.4;
 		letter-spacing: 0.5rem;
 	}
+	.alert{
+		font-size: 1.4rem;
+	}
 
 	h3 {
-		font-size: 1rem;
+		font-size: 1.2rem;
 	}
 
 	h4 {
@@ -436,7 +460,7 @@
 	input[type="password"],
 	input[type="email"],
 	select {
-		height: 2.75rem;
+		height: 3.2rem;
 	}
 
 	textarea {
@@ -893,6 +917,7 @@
 
 		table td {
 			padding: 0.75em 0.75em;
+			font-size: 1.3rem;
 		}
 
 		table th {
@@ -970,14 +995,21 @@
 		text-decoration: none;
 		text-transform: uppercase;
 		white-space: nowrap;
-	}
+	}	   
+	   .margin-top{
+	   	  margin-top: 1%;
+	   }
+	   #conflict{
+	   	    width: 47%!important;
+	   }
 
 		input[type="submit"]:hover,
 		input[type="reset"]:hover,
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
-			background-color: rgba(255, 255, 255, 0.075);
+			background-color: #ecf0f1;
+
 		}
 
 		input[type="submit"]:active,
@@ -1031,6 +1063,8 @@
 			pointer-events: none;
 			cursor: default;
 			opacity: 0.25;
+			background-color: inherit;
+
 		}
 
 	input[type="submit"],
@@ -1038,6 +1072,10 @@
 	input[type="button"],
 	button {
 		line-height: calc(2.75rem - 2px);
+		background-color: #ffffff;
+	    color: #1b1f22!important;
+	    font-weight: 600;
+	    font-size: 1rem;
 	}
 
 /* BG */
@@ -1053,7 +1091,7 @@
 		left: 0;
 		width: 100%;
 		height: 100vh;
-		z-index: 1;
+		z-index: 0;
 	}
 
 		#bg:before, #bg:after {
@@ -1135,14 +1173,8 @@
 		position: relative;
 		min-height: 100vh;
 		width: 100%;
-		padding: 4rem 2rem;
 		z-index: 3;
 	}
-
-		#wrapper:before {
-			content: '';
-			display: block;
-		}
 
 		@media screen and (max-width: 1680px) {
 
@@ -1183,29 +1215,21 @@
 		-webkit-align-items: center;
 		-ms-align-items: center;
 		align-items: center;
+		position: relative;
+		width: 100%;
+		margin: 0 auto;
+		/*--If not commented, footer won't work sticking at the bottom
+		padding: 4rem 2rem;
 		-moz-justify-content: space-between;
 		-webkit-justify-content: space-between;
 		-ms-justify-content: space-between;
-		justify-content: space-between;
-		position: relative;
-		min-height: 100vh;
-		width: 100%;
-		padding: 4rem 2rem;
+		justify-content: space-between;*/
 		z-index: 3;
+  		min-height: 100%;
+  		margin: 0 auto -11px;
 	}
 
-		#wrapper2:after {
-			content: '';
-			display: block;
-		}
-		@media screen and (max-width: 1680px) {
-
-			#wrapper2 {
-				padding: 3rem 2rem;
-			}
-
-		}
-
+	/*--*/
 		@media screen and (max-width: 736px) {
 
 			#wrapper2 {
@@ -1221,7 +1245,137 @@
 			}
 
 		}
+		#login, #resetPassword{
+			width: 33%;
+			margin-top: 5%;
+		}
 
+		@media only screen and (min-device-width: 960px){
+		    #wrapper2 {
+		        zoom: 80%;
+		    }
+		    .content-of-user-contracts{
+				width: 52%;
+			}
+		    .not-autenticated-user-header{
+			width:41%!important;
+			}
+		    .padding-on-extra-large-screens{
+				padding-bottom: 0rem;
+   	 			padding-top: 5rem;
+			}
+			.padding-on-extra-large-screens-header{
+				padding-top: 1rem!important;
+				padding-bottom: 0rem!important;
+			}
+		    #header nav ul li a {
+			    display: block;
+			    min-width: 6rem!important;
+			    height: 2.75rem;
+			    line-height: 2.75rem;
+			    padding: 0 1.25rem 0 1.45rem;
+			    text-transform: uppercase;
+			    letter-spacing: 0.2rem;
+			    font-size: 1.0rem!important;
+			    border-bottom: 0;
+			    zoom:80%;
+			}
+			.not-autenticated-user-header nav ul li a{
+				padding: 0 2.25rem 0 2.45rem!important;
+			}
+			.forgot-password{
+				width: 32%;
+			}
+			table th{
+				font-size: 1.2em;
+			}
+			.title-of-table{
+				font-size: 1.7rem;
+    			padding-bottom: 7%;
+			}
+			.title-of-contracts-of-user{
+				font-size: 1.7rem;
+				padding-bottom: 5%;
+			}
+			.subtitle-of-contracts-of-user{
+				font-size: 1.3rem;
+			}
+			.content-with-explanation{
+				max-width: 82%!important;
+			}
+			.contract-adjust-padding{
+				width: 80%;
+			}
+			.contract-adjust-padding2{
+				width: 44%;
+				margin-top: 6%;
+			}
+		}
+		.link{
+			font-size: 0.8rem;
+		}
+		.text-align-left{
+			text-align: left;
+		}
+		select {
+			font-size: 1.5rem;
+		}
+		
+		/*share icons*/
+		.twitter iframe {
+		  width: 80px !important;
+		  height: 80px!important;
+		  padding-top: 4px;
+		}
+		.facebook-share-button{
+			width: 100px;
+    		height: 20px;
+    		margin-left: 2px;
+		}
+		.share-icons{
+			display: inline-block;
+			margin-top: 2%;
+		}
+		.footer_copyright {
+		  	position: relative;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			height: 50px;
+			text-align: center;
+			width: 100%;
+		}
+		.footer_copyright small{
+			font-size: 0.6rem;
+		}
+		/*upload*/
+		.inputfile {
+			width: 0.1px;
+			height: 0.1px;
+			opacity: 0;
+			overflow: hidden;
+			position: absolute;
+			z-index: -1;	
+		}.inputfile + label {
+		    color: white;
+		    background-color: #ffffff;
+		    display: inline-block;
+		    color: #1b1f22!important;
+		    font-weight: 600;
+		    border-radius: 4px;
+		    font-size: 1rem;
+		    line-height: calc(2.75rem - 2px);
+		    border: 0;
+		    height: 2.75rem;
+		   	letter-spacing: 0.2rem;
+		    padding: 0 1.25rem 0 1.35rem;
+		}
+		.inputfile:focus + label,
+		.inputfile + label:hover {
+		     background-color: #ecf0f1;
+		}
+
+	/*-------/
 /* Header */
 
 	#header {
@@ -1255,7 +1409,16 @@
 			-ms-transition: opacity 0.325s ease-in-out;
 			transition: opacity 0.325s ease-in-out;
 			position: relative;
-			margin-top: 3.5rem;
+			margin-bottom: 3.5rem;
+		}
+		/*--*/
+		#header > * {
+			-moz-transition: opacity 0.325s ease-in-out;
+			-webkit-transition: opacity 0.325s ease-in-out;
+			-ms-transition: opacity 0.325s ease-in-out;
+			transition: opacity 0.325s ease-in-out;
+			position: relative;
+			margin-bottom: 1rem;
 		}
 
 			#header > *:before {
@@ -1335,8 +1498,9 @@
 		}
 
 			#header nav ul li {
-				padding-left: 0;
-				border-left: solid 1px #ffffff;
+			    padding-left: 1rem;
+			    padding-right: 1rem;
+			    border-left: solid 1px #ffffff;
 			}
 
 				#header nav ul li:first-child {
@@ -1488,9 +1652,9 @@
 
 		}
 
-/* Main */
+/* modal */
 
-	#main {
+	#instructions, #error, #confirm {
 		-moz-flex-grow: 1;
 		-webkit-flex-grow: 1;
 		-ms-flex-grow: 1;
@@ -1520,35 +1684,23 @@
 		z-index: 3;
 	}
 
-		#main article {
-			-moz-transform: translateY(0.25rem);
-			-webkit-transform: translateY(0.25rem);
-			-ms-transform: translateY(0.25rem);
-			transform: translateY(0.25rem);
-			-moz-transition: opacity 0.325s ease-in-out, -moz-transform 0.325s ease-in-out;
-			-webkit-transition: opacity 0.325s ease-in-out, -webkit-transform 0.325s ease-in-out;
-			-ms-transition: opacity 0.325s ease-in-out, -ms-transform 0.325s ease-in-out;
-			transition: opacity 0.325s ease-in-out, transform 0.325s ease-in-out;
+		/*--*/
+
+		#instructions article, #error article, #confirm article{
+
 			padding: 4.5rem 2.5rem 1.5rem 2.5rem ;
-			position: relative;
+			position: fixed;
 			width: 40rem;
 			max-width: 100%;
-			background-color: rgba(27, 31, 34, 0.85);
+			background-color: rgba(27, 31, 34, 0.95);
 			border-radius: 4px;
-			opacity: 0;
+			opacity: 1;
 		}
 
-			#main article.active {
-				-moz-transform: translateY(0);
-				-webkit-transform: translateY(0);
-				-ms-transform: translateY(0);
-				transform: translateY(0);
-				opacity: 1;
-			}
-
-			#main article .close {
+			#instructions article .close, #error article .close, #confirm article .close {
 				display: block;
 				position: absolute;
+				z-index: 10;
 				top: 0;
 				right: 0;
 				width: 4rem;
@@ -1559,7 +1711,7 @@
 				white-space: nowrap;
 			}
 
-				#main article .close:before {
+				#instructions article .close:before, #error article .close:before , #confirm article .close:before{
 					-moz-transition: background-color 0.2s ease-in-out;
 					-webkit-transition: background-color 0.2s ease-in-out;
 					-ms-transition: background-color 0.2s ease-in-out;
@@ -1578,21 +1730,21 @@
 					background-repeat: no-repeat;
 				}
 
-				#main article .close:hover:before {
+				#instructions article .close:hover:before, #error article .close:hover:before,  #confirm article .close:hover:before {
 					background-color: rgba(255, 255, 255, 0.075);
 				}
 
-				#main article .close:active:before {
+				#instructions article .close:active:before, #error article .close:active:before,  #confirm article .close:active:before {
 					background-color: rgba(255, 255, 255, 0.175);
 				}
 
 		@media screen and (max-width: 736px) {
 
-			#main article {
+			#instructions article, #error article,  #confirm article {
 				padding: 3.5rem 2rem 0.5rem 2rem ;
 			}
 
-				#main article .close:before {
+				#instructions article .close:before, #error article .close:before,  #confirm article .close:before {
 					top: 0.875rem;
 					left: 0.875rem;
 					width: 2.25rem;
@@ -1604,7 +1756,7 @@
 
 		@media screen and (max-width: 480px) {
 
-			#main article {
+			#instructions article, #error article,  #confirm article{
 				padding: 3rem 1.5rem 0.5rem 1.5rem ;
 			}
 
@@ -1645,4 +1797,8 @@
 
 		body.is-loading #footer {
 			opacity: 0;
+		}
+
+		.hidden{
+			display: hidden!important;
 		}

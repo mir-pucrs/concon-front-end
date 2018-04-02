@@ -4,11 +4,11 @@ This is the frontEnd of the project whose purpose is to identify norm conflicts 
 At the moment we use a two-phase approach that uses traditional machine learning together with deep learning to extract and compare norms in order to identify conflicts between them.
 
 ## Demo
-http://lsa.pucrs.br/conconexp
+http://lsa.pucrs.br/concon
 ## Dependencies
 Below we list the dependencies, which we recommend to be installed within a virtual env
 * [Django](https://www.djangoproject.com/download/)
-* [Python 2.7.3 or 2.7.6](https://www.python.org/downloads/)
+* [Python 2.7.12](https://www.python.org/downloads/)
 * [Mysql](https://www.mysql.com/downloads/)
 * [pypandoc](https://pypi.python.org/pypi/pypandoc)
 * [scikit-learn](http://scikit-learn.org/stable/install.html)
@@ -23,6 +23,7 @@ Below we list the dependencies, which we recommend to be installed within a virt
   * TensorFlow is the backend, upgrading it will download protobuf, pbr, funcsigs, mock, werkzeug and tensorflow 
   * If you get the following error ```Resource u'tokenizers/punkt/english.pickle' not found.```  Please
   use the NLTK Downloader to obtain the missing resource  ```nltk.download() ```
+
     * -->Do : python -m nltk.downloader punkt    
     * -->Do : python -m nltk.downloader wordnet    
     * -->Do : python -m nltk.downloader averaged_perceptron_tagger    
@@ -104,6 +105,10 @@ $ python manage.py runserver
 ------
 Follow the instructions on this [link](https://www.digitalocean.com/community/tutorials/how-to-serve-django-applications-with-apache-and-mod_wsgi-on-ubuntu-16-04).
 
+
+#### NLTK data Folder
+------
+If the nltk.download error persists, nltk_data must be placed at /var/www/.
 
 ## License
 Design of the page is free for personal and commercial use under the CCA 3.0 license [HTML5 UP](https://html5up.net/license)

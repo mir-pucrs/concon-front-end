@@ -23,9 +23,11 @@ Below we list the dependencies, which we recommend to be installed within a virt
   * TensorFlow is the backend, upgrading it will download protobuf, pbr, funcsigs, mock, werkzeug and tensorflow 
   * If you get the following error ```Resource u'tokenizers/punkt/english.pickle' not found.```  Please
   use the NLTK Downloader to obtain the missing resource  ```nltk.download() ```
-    * -->Do : sudo python -m nltk.downloader punkt    
+    * -->Do : python -m nltk.downloader punkt    
+    * -->Do : python -m nltk.downloader wordnet    
+    * -->Do : python -m nltk.downloader averaged_perceptron_tagger    
     * -->pip install h5py    
-    * -->sudo pip install keras --upgrade    
+    * -->pip install keras --upgrade    
 * pdfminer.six [will run setup.py bdist_wheel for pycrypto and built pdfminer.six and pycrypto]
 * [HomeBrew](https://brew.sh/index_pt-br.html) -->If in MacOs
 
@@ -96,5 +98,12 @@ $ python manage.py runserver
   ```
  '\. path_to/dump'
  ```
+
+
+#### Configuring Apache + WSGI
+------
+Follow the instructions on this [link](https://www.digitalocean.com/community/tutorials/how-to-serve-django-applications-with-apache-and-mod_wsgi-on-ubuntu-16-04).
+
+
 ## License
 Design of the page is free for personal and commercial use under the CCA 3.0 license [HTML5 UP](https://html5up.net/license)

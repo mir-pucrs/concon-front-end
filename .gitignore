@@ -99,3 +99,6 @@ ENV/
 
 # pyc
 *.pyc
+
+# Remove media.
+*/media/*

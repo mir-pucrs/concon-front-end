@@ -102,3 +102,6 @@ ENV/
 
 # Remove media.
 */media/*
+
+# Remove secrets.
+*/settings_secret.py

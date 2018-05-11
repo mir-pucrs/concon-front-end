@@ -104,4 +104,4 @@ ENV/
 */media/*
 
 # Remove secrets.
-*/settings_secret.py
+conconexp/conconexp/settings_secret.py

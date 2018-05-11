@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from settings_secret import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@v&9*6$fpo90l)**t*m1zz&#-szan4-k+1j5)(w!0*0bzp)&5#'
+SECRET_KEY = secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'concon',
         'USER': 'concon',
-        'PASSWORD': 'C0nTr4Cts_4nd_ConFl1Cts',
+        'PASSWORD': database_password,
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -122,7 +123,7 @@ USE_TZ = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'project.concon'
-EMAIL_HOST_PASSWORD = 'jIQ9W0DKoq0w-dk'
+EMAIL_HOST_PASSWORD = email_password
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Concon <project.concon@gmail.com>'
 

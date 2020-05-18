@@ -21,10 +21,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = secret_key
+SECRET_KEY = secret_key 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mod_wsgi.server',
 ]
 
 MIDDLEWARE = [
@@ -72,20 +73,21 @@ TEMPLATES = [
 WSGI_APPLICATION = 'conconexp.wsgi.application'
 
 
+# Set timeout.
+TIMEOUT = 1000
+
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'concon',
         'USER': 'concon',
-        'PASSWORD': database_password,
+        'PASSWORD': database_password, 
         'HOST': 'localhost',
         'PORT': '',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -120,12 +122,13 @@ USE_L10N = True
 USE_TZ = True
 
 # Email configuration.
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'project.concon'
-EMAIL_HOST_PASSWORD = email_password
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'Concon <project.concon@gmail.com>'
+EMAIL_HOST_USER = 'project.concon@gmail.com'
+EMAIL_HOST_PASSWORD = email_password 
+# DEFAULT_FROM_EMAIL = 'Concon <project.concon@gmail.com>'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
@@ -135,8 +138,8 @@ SITE_ID = 1
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-LOGIN_REDIRECT_URL = '/conconexp'
+LOGIN_REDIRECT_URL = '/concon'
 
 STATIC_URL = '/static/'
-
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+STATIC_ROOT = '/home/site/concon-front-end-master/conconexp/static'
+#STATIC_ROOT = os.path.join(BASE_DIR, "static/")

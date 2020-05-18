@@ -74,9 +74,10 @@ class AuthUserUserPermissions(models.Model):
 
 class Contracts(models.Model):
     con_id = models.AutoField(primary_key=True)
-    con_name = models.CharField(max_length=40)
-    path_to_file = models.CharField(max_length=100)
-    added_by = models.ForeignKey(AuthUser, on_delete=models.CASCADE, db_column='added_by')
+    con_name = models.CharField(max_length=100)
+    path_to_file = models.CharField(max_length=200)
+    added_by = models.ForeignKey(AuthUser, on_delete=models.CASCADE,
+        db_column='added_by')
     test_only = models.IntegerField(blank=True, default=0)
     reg_date = models.DateTimeField()
 
@@ -96,10 +97,13 @@ class Modality(models.Model):
 
 class Clauses(models.Model):
     clause_id = models.AutoField(primary_key=True)
-    con = models.ForeignKey(Contracts, on_delete=models.CASCADE, db_column='con_id')
+    con = models.ForeignKey(Contracts, on_delete=models.CASCADE,
+        db_column='con_id')
     clause_range = models.CharField(max_length=10)
-    modal = models.ForeignKey(Modality, on_delete=models.CASCADE, blank=True, null=True, db_column='modal_id')
+    modal = models.ForeignKey(Modality, on_delete=models.CASCADE, blank=True,
+        null=True, db_column='modal_id')
     reg_date = models.DateTimeField()
+    norm = models.IntegerField()
 
     class Meta:
         managed = False
@@ -111,14 +115,30 @@ class Classifiers(models.Model):
     classifier_name = models.CharField(max_length=30)
 
 
+class ConflictTypes(models.Model):
+    type_id = models.SmallIntegerField(primary_key=True)
+    type = models.CharField(max_length=12, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'conf_types'
+
+
 class Conflicts(models.Model):
     conf_id = models.AutoField(primary_key=True)
-    con = models.ForeignKey(Contracts, on_delete=models.CASCADE, db_column='con_id')
-    clause_id_1 = models.ForeignKey(Clauses, on_delete=models.CASCADE, db_column='clause_id_1', related_name='first_clause')
-    clause_id_2 = models.ForeignKey(Clauses, on_delete=models.CASCADE, db_column='clause_id_2', related_name='second_clause')
-    classifier = models.ForeignKey(Classifiers, on_delete=models.CASCADE, null=True, db_column='classifier_id')
+    con = models.ForeignKey(Contracts, on_delete=models.CASCADE,
+        db_column='con_id')
+    clause_id_1 = models.ForeignKey(Clauses, on_delete=models.CASCADE,
+        db_column='clause_id_1', related_name='first_clause')
+    clause_id_2 = models.ForeignKey(Clauses, on_delete=models.CASCADE,
+        db_column='clause_id_2', related_name='second_clause')
+    classifier = models.ForeignKey(Classifiers, on_delete=models.CASCADE,
+        null=True, db_column='classifier_id')
     confidence = models.IntegerField(null=False)
-    added_by = models.ForeignKey(AuthUser, on_delete=models.CASCADE, null=True, db_column='added_by')
+    added_by = models.ForeignKey(AuthUser, on_delete=models.CASCADE,
+        null=True, db_column='added_by')
+    type_id = models.ForeignKey(ConflictTypes, on_delete=models.CASCADE,
+     db_column='type_id')
     reg_date = models.DateTimeField()
 
     class Meta:
@@ -132,7 +152,8 @@ class DjangoAdminLog(models.Model):
     object_repr = models.CharField(max_length=200)
     action_flag = models.SmallIntegerField()
     change_message = models.TextField()
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING,
+        blank=True, null=True)
     user = models.ForeignKey(AuthUser, models.DO_NOTHING)
 
     class Meta:
@@ -172,9 +193,12 @@ class DjangoSession(models.Model):
 
 class ModalCorrections(models.Model):
     id_modal = models.IntegerField(primary_key=True)
-    id_clause = models.ForeignKey(Clauses, on_delete=models.CASCADE, db_column='id_clause')
-    id_user = models.ForeignKey(AuthUser, on_delete=models.CASCADE, db_column='id_user')
-    id_modality = models.ForeignKey(Modality, models.CASCADE, db_column='id_modality')
+    id_clause = models.ForeignKey(Clauses, on_delete=models.CASCADE,
+        db_column='id_clause')
+    id_user = models.ForeignKey(AuthUser, on_delete=models.CASCADE,
+        db_column='id_user')
+    id_modality = models.ForeignKey(Modality, models.CASCADE,
+        db_column='id_modality')
     reg_date = models.DateTimeField()
 
     class Meta:

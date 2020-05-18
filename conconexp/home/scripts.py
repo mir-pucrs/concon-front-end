@@ -1,21 +1,33 @@
 # -*- coding:utf-8 -*-
+import io
 import os
 import sys
+import keras
+import PyPDF2
 import pypandoc
 from constants import *
-from nltk.tokenize import sent_tokenize
-from models import AuthUser, Contracts, Clauses, Conflicts
-from preprocess_norms import to_matrix
 from django.conf import settings
-from keras.models import  model_from_json
-from django.core.files.storage import FileSystemStorage
-from conflict_models.msc_model.party_identification.extracting_parties import extract_parties
+from keras.models import load_model
+from embedding import conflict_finder
+from preprocess_norms import to_matrix
+from nltk.tokenize import sent_tokenize
 from conflict_models.msc_model.rule_functions import *
-from cStringIO import StringIO
-from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
-from pdfminer.converter import TextConverter
-from pdfminer.layout import LAParams
-from pdfminer.pdfpage import PDFPage
+from django.core.files.storage import FileSystemStorage
+from models import AuthUser, Contracts, Clauses, Conflicts
+from conflict_models.msc_model.party_identification.extracting_parties import extract_parties
+# from cStringIO import StringIO
+# from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+# from pdfminer.converter import TextConverter
+# from pdfminer.layout import LAParams
+# from pdfminer.pdfpage import PDFPage
+# from pdfminer.pdfparser import PDFParser
+# from pdfminer.pdfdocument import PDFDocument
+# from pdfminer.pdfpage import PDFPage
+# from pdfminer.pdfpage import PDFTextExtractionNotAllowed
+# from pdfminer.pdfinterp import PDFResourceManager
+# from pdfminer.pdfinterp import PDFPageInterpreter
+# from pdfminer.pdfdevice import PDFDevice
+
 
 clause_classifier, vec = get_classifier()
 SUCCESS = 'SUCCESS'
@@ -23,28 +35,60 @@ ERR = 'ERROR'
 WARN = 'WARNING'
 
 
+def _start(gpu):
+    import tensorflow as tf
+    os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   # see issue #152
+    os.environ["CUDA_VISIBLE_DEVICES"]=str(gpu)
+    config = tf.ConfigProto()
+    config.gpu_options.allow_growth=True
+    sess = tf.Session(config=config)
+    
+    return 'Done!'
+
+
 def new_confidence(x): return abs(x - 0.5) * 2
 
 
 def convert_pdf_to_txt(path):
-    rsrcmgr = PDFResourceManager()
-    retstr = StringIO()
-    codec = 'utf-8'
-    laparams = LAParams()
-    device = TextConverter(rsrcmgr, retstr, codec=codec, laparams=laparams)
-    fp = file(path, 'rb')
-    interpreter = PDFPageInterpreter(rsrcmgr, device)
-    password = ""
-    maxpages = 0
-    caching = True
-    pagenos=set()
-    for page in PDFPage.get_pages(fp, pagenos, maxpages=maxpages, password=password,caching=caching, check_extractable=True):
-        interpreter.process_page(page)
-    fp.close()
-    device.close()
-    text = retstr.getvalue()
-    retstr.close()
-    return text.decode('utf-8')
+    
+    # Read pdf file.
+    pdf_file_obj = open(path, 'rb')
+    # Read pdf.
+    pdf_reader = PyPDF2.PdfFileReader(pdf_file_obj)
+    # Get the number of pages.
+    num_pages = pdf_reader.numPages
+
+    # Start text.
+    text = ''
+
+    for page in range(num_pages):
+        # Run over pages and read them.
+        pageObj = pdf_reader.getPage(page)
+        text += pageObj.extractText()
+
+    # rsrcmgr = PDFResourceManager()
+    # retstr = io.StringIO()
+    # codec = 'iso-8859-1'
+    # laparams = LAParams()
+    # device = TextConverter(rsrcmgr, retstr)#, codec=codec, laparams=laparams)
+    # fp = open(path, 'rb')
+    # interpreter = PDFPageInterpreter(rsrcmgr, device)
+    # password = ""
+    # maxpages = 0
+    # caching = True
+    # pagenos=set()
+
+    # for page in PDFPage.get_pages(fp, pagenos, maxpages=maxpages, \
+    #     password=password,caching=caching, check_extractable=True):
+    #     interpreter.process_page(page)
+    # text = retstr.getvalue()
+
+    # fp.close()
+    # device.close()    
+    # retstr.close()
+    pdf_file_obj.close()
+
+    return text#.decode('utf-8')
 
 
 def save_contract(up_file, user_id):
@@ -78,7 +122,7 @@ def save_contract(up_file, user_id):
 
     if extension == '.pdf':
 
-        try:            
+        try:
             txt = convert_pdf_to_txt(full_file_url)
         except: # catch *all* exceptions
             # Remove the first file.
@@ -172,19 +216,20 @@ def insert_conflicts(con_id, conflicts, classifier_obj):
 
         ins_conf.save()
 
-        new_conflicts_list.append((ins_conf.conf_id, cls_1_id, cls_2_id, confidence))
+        new_conflicts_list.append((ins_conf.conf_id, cls_1_id, cls_2_id, \
+            confidence))
 
     return new_conflicts_list
 
 
-def insert_contract(path, user_obj):
+def insert_contract(path_file, user_obj):
 
     # Get the file name to save into the base.
-    file_path = path.split('/')[-1]
+    file_path = path_file.split('/')[-1]
     filename, _ = os.path.splitext(file_path)
 
     # Read file.
-    file_text = open(path, 'r').read()
+    file_text = open(path_file, 'r').read()
 
     # Break into sentences.
     try:
@@ -202,7 +247,8 @@ def insert_contract(path, user_obj):
         sent_ranges.append((min_limit, max_limit))
 
     # Insert contract.
-    ins = Contracts(con_name=filename, path_to_file=path, added_by_id=user_obj)
+    ins = Contracts(con_name=filename, path_to_file=path_file,
+        added_by_id=user_obj)
     ins.save()
 
     # Get the contract id.
@@ -233,14 +279,14 @@ def get_norm_pairs(norms):
 
 
 def check_conflict(clauses, pairs):
-
+    _start(0)
     # Get model.
-    json_file = open(PATH_TO_MODEL, 'r')	
-    model_json = json_file.read()
-    json_file.close()
-    model = model_from_json(model_json)
+    #json_file = open(PATH_TO_MODEL, 'r')	
+    #model_json = json_file.read()
+    #json_file.close()
+    model = load_model(PATH_TO_MODEL)
     
-    model.load_weights(PATH_TO_WEIGHTS)
+    # model.load_weights(WEIGHTS)
    
     conflicts = []
     
@@ -265,9 +311,11 @@ class Contract:
     def __init__(self, contract_id):
 
         self.contract_id = contract_id
-        self.contract_path = Contracts.objects.get(con_id=self.contract_id).path_to_file
+        self.contract_path = Contracts.objects.get(con_id=self.contract_id
+            ).path_to_file
         self.file_text = open(self.contract_path, 'r').read()
-        self.clause_ranges = Clauses.objects.filter(con_id=self.contract_id).order_by('clause_id')
+        self.clause_ranges = Clauses.objects.filter(con_id=self.contract_id
+            ).order_by('clause_id')
         self.clauses = dict()
         self.norms = list()
 
@@ -331,9 +379,21 @@ def msc_model(contract_id):
     else:        
         
         # Check modalities if norms have the entities.
-        entity_1, entity_2 = check_norms(entities, cntrct.norms, cntrct.clauses)
+        entity_1, entity_2 = check_norms(entities, cntrct.norms,
+            cntrct.clauses)
 
         # Find conflicts.
         conflicts = check_conflicts(entity_1, entity_2, cntrct.clauses)
 
         return cntrct.clause_ranges, cntrct.clauses, conflicts
+
+
+def embedding_model(contract_id):
+    
+    cntrct = Contract(contract_id)
+
+    cntrct.process_clauses()
+
+    conflicts = conflict_finder.find_conflicts(cntrct.clauses, cntrct.norms)
+
+    return cntrct.clause_ranges, cntrct.clauses, conflicts

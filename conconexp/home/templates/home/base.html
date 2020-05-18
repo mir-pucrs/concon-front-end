@@ -12,8 +12,8 @@
         {% load static %}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 
-        <link rel="stylesheet" href="{% static 'home/assets/css/main.css' %}"/>
-        <link rel="stylesheet" href="{% static 'home/assets/css/conflict.css' %}"/>
+        <link rel="stylesheet" href="../../{% static 'home/assets/css/main.css' %}"/>
+        <link rel="stylesheet" href="../../{% static 'home/assets/css/conflict.css' %}"/>
             <!-- for IE and Android native browser support -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
 
@@ -22,14 +22,20 @@
 
         <!-- Javascripts -->
         <!-- <script type="text/javascript" src="diff2html/dist/diff2html.js"></script> -->
-        <script src="{% static 'home/node_modules/jquery/dist/jquery.min.js' %}"></script>
+        <script src="../../{% static 'home/assets/js/jquery.min.js' %}"></script>
 
 <!--    <script src="{% static 'node_modules/sweetalert2/dist/sweetalert2.min.js' %}"></script>
         <link rel="stylesheet" href="node_modules/sweetalert2/dist/sweetalert2.min.css"> -->
         <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-        <noscript><link rel="stylesheet" href="{% static 'home/assets/css/noscript.css' %}" /></noscript>
+        <noscript><link rel="stylesheet" href="../../{% static 'home/assets/css/noscript.css' %}" /></noscript>
         <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script> -->
-        <script src="{% static 'home/js/main_functions.js' %}"></script>
+        
+        <script type="text/javascript">
+            var url_del = "{% url 'home:delete_conf' %}";
+            var url_sub = "{% url 'home:submit_conf' %}";
+        </script>
+
+        <script src="../../{% static 'home/js/main_functions.js' %}"></script>
 
     </head>
     <body>
@@ -42,20 +48,22 @@
                         Hi, {{ user.username }}!</h3>
                         <nav>
                         <ul>
-                        <li><a href="{% url 'home:index' %}">Home</a></li>
-                        <li><a href="{% url 'home:intro' %}">Intro</a></li>
-                        <li><a href="{% url 'home:conflict' %}">Conflict</a></li>
-                        <li><a href="{% url 'home:profile' %}">Profile</a></li>
-                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                            <li><a href="{% url 'home:index' %}">Home</a></li>
+                            <li><a href="{% url 'home:intro' %}">Intro</a></li>
+                            <li><a href="{% url 'home:conflict' %}">Conflict</a></li>
+                            <li><a href="{% url 'home:profile' %}">Profile</a></li>
+                            <li><a href="{% url 'home:contact' %}">Contact</a></li>
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
                         </ul>
                         </nav>
                  </header>   
                 {% else %}
-                <header id=header class="not-autenticated-user-header">
+                 <header id=header class="not-autenticated-user-header">
                     <nav>
                     <ul>
                         <li><a href="{% url 'home:index' %}">Home</a></li>
                         <li><a href="{% url 'home:intro' %}">Intro</a></li>
+                        <li><a href="{% url 'home:contact' %}">Contact</a></li>
                         <li><a href="{% url 'login' %}">Login</a></li>
                     </ul>
                     </nav>
@@ -71,17 +79,18 @@
       <div id="bg"></div>
 
           <div class="footer_copyright">
+             <!-- <a href="https://github.com/mir-pucrs/concon-front-end" style="text-decoration: none; margin-right: 5px;"><img src="{% static 'home/images/github-mark.svg' %}" width="29" height="32"  title="Github link"></a> -->
              <a href="https://twitter.com/share" class="twitter-share-button" data-text="Check for contract conflicts using deep learning http://lsa.pucrs.br/concon" data-hashtags="contracts" data-show-count="false"></a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
              <iframe  class="facebook-share-button"  src="https://www.facebook.com/plugins/share_button.php?href=http%3A%2F%2Flsa.pucrs.br%2Fconconexp%2F&layout=button&size=small&mobile_iframe=true&width=59&height=20&appId" scrolling="no" allowTransparency="true"></iframe><br>
-             <small  style="font-size: 0.4rem">&copy; Design: <a href="https://html5up.net" style="font-size: 0.4rem">HTML5 UP</a></small> 
+             <small  style="font-size: 0.4rem">&copy; Design: <a href="https://html5up.net" style="font-size: 0.4rem">HTML5 UP</a></small>
           </div>
 
 	<div class="modal"><!-- Place at bottom of page --></div>
         <!-- Scripts -->
-        <script src="{% static 'home/assets/js/jquery.min.js' %}"></script>
-        <script src="{% static 'home/assets/js/skel.min.js' %}"></script>
-        <script src="{% static 'home/assets/js/util.js' %}"></script>
-        <script src="{% static 'home/assets/js/main.js' %}"></script>
+        <script src="../../{% static 'home/assets/js/jquery.min.js' %}"></script>
+        <script src="../../{% static 'home/assets/js/skel.min.js' %}"></script>
+        <script src="../../{% static 'home/assets/js/util.js' %}"></script>
+        <script src="../../{% static 'home/assets/js/main.js' %}"></script>
     
     </body>
 </html>

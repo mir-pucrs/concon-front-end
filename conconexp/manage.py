@@ -2,8 +2,22 @@
 import os
 import sys
 
+
+def _start(gpu):
+    import os
+    import tensorflow as tf
+
+    os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID"   # see issue #152
+    os.environ["CUDA_VISIBLE_DEVICES"]=str(gpu)
+    config = tf.ConfigProto()
+    config.gpu_options.allow_growth=True
+    sess = tf.Session(config=config)
+    
+    return 'Done!'
+
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "conconexp.settings")
+    _start(0) 
     try:
         from django.core.management import execute_from_command_line
     except ImportError:

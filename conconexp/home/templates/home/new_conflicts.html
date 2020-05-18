@@ -1,0 +1,71 @@
+{% extends 'home/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% load home_extras %}
+
+<div id="wrapper2" class="padding-on-extra-large-screens"> 
+
+    <h1>Create Conflicts</h1>
+
+    <form id="select_norm" method="post" enctype="multipart/form-data">
+        {% if thanks %}
+        {% csrf_token %}
+            <div class="conflict_content">
+                <center>
+                    <h2 style="margin-top: 6%; margin-bottom: 4%">Thanks for you help!</h2>
+
+                    <input type="submit" name="return" value="Return">
+                </center>
+            </div>
+        {% else %}
+            {% csrf_token %}
+            {% if norm %}
+                <div class="conflict_content">
+                    <h3>Processing: {{ con_name }}</h3>
+
+                    <input type=hidden   name='norm_text' value='{{ con_id }}_{{ norm_id }}'>
+                    <p name='norm_text' value='{{ con_id }}_{{ norm_id }}' id="norm-view">{{ norm }}</p>
+                    <p style="">Please, write below a norm that conflicts with the one above and select the proper type of conflict.</p>
+                    <input type="text"   name="new_norm"  placeholder="Write at least 20 characters"  id=newConflict>
+
+                    <!-- Type Selector -->
+                    <label style="float: left; margin-top: 4%; margin-right: 2%; font-size: 22px" for="selector">Conflict Type</label>
+                    <select name="select_type" style="width: 50%; margin:2%" id="selector">
+                        {% for conf_type in conf_types %}
+
+                            <option value="{{ conf_type }}">{{ conf_types|get_text:conf_type }}</option>
+
+                        {% endfor %}
+                    </select>
+                    <!--Buttons-->
+                    <center>
+                    
+                        <input type="submit" name="sub_conf"    id="submit_conflict" class="btn_conf" value="Submit the Conflict">
+                        <input type="submit" name="sel_n_norm"  id="select_new_norm" class="btn_conf" value="Select another norm">
+                        <input type="submit" name="not_a_norm"  id="not_a_norm"      class="btn_conf" value="Not a norm">
+                
+                        <input type="submit" name="chng_cntrct" id="change_contract" class="btn_conf" value="Change Contract">
+                        <input type="submit" name="finish"      id="finish"          class="btn_conf" value="Finish"> 
+                    </center>
+                </div>
+            {% else %}         
+                <div class="conflict_content">
+                    <center>
+                    <p>                       
+                       In this section, you can help us by creating new conflicts from existing norms.<br/>
+                       We select a norm from a real contract and  create a conflict.<br/>
+                       You can start by clicking on "Select a Norm".
+                    </p>
+                    <input type="submit" name="sel_norm" id="selectNorm" value="Select a norm">
+                    </center>
+                </div>
+                <!-- <input type="submit" value="Upload" id='upload_button' name="up_file"> -->
+            {% endif %}
+        {% endif %}
+    </form>
+</div>
+
+{% endblock %}

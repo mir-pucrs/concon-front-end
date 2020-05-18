@@ -3,6 +3,7 @@
     THEANO_FLAGS=mode=FAST_RUN,device=gpu,floatX=float32 python cifar10_cnn.py    
 """
 import numpy as np
+from keras import backend
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.layers import Convolution2D, MaxPooling2D
@@ -18,7 +19,11 @@ def get_model(maxlength):
 
     # input image dimensions
     img_rows, img_cols = maxlength, maxlength
-    input_shape = (1, img_rows, img_cols)
+    
+    if backend.image_data_format() == 'channels_first':
+        input_shape = (1, img_rows, img_cols)
+    else:
+        input_shape = (img_rows, img_cols, 1)
 
     # number of convolutional filters to use
     nb_filters = 32

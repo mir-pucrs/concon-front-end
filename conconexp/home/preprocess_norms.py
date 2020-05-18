@@ -1,6 +1,7 @@
 import os
 import csv
 import numpy as np
+from keras import backend
 from itertools import combinations
 from nltk.tokenize import sent_tokenize
 from sklearn.feature_extraction.text import CountVectorizer
@@ -153,8 +154,11 @@ def turn_into_matrix(pairs, maxlength):
 
                     if norm1[i] == norm2[j]:
                         matrix_connection[i][j] = 1
-        
-            matrix_connection = matrix_connection.reshape(1, 1, maxlength, maxlength)
+            
+            if backend.image_data_format() == 'channels_first':
+                matrix_connection = matrix_connection.reshape(1, 1, maxlength, maxlength)
+            else:
+                matrix_connection = matrix_connection.reshape(1, maxlength, maxlength, 1)
 
             yield matrix_connection, y.reshape(1, 2)
 
@@ -180,7 +184,10 @@ def to_matrix(norm1, norm2, maxlength):
             if norm1[i] == norm2[j]:
                 matrix_connection[i][j] = 1
 
-    matrix_connection = matrix_connection.reshape(1, 1, maxlength, maxlength)
+    if backend.image_data_format() == 'channels_first':
+        matrix_connection = matrix_connection.reshape(1, 1, maxlength, maxlength)
+    else:
+        matrix_connection = matrix_connection.reshape(1, maxlength, maxlength, 1)
 
     return matrix_connection#, y.reshape(1, 2)            
     

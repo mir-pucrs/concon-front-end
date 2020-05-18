@@ -11,7 +11,7 @@ from sklearn.metrics import f1_score
 from sklearn.metrics import recall_score
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
-from sklearn.linear_model import SGDClassifier
+from sklearn import linear_model
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 
@@ -61,7 +61,7 @@ class SentenceClassifier:
             print "Data preprocessed! We have a total of %d examples.\n\tNorm examples: %d\n\tNonNorm Examples: %d\n" % (len(self.corpus), len([x for x in self.y if x == 1]), len([x for x in self.y if x == 0]))
             print "Number of train examples: %d\nNumber of test examples: %d\n" % (self.X_train.shape[0], self.X_test.shape[0])
 
-    def train(self, alg_classifier=SGDClassifier(loss='hinge', penalty='l2', random_state=42), n_folds=10):
+    def train(self, alg_classifier=linear_model.SGDClassifier(loss='hinge', penalty='l2', random_state=42), n_folds=10):
         # Use alg_classifier to train a model with 10-fold cross validation.
         # The default value for alg_classifier is the SGDClassifier from scikit learn.
 

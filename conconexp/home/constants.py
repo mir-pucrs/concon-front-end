@@ -9,7 +9,7 @@ CLASSIFIER_PATH = os.path.join(base_dir, 'home/norm_identifier/classifiers/' \
                   '16-10-25_12:18:39/' \
                   'sentence_classifier_16-10-25_12:18:39.pkl')
 PATH_TO_WEIGHTS = os.path.join(base_dir, 'home/model/model.h5')
-PATH_TO_MODEL = os.path.join(base_dir, 'home/model/model.json')
+PATH_TO_MODEL = os.path.join(base_dir, 'home/model/model.h5')
 NAMES_PATH = os.path.join(base_dir, 'home/norm_identifier/classifiers/' \
              '16-10-25_12:18:39/sentence_classifier_16-10-25_12:18:39_names.txt')
 MAX_LENGTH = 200

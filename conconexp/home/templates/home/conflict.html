@@ -80,46 +80,42 @@
 
                         <div class="alt">    
                 
+                                <h4><a href="{% url 'home:new_conflicts' %}">Create New Conflicts</a></h4>
+
                                 <p>Please, upload a contract to start our processing.</p>
                                  
                                 <p>Have no contracts but want to test? <a href="https://github.com/JoaoPauloAires/potential-conflict-identifier/tree/master/code/data/manufacturing" target='_blank'><b>Here</b></a> we have some contracts.</p>
 
-                               <!--  <tr>
-                                    <td class="before_upload">
-                                        <a class="button small">Inspect</a>
-                                        <a href="#" class="button ">Select</a>
-                                        <a href="#" class="button ">Generate</a>
-                                        <a href="#" class="button special icon fa-download">Download</a>
-                                    </td>
-                                </tr>
-                                <tr> -->
-                                    <form id="file_form" method="post" enctype="multipart/form-data">
-                                        {% csrf_token %}
-                                        <span>
-                                            Select a Model to use. 
-                                        </span>
+                                <form id="file_form" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <span>
+                                        Select a Model to use. 
+                                    </span>
 
-                                        <select name="select_model">
-                                            <option value="cnn">
-                                                CNN model
-                                            </option>
-                                            <option value="msc">
-                                                Rule-based model
-                                            </option>
-                                        </select>
-                                        <br/>
-                                        <!-- estava assim antes(o novo ta abaixo), o id é diferente, nao sei se esse id interfere em algo, mas acho que nao<input type="file" name="up_file" id="fileToUpload"> data: 28/07/2017 by Catarina Nogueira-->
-                                      
-                                        
-                                         <!--choose file button-->
-                                        <input type="file" name="up_file" id="file" class="inputfile" />
-                                        <label for="file">Choose a file</label>
-                                         <!--choose file button-->
-                                         
-                                        <!--upload button-->
-                                        <input type="submit" value="Upload" id='upload_button' name="up_file">
-                                        <!--upload button-->
-                                    </form>
+                                    <select name="select_model">
+                                        <option value="emb">
+                                            Embedding model
+                                        </option>
+                                        <option value="cnn">
+                                            CNN model
+                                        </option>
+                                        <option value="msc">
+                                            Rule-based model
+                                        </option>         
+                                    </select>
+                                    <br/>
+                                    <!-- estava assim antes(o novo ta abaixo), o id é diferente, nao sei se esse id interfere em algo, mas acho que nao<input type="file" name="up_file" id="fileToUpload"> data: 28/07/2017 by Catarina Nogueira-->
+                                  
+                                    
+                                     <!--choose file button-->
+                                    <input type="file" name="up_file" id="file" class="inputfile" />
+                                    <label for="file">Choose a file</label>
+                                     <!--choose file button-->
+                                     
+                                    <!--upload button-->
+                                    <input type="submit" value="Upload" id='upload_button' name="up_file">
+                                    <!--upload button-->
+                                </form>
                                 </tr>
 
                                 

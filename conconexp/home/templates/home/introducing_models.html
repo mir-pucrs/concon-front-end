@@ -25,7 +25,7 @@
                                             Finally, we compare the parties, the modal verb (and its deontic meaning), and the norm action and, using conflict rules, we identify which ones are potential conflicts.
                                         </p>
 
-                                        <p>Check our paper for more details: <a class="link" href="https://ict2.tbm.tudelft.nl/wp/wp-content/uploads/sites/8/2015/06/COINIJCAI_2015_submission_7-1.pdf">Identifying Potential Conflicts between Norms in Contracts</a></p>
+                                        <p>Check our paper for more details: <a class="link" target="_blank" href="https://pdfs.semanticscholar.org/f9b1/2d30199f2acacf6c1558c1c0dcc33398d847.pdf">Identifying Potential Conflicts between Norms in Contracts</a></p>
 
                                     <center><h3 class="major">CNN Model</h3></center>
 
@@ -36,7 +36,22 @@
                                         </p>
 
                                         <p>
-                                            For further details, check our paper: <a class="link" href="https://coin-workshop.github.io/coin-2017-brazil/papers/00010033.pdf">Norm Conflict Identification using Deep Learning</a>.
+                                            For further details, check our paper: <a class="link" target="_blank" href="https://coin-workshop.github.io/coin-2017-brazil/papers/00010033.pdf">Norm Conflict Identification using Deep Learning</a>.
+                                        </p>
+
+                                    <center><h3 class="major">Embedding Model</h3></center>
+
+                                        <p>
+                                            In this model, we use a embedding representation of sentences to compare norms and identify conflicts.
+                                            We use Sent2Vec to turn each norm into a latent vector, then giving a data set of conflicting norms, we generate an offset
+                                            that represent the concept of conflict.
+                                            We generate such offset by calculating the mean vector from the sum of all subtractions between conflicting norm vectors.
+                                            To identify a new conflict, we use get the resulting vector from two norms and compare such vector with our offset.
+                                            Given a threshold, we say that if the distance between the vector and the offset is below the threshold it is a conflict, otherwise it is not.
+                                        </p>
+
+                                        <p>
+                                            For further details, check our paper: <a class="link" target="_blank" href="http://www.meneguzzi.eu/felipe/pubs/ijcnn-contract-conflicts-2018.pdf">Norm Conflict Identification using Vector Space Offsets</a>
                                         </p>
 
                                 </article>

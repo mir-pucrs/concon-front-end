@@ -17,7 +17,9 @@
 
                 <div class="table-wrapper">
 
-            <h4 id='test_text'>Conflicts</h4>
+            <h2>{{ con_name }}</h2>
+
+            <h3 id='test_text'>Conflicts Found</h3>
 
             <select id="selector">
                 <option value="none">-</option>
@@ -39,24 +41,40 @@
 
              <div id="instructions" style="display:none;">
                 <article>
-                    <h2 class="major">Instruções</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mattis ligula ut diam egestas, id vestibulum metus vulputate. Sed ipsum justo, ultricies at lorem eget, porta accumsan lectus. Mauris ut condimentum nulla, eleifend efficitur odio. In eget volutpat nibh. Sed vehicula tortor nec elit tempus hendrerit.</p>
+                    <h2 class="major">Instructions</h2>
+                    <p>
+                        In order to submit a new conflict, make sure that you selected two norms that configure a real conflict and were not already classified by our classifier.
+                    </p>
                     <div class="close" id="close">Close</div>
                 </article>
             </div>
+            <div id="success" style="display:none;">
+                <article>
+                    <h2 class="major">Success</h2>
+                    <p>Thanks for helping us, we deleted the false conflict.</p>
+                    <div class="close" id="close">Close</div>
+                </article>
+            </div>
+            <div id="error_conf" style="display:none;">
+                <article>
+                    <h2 class="major">We've got a problem</h2>
+                    <p>Don't worry, we will solve this soon.</p>
+                    <div class="close" id="close">Close</div>
+                </article>
+            </div>            
             <div id="error" style="display:none;">
                 <article>
-                    <h2 class="major">Os dois sao iguais!</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mattis ligula ut diam egestas, id vestibulum metus vulputate. Sed ipsum justo, ultricies at lorem eget, porta accumsan lectus. Mauris ut condimentum nulla, eleifend efficitur odio. In eget volutpat nibh. Sed vehicula tortor nec elit tempus hendrerit.</p>
+                    <h2 class="major">Both are the same!</h2>
+                    <p>Please, choose a conflicting case that consists of different norms.</p>
                     <div class="close" id="close">Close</div>
                 </article>
             </div>
             <div id="confirm" style="display:none;">
                 <article>
-                    <h3 class="major">Deseja confirmar que esse é um novo conflito?</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mattis ligula ut diam egestas, id vestibulum metus vulputate. Sed ipsum justo, ultricies at lorem eget, porta accumsan lectus. Mauris ut condimentum nulla, eleifend efficitur odio. In eget volutpat nibh. Sed vehicula tortor nec elit tempus hendrerit.</p>
+                    <h3 class="major">Are you sure you want to submit this conflict?</h3>
+                    <p>Please, certify that this is a real conflict!</p>
                     <div class="close" id="close">Close</div>
-                    <button class="confirmTheConflict">Sim</button>
+                    <button class="confirmTheConflict">OK</button>
                 </article>
             </div>
 
@@ -98,32 +116,40 @@
                     </table>
                 </div>
             </div>
+            <h2 align="center" style="margin-top: 24%" class="changeText" >Help Us!</h2>
+            <div align="center" id="anotherOne" style="display:none;"> <button>Submit another one?</button></div>
+            <div class = "row">
+                <div id='submit' style=" overflow: auto; width: 50%; float: left;">
+                    <table>
+                        <tbody>
+                            <div id="{{user.id}}" class="userId">
+                                <h3 class="submitNewConflict">Submit a new conflict by clicking in two norms you <br>think are conflicting!</h3>
+                                <!-- <select name="select_type" style="width: 50%; margin:2%">
+                                    {% for conf_type in conf_types %}
+
+                                        <option value="{{ conf_type }}">{{ conf_types|get_text:conf_type }}</option>
+
+                                    {% endfor %}
+                                </select> -->
+                                <button id="submitNewConflict" type="button" class="align-center ">Submit a new Conflict!</button>
+                            </div>
+                        </tbody>
+                    </table>
+                </div>                                   
+                <div id='remove' style="overflow: auto; width: 50%; float: right; ">
+                     <table id="table2">
+                        <tbody >
+                            <div>
+                                <div id="correct" name="{{ selected_model }}"></div>
+                            </div>             
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-                <div class="margin-top">          
-                    <h2 align="center" class="changeText" >Help Us!</h2>
-                    <div align="center" id="anotherOne" style="display:none;"> <button>Submit another one?</button></div>
-                    <div class = "row">
-                        <div id='first_table' style=" overflow: auto; height: 300px;  width: 50%; float: left;">
-                            <table>
-                                <tbody>
-                                    <div id="{{user.id}}" class="userId">
-                                        <h3 class="submitNewConflict">Submit a new conflict clicking in those which you <br>think that are conflitant! </h3>
-                                            <button id="submitNewConflict" type="button" class="align-center ">Submit a new Conflict!</button>
-                                    </div>
-                                </tbody>
-                            </table>
-                        </div>                                   
-                        <div id='second_table' style="overflow: auto; height: 400px; width: 50%; float: right; ">
-                             <table id="table2">
-                                <tbody >
-                                 <div>
-                                    <div id="correct" name="{{ selected_model }}"></div>
-                                </div>             
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>        
+                <!-- <div class="margin-top">          
+                    
+                </div>         -->
     </div>
 </article>
         {% else %}
@@ -134,12 +160,15 @@
         <form id="file_form" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <select name="select_model">
+                <option value="emb">
+                    Embedding model
+                </option>
                 <option value="cnn">
                     CNN model
                 </option>
                 <option value="msc">
                     Rule-based model
-                </option>
+                </option>                
             </select>
             <br/>
             <input type="submit" value="Open" id='select'>
@@ -151,5 +180,6 @@
           
 
 
-</div>    
+</div> 
+
 {% endblock %}

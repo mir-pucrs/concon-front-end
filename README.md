@@ -1,4 +1,4 @@
-# Project Name
+# ConCon
 
 This is the frontEnd of the project whose purpose is to identify norm conflicts using deep learning.
 At the moment we use a two-phase approach that uses traditional machine learning together with deep learning to extract and compare norms in order to identify conflicts between them.

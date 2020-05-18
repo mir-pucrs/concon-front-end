@@ -71,3 +71,43 @@ body.loading .modal {
 
     width: 10%;
 }
+
+.table-wrapper #first_table{
+    height: 600px;
+}
+
+.table-wrapper #second_table{
+    height: 600px;
+}
+
+form#select_norm{
+    width: 55%;
+}
+
+
+
+.conflict_content{
+    width: 100%;
+    padding: 0;
+}
+
+input.btn_conf{
+    float: left;
+    text-align: center;
+    margin: 1% !important; 
+}
+
+#newConflict{
+    font-size: 24px;
+    padding: 2%;
+    border-width: 5%;
+
+}
+
+p#norm-view{
+    background-color: cornflowerblue;
+    border: 1px;
+    border-color: white;
+    padding: 1%;
+    border-radius: 3px;
+}

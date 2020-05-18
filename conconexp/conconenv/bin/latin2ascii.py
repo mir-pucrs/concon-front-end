@@ -1,4 +1,5 @@
-#!/home/lsa/conconexp/conconenv/bin/python
+#!/usr/bin/env python
+
 #
 #  latin2ascii.py - converts latin1 characters into ascii.
 #
@@ -112,7 +113,7 @@ def latin2ascii(s):
 def main(argv):
     import getopt, fileinput
     def usage():
-        print 'usage: %s [-c codec] file ...' % argv[0]
+        print ('usage: %s [-c codec] file ...' % argv[0])
         return 100
     try:
         (opts, args) = getopt.getopt(argv[1:], 'c')

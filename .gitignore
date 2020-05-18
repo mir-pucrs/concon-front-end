@@ -109,3 +109,4 @@ conconexp/conconexp/settings_secret.py
 # Remove models.
 *.h5
 *.hdf5
+*/model*

@@ -997,8 +997,15 @@
 		white-space: nowrap;
 	}	   
 	   .margin-top{
-	   	  margin-top: 1%;
+	   	  margin-top: 3%;
+	   	  width: 70%;
+	   	  /*border-style: solid;
+	   	  border-color: white;*/
+	   	  /*border-width: 2px;*/
+	   	  align-content: center;
+	   	  position: absolute;
 	   }
+
 	   #conflict{
 	   	    width: 47%!important;
 	   }
@@ -1470,7 +1477,7 @@
 				-ms-transition-delay: 0.25s;
 				transition-delay: 0.25s;
 				padding: 3rem 2rem;
-				max-height: 40rem;
+				max-height: 100%;
 				overflow: hidden;
 			}
 
@@ -1654,7 +1661,7 @@
 
 /* modal */
 
-	#instructions, #error, #confirm {
+	#instructions, #error, #confirm, #success {
 		-moz-flex-grow: 1;
 		-webkit-flex-grow: 1;
 		-ms-flex-grow: 1;
@@ -1686,7 +1693,7 @@
 
 		/*--*/
 
-		#instructions article, #error article, #confirm article{
+		#instructions article, #error article, #confirm article, #success article{
 
 			padding: 4.5rem 2.5rem 1.5rem 2.5rem ;
 			position: fixed;
@@ -1697,7 +1704,7 @@
 			opacity: 1;
 		}
 
-			#instructions article .close, #error article .close, #confirm article .close {
+			#instructions article .close, #error article .close, #confirm article .close, #success article .close {
 				display: block;
 				position: absolute;
 				z-index: 10;
@@ -1711,7 +1718,7 @@
 				white-space: nowrap;
 			}
 
-				#instructions article .close:before, #error article .close:before , #confirm article .close:before{
+				#instructions article .close:before, #error article .close:before , #confirm article .close:before, #success article .close:before{
 					-moz-transition: background-color 0.2s ease-in-out;
 					-webkit-transition: background-color 0.2s ease-in-out;
 					-ms-transition: background-color 0.2s ease-in-out;
@@ -1730,21 +1737,21 @@
 					background-repeat: no-repeat;
 				}
 
-				#instructions article .close:hover:before, #error article .close:hover:before,  #confirm article .close:hover:before {
+				#instructions article .close:hover:before, #error article .close:hover:before,  #confirm article .close:hover:before, #success article .close:hover:before{
 					background-color: rgba(255, 255, 255, 0.075);
 				}
 
-				#instructions article .close:active:before, #error article .close:active:before,  #confirm article .close:active:before {
+				#instructions article .close:active:before, #error article .close:active:before,  #confirm article .close:active:before, #success article .close:active:before {
 					background-color: rgba(255, 255, 255, 0.175);
 				}
 
 		@media screen and (max-width: 736px) {
 
-			#instructions article, #error article,  #confirm article {
+			#instructions article, #error article,  #confirm article, #success article{
 				padding: 3.5rem 2rem 0.5rem 2rem ;
 			}
 
-				#instructions article .close:before, #error article .close:before,  #confirm article .close:before {
+				#instructions article .close:before, #error article .close:before,  #confirm article .close:before, #success article .close:before{
 					top: 0.875rem;
 					left: 0.875rem;
 					width: 2.25rem;
@@ -1756,7 +1763,7 @@
 
 		@media screen and (max-width: 480px) {
 
-			#instructions article, #error article,  #confirm article{
+			#instructions article, #error article,  #confirm article, #success article{
 				padding: 3rem 1.5rem 0.5rem 1.5rem ;
 			}
 
